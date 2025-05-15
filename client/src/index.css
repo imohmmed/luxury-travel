@@ -99,7 +99,8 @@
   }
 
   .reveal {
-    @apply opacity-0 translate-y-8 transition-all duration-800 ease-in-out;
+    @apply opacity-0 translate-y-8 transition-all duration-500 ease-in-out;
+    will-change: opacity, transform;
   }
 
   .reveal.active {
@@ -124,5 +125,15 @@
 
   .testimonial-slide {
     @apply min-w-full;
+  }
+  
+  /* Scroll to top button */
+  .scroll-to-top {
+    @apply fixed bottom-8 left-8 bg-primary text-white w-12 h-12 rounded-full shadow-lg 
+           flex items-center justify-center text-2xl z-50 opacity-0 transition-all duration-300;
+  }
+
+  .scroll-to-top:hover {
+    @apply bg-primary/90 scale-110;
   }
 }
