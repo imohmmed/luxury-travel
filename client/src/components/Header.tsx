@@ -23,8 +23,16 @@ const Header: React.FC = () => {
   }, []);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-    document.body.classList.toggle('overflow-hidden');
+    // تغيير حالة القائمة
+    const newMenuState = !isMenuOpen;
+    setIsMenuOpen(newMenuState);
+    
+    // إضافة أو إزالة overflow-hidden فقط عند فتح أو إغلاق القائمة
+    if (newMenuState) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
   };
 
   const closeMenu = () => {
@@ -41,8 +49,16 @@ const Header: React.FC = () => {
     { name: 'اتصل بنا', href: '/' },
   ];
 
+  // Allows scrolling to continue even when touch starts on header
+  const headerStyle = {
+    touchAction: 'pan-y' // Allow vertical scrolling
+  };
+
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg py-2' : 'py-6'}`}>
+    <header 
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg py-2' : 'py-6'}`} 
+      style={headerStyle}
+    >
       <div className="container mx-auto px-4 flex justify-between items-center transition-all">
         {/* Logo */}
         <div className={`logo text-center mx-auto transition-all duration-300 ${scrolled ? 'w-36 md:w-44' : 'w-44 md:w-52'}`}>
