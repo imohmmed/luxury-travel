@@ -42,7 +42,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-dark shadow-lg' : ''}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : ''}`}>
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
@@ -62,7 +62,7 @@ const Header: React.FC = () => {
         </div>
         
         {/* Menu Overlay */}
-        <div className={`overlay fixed inset-0 bg-dark bg-opacity-90 z-40 flex flex-col justify-center items-center ${isMenuOpen ? 'block' : 'hidden'}`}>
+        <div className={`overlay fixed inset-0 bg-secondary bg-opacity-95 z-40 flex flex-col justify-center items-center ${isMenuOpen ? 'block' : 'hidden'}`}>
           <nav className="text-center">
             <ul className="text-white text-xl">
               {menuItems.map((item, index) => (

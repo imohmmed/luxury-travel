@@ -76,7 +76,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-20 bg-neutral" ref={sectionRef}>
+    <section id="services" className="py-20 bg-neutral text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
           <AnimatedText 

@@ -42,7 +42,7 @@ const socialLinks: SocialLink[] = [
 const paymentMethods: PaymentMethod[] = [
   { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
   { id: 'cash', icon: 'fas fa-wallet' },
-  { id: 'zain', text: 'ZAIN' },
+  { id: 'zain', icon: '', text: 'ZAIN' },
 ];
 
 const Footer: React.FC = () => {
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer id="contact" className="bg-dark text-white pt-16 pb-8" ref={footerRef}>
+    <footer id="contact" className="bg-secondary text-white pt-16 pb-8" ref={footerRef}>
       <div className="container mx-auto px-4" ref={contentRef}>
         <div className="flex flex-wrap">
           {/* Logo and About */}
@@ -150,7 +150,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm reveal">
+        <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/80 text-sm reveal">
           <p>© {new Date().getFullYear()} سفر الفخامة. جميع الحقوق محفوظة.</p>
         </div>
       </div>
