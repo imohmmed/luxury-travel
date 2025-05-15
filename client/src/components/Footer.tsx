@@ -23,9 +23,10 @@ interface PaymentMethod {
 const menuItems: MenuItem[] = [
   { name: 'الرئيسية', href: '#home' },
   { name: 'من نحن', href: '#about' },
-  { name: 'تعليقات العملاء', href: '#testimonials' },
   { name: 'خدماتنا', href: '#services' },
   { name: 'اكتشف العالم', href: '#discover' },
+  { name: 'تعليقات العملاء', href: '#testimonials' },
+  { name: 'اتصل بنا', href: '#contact' },
   { name: 'سياسة الخصوصية', href: '#' },
   { name: 'الشروط والأحكام', href: '#' },
 ];
@@ -51,7 +52,7 @@ const Footer: React.FC = () => {
           <div className="w-full md:w-1/3 mb-10 md:mb-0">
             <div className="mb-6">
               <a href="#" className="text-white font-bold text-3xl">
-                <span className="text-accent">ال</span>تَرَف
+                <span className="text-accent">التَرَف</span>
               </a>
             </div>
             <p className="text-gray-400 mb-6">

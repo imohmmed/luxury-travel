@@ -43,9 +43,9 @@ const Header: React.FC = () => {
   const menuItems = [
     { name: 'الرئيسية', href: '/' },
     { name: 'من نحن', href: '/' },
-    { name: 'تعليقات العملاء', href: '/' },
     { name: 'خدماتنا', href: '/' },
     { name: 'اكتشف العالم', href: '/' },
+    { name: 'تعليقات العملاء', href: '/' },
     { name: 'اتصل بنا', href: '/' },
   ];
 
