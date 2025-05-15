@@ -62,31 +62,31 @@ const Services: React.FC = () => {
     if (sectionRef.current && cardsRef.current) {
       const cards = cardsRef.current.children;
       
-      // Subtle parallax effect for background
+      // تخفيف تأثير البارالاكس للخلفية
       gsap.to(sectionRef.current, {
-        backgroundPosition: `50% ${window.innerHeight / 4}px`,
-        ease: "none",
+        backgroundPosition: `50% ${window.innerHeight / 8}px`,
+        ease: "power1.out",
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 0.5,
-          fastScrollEnd: true,
-          preventOverlaps: true
+          scrub: 0.2, // تقليل قيمة scrub لجعل التأثير أسرع
+          preventOverlaps: true,
+          fastScrollEnd: true
         }
       });
       
-      // Card animations
+      // تسريع انيميشن البطاقات
       gsap.from(cards, {
-        y: 100,
+        y: 50, // تقليل المسافة
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
+        stagger: 0.05, // تقليل فاصل الوقت بين العناصر
+        duration: 0.3, // تقليل مدة الانيميشن
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 70%",
-          scrub: 1,
+          start: "top 80%",
+          toggleActions: "play none none none", // التشغيل مرة واحدة فقط بدون تكرار مع السكرول
+          once: true // تشغيل مرة واحدة فقط
         }
       });
     }
@@ -137,12 +137,16 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">الكروبات</span>
-                <span className="mr-1">السياحية</span>
-                <span className="mr-1">وتنظيم</span>
-                <span className="mr-1">المؤتمرات</span>
+              <h3 className="text-2xl font-bold mb-2 text-white">
+                <div className="inline-flex">
+                  <span>قسم</span>
+                  <span className="mr-1">الكروبات</span>
+                  <span className="mr-1">السياحية</span>
+                </div>
+                <div className="inline-flex mt-1">
+                  <span>وتنظيم</span>
+                  <span className="mr-1">المؤتمرات</span>
+                </div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
