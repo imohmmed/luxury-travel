@@ -36,10 +36,10 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', image: '/img/social-media/instagram.png', href: '#' },
-  { id: 'facebook', image: '/img/social-media/facebook.png', href: '#' },
-  { id: 'whatsapp', image: '/img/social-media/whatsapp.png', href: '#' },
-  { id: 'telegram', image: '/img/social-media/telegram.png', href: 'https://t.me/mohmmed' },
+  { id: 'facebook', image: '/img/social-new/facebook.png', href: '#' },
+  { id: 'instagram', image: '/img/social-new/instagram.png', href: '#' },
+  { id: 'whatsapp', image: '/img/social-new/whatsapp.png', href: '#' },
+  { id: 'telegram', image: '/img/social-new/telegram.png', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
@@ -151,33 +151,23 @@ const Footer: React.FC = () => {
         {/* Social media links in center */}
         <div className="border-t border-white/20 mt-12 pt-8 text-center flex flex-col items-center gap-6">
           <div className="flex items-center justify-center gap-4 mb-4">
-            {socialLinks.map((social, index) => {
-              // تعيين لون مختلف لكل أيقونة
-              const bgColors = [
-                "bg-[#E1306C]",  // وردي للانستغرام
-                "bg-[#3b5998]",  // أزرق للفيسبوك
-                "bg-[#25D366]",  // أخضر للواتساب
-                "bg-[#0088cc]",  // أزرق للتيليجرام
-              ];
-              
-              return (
-                <motion.a 
-                  key={social.id}
-                  href={social.href} 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`w-12 h-12 rounded-full ${bgColors[index]} flex items-center justify-center hover:opacity-90 transition-all`}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <img 
-                    src={social.image} 
-                    alt={social.id} 
-                    className="h-6 w-6 filter brightness-0 invert"
-                  />
-                </motion.a>
-              );
-            })}
+            {socialLinks.map((social) => (
+              <motion.a 
+                key={social.id}
+                href={social.href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center hover:opacity-90 transition-all"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img 
+                  src={social.image} 
+                  alt={social.id} 
+                  className="h-7 w-7"
+                />
+              </motion.a>
+            ))}
           </div>
           
           <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
