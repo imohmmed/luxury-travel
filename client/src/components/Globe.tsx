@@ -142,30 +142,36 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // دالة تحريك الكرة الأرضية وتكبيرها بناءً على نسبة تمرير الصفحة
+    // دالة تحريك الكرة الأرضية وتكبيرها بناءً على نسبة تمرير الصفحة (عكسي)
     const handleScroll = () => {
       if (earthRef.current && cloudsRef.current && cameraRef.current) {
         // حساب نسبة التمرير
         const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         const documentHeight = document.body.scrollHeight;
-        const progress = Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
         
-        // الحد الأقصى للزيادة في الحجم (1.5 = زيادة 50% من الحجم الأصلي)
-        const maxScale = 1.5;
+        // حساب نسبة التمرير العكسية (1 عند الأعلى و0 عند الأسفل)
+        const inverseProgress = 1 - Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
         
-        // حساب مقياس جديد بناءً على نسبة التمرير
-        const newScale = 1 + (progress * (maxScale - 1));
+        // الحد الأدنى للمقياس (0.7 = 70% من الحجم الأصلي) عند أسفل الصفحة
+        const minScale = 0.7;
+        // الحد الأقصى للمقياس (1.3 = 130% من الحجم الأصلي) عند أعلى الصفحة
+        const maxScale = 1.3;
         
-        // تطبيق المقياس الجديد على الأرض
+        // حساب مقياس جديد بناءً على نسبة التمرير العكسية
+        const newScale = minScale + (inverseProgress * (maxScale - minScale));
+        
+        // تطبيق المقياس الجديد على الأرض (أصغر عند الأسفل، أكبر عند الأعلى)
         earthRef.current.scale.set(newScale, newScale, newScale);
         
         // تطبيق نفس المقياس على السحب
         cloudsRef.current.scale.set(newScale, newScale, newScale);
         
         // تطبيق التغييرات على دوران الكرة الأرضية والكاميرا
-        earthRef.current.rotation.y = progress * Math.PI * 2;
-        cameraRef.current.position.z = 15 - (progress * 3);
+        earthRef.current.rotation.y = (1 - inverseProgress) * Math.PI * 2;
+        
+        // كاميرا أقرب عند الأعلى، وأبعد عند الأسفل
+        cameraRef.current.position.z = 15 + ((1 - inverseProgress) * 3);
         cameraRef.current.updateProjectionMatrix();
       }
     };
