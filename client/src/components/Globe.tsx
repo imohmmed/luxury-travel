@@ -146,29 +146,24 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // Scroll animation with GSAP
+    // Improved scroll animation with GSAP - optimized for performance
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: 'top bottom',
       end: 'bottom top',
-      scrub: 1,
+      scrub: 0.3, // Faster response
+      fastScrollEnd: true,
+      preventOverlaps: true,
       onUpdate: (self) => {
         if (earthRef.current && cameraRef.current) {
-          // Rotate earth based on scroll position
-          gsap.to(earthRef.current.rotation, {
-            y: self.progress * Math.PI * 2, // Full 360 rotation
-            duration: 0.5,
-            ease: 'power1.out',
-            overwrite: 'auto'
-          });
+          // Set values directly instead of using animations for better performance
+          earthRef.current.rotation.y = self.progress * Math.PI * 2; // Full 360 rotation
+          cameraRef.current.position.z = 15 - (self.progress * 5); // Start at 15, zoom in to 10
           
-          // Move camera closer on scroll
-          gsap.to(cameraRef.current.position, {
-            z: 15 - (self.progress * 5), // Start at 15, zoom in to 10
-            duration: 0.5,
-            ease: 'power1.out',
-            overwrite: 'auto'
-          });
+          // Only update the camera and renderer when needed
+          if (cameraRef.current) {
+            cameraRef.current.updateProjectionMatrix();
+          }
         }
       }
     });

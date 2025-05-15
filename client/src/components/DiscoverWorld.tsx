@@ -17,46 +17,35 @@ const DiscoverWorld: React.FC = () => {
 
   useGSAP(() => {
     if (sectionRef.current && titleRef.current && globeRef.current && buttonRef.current) {
-      // Animate the title and description
-      gsap.from(titleRef.current.children, {
-        y: 30,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
+      // Simple fade-in for elements instead of heavy scroll animations
+      const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          end: "center center",
-          scrub: 1,
-        }
-      });
-
-      // Make globe appear and scale up
-      gsap.from(globeRef.current, {
-        scale: 0.7,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "center center",
-          scrub: 1,
+          start: "top 80%",
+          end: "top 30%", 
+          toggleActions: "play none none none",
+          once: true,
+          fastScrollEnd: true,
+          preventOverlaps: true
         }
       });
       
-      // Button animation
-      gsap.from(buttonRef.current, {
-        y: 20,
-        opacity: 0,
-        duration: 0.5,
-        delay: 0.5,
-        scrollTrigger: {
-          trigger: globeRef.current,
-          start: "top 70%",
-          end: "center center",
-          scrub: 1,
-        }
-      });
+      // Add animations to timeline for better performance
+      timeline
+        .fromTo(titleRef.current.children, 
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, stagger: 0.1, duration: 0.4, ease: "power1.out" }
+        )
+        .fromTo(globeRef.current, 
+          { scale: 0.9, opacity: 0 }, 
+          { scale: 1, opacity: 1, duration: 0.4, ease: "power1.out" }, 
+          "-=0.2"
+        )
+        .fromTo(buttonRef.current, 
+          { y: 10, opacity: 0 }, 
+          { y: 0, opacity: 1, duration: 0.3, ease: "power1.out" }, 
+          "-=0.1"
+        );
     }
   }, []);
 
