@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -117,13 +118,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/visa-booking" 
+                <Link 
+                  to="/visa-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احجز فيزا الآن
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -148,13 +149,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/groups-booking" 
+                <Link 
+                  to="/groups-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احجز رحلة جماعية
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -179,13 +180,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/tickets-booking" 
+                <Link 
+                  to="/tickets-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احجز تذكرة طيران
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -210,13 +211,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/driving-license" 
+                <Link 
+                  to="/driving-license" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احصل على رخصة دولية
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -241,13 +242,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/health-insurance" 
+                <Link 
+                  to="/health-insurance" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احجز تأمين صحي
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -272,13 +273,13 @@ const Services: React.FC = () => {
                 </ul>
               </div>
               <div className="mt-3">
-                <a 
-                  href="/transfer-services" 
+                <Link 
+                  to="/transfer-services" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
                 >
                   احجز خدمة استقبال
                   <i className="fas fa-arrow-left mr-2"></i>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
