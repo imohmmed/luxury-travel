@@ -78,7 +78,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-10 text-secondary relative bg-sky-50" ref={sectionRef}>
+    <section id="services" className="py-10 text-secondary relative" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 reveal">
           <AnimatedText 
@@ -92,16 +92,15 @@ const Services: React.FC = () => {
           </p>
         </div>
         
-        <div className="space-y-6 mb-8" ref={cardsRef}>
-          {/* قسم الفيز */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+        <div className="grid grid-cols-1 gap-6 mb-8" ref={cardsRef}>
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم الفيز</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
                 <li>متابعة كاملة من التقديم إلى الاستلام.</li>
                 <li>يشمل تأشيرات سياحية، علاجية، تجارية، وزيارات خاصة.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/visa-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
@@ -112,15 +111,14 @@ const Services: React.FC = () => {
               </div>
           </div>
           
-          {/* قسم الكروبات السياحية وتنظيم المؤتمرات */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم الكروبات السياحية وتنظيم المؤتمرات</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
                 <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
                 <li>تنظيم مؤتمرات ومعارض وسفرات عمل متكاملة.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/groups-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
@@ -131,15 +129,14 @@ const Services: React.FC = () => {
               </div>
           </div>
           
-          {/* قسم التذاكر */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم التذاكر</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
                 <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
                 <li>دعم متكامل قبل وأثناء وبعد الحجز.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/tickets-booking" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
@@ -150,15 +147,14 @@ const Services: React.FC = () => {
               </div>
           </div>
           
-          {/* قسم إجازات السوق الدولية */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم إجازات السوق الدولية</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
                 <li>خدمة سريعة ومعتمدة دوليًا.</li>
                 <li>متوفرة لجميع الجنسيات.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/driving-license" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
@@ -169,15 +165,14 @@ const Services: React.FC = () => {
               </div>
           </div>
           
-          {/* قسم التأمين الصحي */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم التأمين الصحي</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
                 <li>معتمد من السفارات وشركات الطيران.</li>
                 <li>خطط مرنة حسب مدة السفر والدولة.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/health-insurance" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
@@ -188,15 +183,14 @@ const Services: React.FC = () => {
               </div>
           </div>
           
-          {/* قسم الاستقبال والتوديع (ترانسفير) */}
-          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+          <div className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">قسم الاستقبال والتوديع (ترانسفير)</h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
                 <li>توفير سيارات فخمة وسواقين محترفين.</li>
                 <li>متاحة لجميع الرحلات في دول متعددة.</li>
               </ul>
-              <div className="mt-3">
+              <div className="mt-3 text-center">
                 <Link 
                   to="/transfer-services" 
                   className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
