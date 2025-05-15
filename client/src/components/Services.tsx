@@ -94,17 +94,13 @@ const Services: React.FC = () => {
         
         <div className="space-y-6 mb-8" ref={cardsRef}>
           {/* قسم الفيز */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم الفيز</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
-                  <li>متابعة كاملة من التقديم إلى الاستلام.</li>
-                  <li>يشمل تأشيرات سياحية، علاجية، تجارية، وزيارات خاصة.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم الفيز</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
+                <li>متابعة كاملة من التقديم إلى الاستلام.</li>
+                <li>يشمل تأشيرات سياحية، علاجية، تجارية، وزيارات خاصة.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/visa-booking" 
@@ -114,21 +110,16 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
           
           {/* قسم الكروبات السياحية وتنظيم المؤتمرات */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم الكروبات السياحية وتنظيم المؤتمرات</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
-                  <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
-                  <li>تنظيم مؤتمرات ومعارض وسفرات عمل متكاملة.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم الكروبات السياحية وتنظيم المؤتمرات</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
+                <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
+                <li>تنظيم مؤتمرات ومعارض وسفرات عمل متكاملة.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/groups-booking" 
@@ -138,21 +129,16 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
           
           {/* قسم التذاكر */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم التذاكر</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
-                  <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
-                  <li>دعم متكامل قبل وأثناء وبعد الحجز.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم التذاكر</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
+                <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
+                <li>دعم متكامل قبل وأثناء وبعد الحجز.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/tickets-booking" 
@@ -162,21 +148,16 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
           
           {/* قسم إجازات السوق الدولية */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم إجازات السوق الدولية</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
-                  <li>خدمة سريعة ومعتمدة دوليًا.</li>
-                  <li>متوفرة لجميع الجنسيات.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم إجازات السوق الدولية</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
+                <li>خدمة سريعة ومعتمدة دوليًا.</li>
+                <li>متوفرة لجميع الجنسيات.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/driving-license" 
@@ -186,21 +167,16 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
           
           {/* قسم التأمين الصحي */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم التأمين الصحي</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
-                  <li>معتمد من السفارات وشركات الطيران.</li>
-                  <li>خطط مرنة حسب مدة السفر والدولة.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم التأمين الصحي</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
+                <li>معتمد من السفارات وشركات الطيران.</li>
+                <li>خطط مرنة حسب مدة السفر والدولة.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/health-insurance" 
@@ -210,21 +186,16 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
           
           {/* قسم الاستقبال والتوديع (ترانسفير) */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
-          >
-            <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
-              <div>
-                <h3 className="text-2xl font-bold mb-2">قسم الاستقبال والتوديع (ترانسفير)</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
-                  <li>توفير سيارات فخمة وسواقين محترفين.</li>
-                  <li>متاحة لجميع الرحلات في دول متعددة.</li>
-                </ul>
-              </div>
+          <div className="rounded-lg overflow-hidden shadow-lg reveal bg-primary p-6 mb-6">
+              <h3 className="text-2xl font-bold mb-2 text-white">قسم الاستقبال والتوديع (ترانسفير)</h3>
+              <ul className="list-disc list-inside space-y-1 text-white mb-4">
+                <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
+                <li>توفير سيارات فخمة وسواقين محترفين.</li>
+                <li>متاحة لجميع الرحلات في دول متعددة.</li>
+              </ul>
               <div className="mt-3">
                 <Link 
                   to="/transfer-services" 
@@ -234,7 +205,6 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-            </div>
           </div>
         </div>
       </div>
