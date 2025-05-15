@@ -89,13 +89,17 @@ const DiscoverWorld: React.FC = () => {
             className="globe-container relative flex items-center justify-center mb-12 w-full"
             ref={globeRef}
           >
-            <div className="relative w-full h-[250px] md:h-[400px] transition-all duration-700">
+            <div className="relative w-full h-[300px] md:h-[450px] transition-all duration-700">
               <Globe />
               
-              {/* Decorative orbit rings */}
+              {/* Decorative square and orbit rings */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[80%] h-[80%] max-w-[600px] max-h-[600px] border-2 border-white/20 rounded-full absolute animate-spin" style={{ animationDuration: '30s' }}></div>
-                <div className="w-[90%] h-[90%] max-w-[680px] max-h-[680px] border border-white/10 rounded-full absolute animate-spin" style={{ animationDuration: '50s' }}></div>
+                {/* مربع حول الكرة */}
+                <div className="w-[85%] h-[85%] max-w-[650px] max-h-[650px] border-[3px] border-white/20 absolute"></div>
+                
+                {/* حلقات المدار - دائرية داخل المربع */}
+                <div className="w-[75%] h-[75%] max-w-[580px] max-h-[580px] border-2 border-white/15 rounded-full absolute animate-spin" style={{ animationDuration: '30s' }}></div>
+                <div className="w-[65%] h-[65%] max-w-[500px] max-h-[500px] border border-white/10 rounded-full absolute animate-spin" style={{ animationDuration: '50s' }}></div>
               </div>
             </div>
           </div>

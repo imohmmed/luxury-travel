@@ -27,7 +27,7 @@ const Globe: React.FC = () => {
     );
     // تحديد موقع الكاميرا بناءً على نسبة العرض إلى الارتفاع لضمان رؤية الكرة كاملة
     const aspectRatio = containerRef.current.clientWidth / containerRef.current.clientHeight;
-    camera.position.z = aspectRatio < 1 ? 18 : 15; // إبعاد الكاميرا أكثر للشاشات الطويلة
+    camera.position.z = aspectRatio < 1 ? 21 : 18; // إبعاد الكاميرا أكثر للشاشات الطويلة
     cameraRef.current = camera;
 
     // Initialize renderer
@@ -40,8 +40,8 @@ const Globe: React.FC = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create Earth
-    const geometry = new THREE.SphereGeometry(5, 64, 64);
+    // Create Earth - جعل الكرة أكبر
+    const geometry = new THREE.SphereGeometry(6.5, 64, 64);
     
     // Load Earth texture and bump map
     const textureLoader = new THREE.TextureLoader();
