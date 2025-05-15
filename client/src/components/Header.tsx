@@ -6,27 +6,35 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // نستخدم debounce لتحسين الأداء ومنع التنفيذ المتكرر للدالة أثناء السكرول
-    let scrollTimer: NodeJS.Timeout | null = null;
+    // استخدام Intersection Observer API للتعامل مع حالة الهيدر
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // عند عدم رؤية الجزء العلوي من الصفحة (بدء السكرول) نجعل الهيدر معتم
+        setScrolled(!entry.isIntersecting);
+        console.log('Header visibility changed:', !entry.isIntersecting);
+      },
+      { 
+        threshold: 0,
+        rootMargin: '-5px 0px 0px 0px' // حساسية عالية جدا للسكرول
+      }
+    );
     
-    const handleScroll = () => {
-      if (scrollTimer) clearTimeout(scrollTimer);
-      
-      scrollTimer = setTimeout(() => {
-        if (window.scrollY > 10) {
-          setScrolled(true);
-        } else {
-          setScrolled(false);
-        }
-      }, 20); // تأخير بسيط جدا للاستجابة السريعة
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // التحقق من موضع السكرول الأولي
-
+    // إنشاء عنصر وهمي في أعلى الصفحة لمراقبته
+    const topMarker = document.createElement('div');
+    topMarker.style.position = 'absolute';
+    topMarker.style.top = '0';
+    topMarker.style.height = '1px';
+    topMarker.style.width = '100%';
+    topMarker.style.pointerEvents = 'none';
+    document.body.prepend(topMarker);
+    
+    // بدء المراقبة
+    observer.observe(topMarker);
+    
+    // التنظيف عند إزالة المكون
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      if (scrollTimer) clearTimeout(scrollTimer);
+      observer.disconnect();
+      topMarker.remove();
     };
   }, []);
 
@@ -50,7 +58,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-secondary/95 shadow-lg backdrop-blur-sm' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? 'bg-secondary/95 shadow-md backdrop-blur-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
