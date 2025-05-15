@@ -177,30 +177,7 @@ const HeroSlider: React.FC = () => {
         ))}
       </div>
       
-      {/* أسهم التنقل */}
-      <div className="absolute inset-y-0 left-4 right-4 z-10 flex items-center justify-between pointer-events-none">
-        <button 
-          onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-all pointer-events-auto"
-          aria-label="الشريحة السابقة"
-        >
-          <span className="sr-only">السابق</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 rtl:rotate-180">
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
-        
-        <button 
-          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-          className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-all pointer-events-auto"
-          aria-label="الشريحة التالية"
-        >
-          <span className="sr-only">التالي</span>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 rtl:rotate-180">
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
-      </div>
+
     </section>
   );
 };

@@ -116,22 +116,50 @@ const Footer: React.FC = () => {
           
           {/* Contact Info */}
           <div className="w-full md:w-1/3 reveal">
-            <h3 className="text-xl font-bold mb-6 inline-flex">
+            <h3 className="text-xl font-bold mb-6">
               <span>اتصل</span>
               <span className="mx-1">بنا</span>
             </h3>
             <ul className="space-y-3">
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt text-accent w-6"></i>
-                <span className="text-gray-400">بغداد - زيونة - شارع دريم سيتي</span>
+                <a 
+                  href="https://maps.google.com/?q=Baghdad+Zayouna+Dream+City+Street" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-gray-400 hover:text-accent transition-colors"
+                >
+                  بغداد - زيونة - شارع دريم سيتي
+                </a>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-phone-alt text-accent w-6"></i>
-                <span className="text-gray-400 dir-ltr">+964 772 416 6086</span>
+                <div className="flex items-center">
+                  <a 
+                    href="tel:+9647724166086" 
+                    className="text-gray-400 hover:text-accent transition-colors dir-ltr"
+                  >
+                    +964 772 416 6086
+                  </a>
+                  <a 
+                    href="https://wa.me/9647724166086" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-accent mx-2"
+                    aria-label="واتساب"
+                  >
+                    <i className="fab fa-whatsapp"></i>
+                  </a>
+                </div>
               </li>
-              <li className="flex items-center">
-                <i className="fas fa-envelope text-accent w-6"></i>
-                <span className="text-gray-400">info@altaraf.net</span>
+              <li className="flex flex-nowrap items-center">
+                <i className="fas fa-envelope text-accent w-6 flex-shrink-0"></i>
+                <a 
+                  href="mailto:info@altaraf.net" 
+                  className="text-gray-400 hover:text-accent transition-colors"
+                >
+                  info@altaraf.net
+                </a>
               </li>
             </ul>
             
@@ -139,7 +167,7 @@ const Footer: React.FC = () => {
               <span>وسائل</span>
               <span className="mx-1">الدفع</span>
             </h3>
-            <div className="flex justify-end">
+            <div className="flex justify-start">
               <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 {paymentMethods.map(method => (
                   <div 
