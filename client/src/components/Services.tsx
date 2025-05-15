@@ -50,8 +50,28 @@ const Services: React.FC = () => {
           />
           <div className="w-20 h-1 bg-accent mx-auto"></div>
           <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
-            نقدم باقة متنوعة من الخدمات السياحية الفاخرة لتلبية احتياجاتك
+            نقدم باقة متنوعة من الخدمات السياحية الفاخرة من خلال أقسامنا المتخصصة
           </p>
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto text-center">
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم الفيز</p>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم الكروبات السياحية وتنظيم المؤتمرات</p>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم التذاكر</p>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم إجازات السوق الدولية</p>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم التأمين الصحي</p>
+            </div>
+            <div className="p-3 bg-primary/10 rounded-lg">
+              <p className="font-bold text-primary">قسم الاستقبال والتوديع</p>
+            </div>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={cardsRef}>
