@@ -97,7 +97,10 @@ const Footer: React.FC = () => {
           
           {/* Quick Links */}
           <div className="w-full md:w-1/3 mb-10 md:mb-0 md:px-8 reveal">
-            <h3 className="text-xl font-bold mb-6">روابط سريعة</h3>
+            <h3 className="text-xl font-bold mb-6 inline-flex">
+              <span>روابط</span>
+              <span className="mx-1">سريعة</span>
+            </h3>
             <ul className="space-y-3">
               {menuItems.map((item, index) => (
                 <li key={index}>

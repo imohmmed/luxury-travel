@@ -73,11 +73,10 @@ const Testimonials: React.FC = () => {
     <section id="testimonials" className="py-20 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 reveal">
-          <AnimatedText 
-            text="تعليقات العملاء" 
-            className="text-4xl font-bold text-primary mb-4"
-            once 
-          />
+          <h2 className="text-4xl font-bold text-primary mb-4 inline-flex justify-center w-full">
+            <span>تعليقات</span>
+            <span className="mx-1">العملاء</span>
+          </h2>
           <div className="w-20 h-1 bg-accent mx-auto"></div>
           <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
             استمع لآراء عملائنا المميزين عن تجاربهم معنا

@@ -85,11 +85,10 @@ const DiscoverWorld: React.FC = () => {
         <div className="flex flex-col items-center">
           {/* Text Content */}
           <div className="text-center max-w-3xl mb-12" ref={titleRef}>
-            <AnimatedText 
-              text="اكتشف العالم" 
-              className="text-5xl font-bold text-white mb-6"
-              once 
-            />
+            <h2 className="text-5xl font-bold text-white mb-6 inline-flex justify-center w-full">
+              <span>اكتشف</span>
+              <span className="mx-1">العالم</span>
+            </h2>
             <div className="w-20 h-1 bg-accent mx-auto mb-6"></div>
             <p className="text-2xl text-white leading-relaxed">
               استكشف أجمل الوجهات السياحية حول العالم مع باقات سفر مخصصة لتناسب تطلعاتك
