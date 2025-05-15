@@ -43,8 +43,8 @@ const socialLinks: SocialLink[] = [
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
-  { id: 'zain-cash', text: 'زين كاش' },
+  { id: 'mastercard', image: '/img/logos/mastercard.png' },
+  { id: 'zain-cash', image: '/img/logos/zaincash.png' },
 ];
 
 const Footer: React.FC = () => {
@@ -167,7 +167,15 @@ const Footer: React.FC = () => {
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <i className={`${social.icon} text-xl`}></i>
+                {social.image ? (
+                  <img 
+                    src={social.image} 
+                    alt={social.id} 
+                    className="h-6 w-6 filter invert"
+                  />
+                ) : (
+                  <i className={`${social.icon} text-xl`}></i>
+                )}
               </motion.a>
             ))}
           </div>
