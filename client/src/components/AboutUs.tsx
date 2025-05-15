@@ -25,12 +25,7 @@ const AboutUs: React.FC = () => {
                 className="text-gray-600"
               />
             </div>
-            <div className="text-lg text-gray-600 mb-8">
-              <AnimatedText 
-                text="يتكون فريقنا من خبراء متخصصين في مختلف أقسام الشركة، بدءاً من قسم الفيز إلى قسم الكروبات السياحية وتنظيم المؤتمرات، وقسم الاستقبال والتوديع (ترانسفير) وغيرها من الخدمات المتميزة."
-                className="text-gray-600"
-              />
-            </div>
+
             <div className="text-center w-full">
               <Link to="/about-us" className="inline-block bg-primary text-white font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
                 اقرأ المزيد
