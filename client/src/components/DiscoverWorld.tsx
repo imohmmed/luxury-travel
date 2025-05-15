@@ -89,7 +89,7 @@ const DiscoverWorld: React.FC = () => {
             className="globe-container relative flex items-center justify-center mb-12"
             ref={globeRef}
           >
-            <div className="relative w-[500px] h-[500px]">
+            <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] transition-all duration-700">
               <Globe />
               
               {/* Decorative orbit rings */}

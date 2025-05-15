@@ -142,18 +142,28 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // دالة تحريك الكرة الأرضية بناءً على نسبة تمرير الصفحة (مُبسطة)
+    // دالة تحريك وتكبير الكرة الأرضية بناءً على اتجاه التمرير
     const handleScroll = () => {
-      if (earthRef.current && cameraRef.current) {
-        // حساب نسبة التمرير
-        const scrollY = window.scrollY;
+      if (earthRef.current && cameraRef.current && containerRef.current) {
+        // قياس موقع العنصر بالنسبة لنافذة العرض
+        const rect = containerRef.current.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        const documentHeight = document.body.scrollHeight;
-        const progress = Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
         
-        // تطبيق التغييرات على الكرة الأرضية والكاميرا
-        earthRef.current.rotation.y = progress * Math.PI * 2;
-        cameraRef.current.position.z = 15 - (progress * 5);
+        // حساب نسبة رؤية العنصر في النافذة
+        const visibleRatio = Math.min(Math.max((windowHeight - rect.top) / windowHeight, 0), 1);
+
+        // تطبيق التغييرات على الكرة الأرضية
+        
+        // تكبير الكرة عند التمرير للأعلى
+        const scale = 0.8 + (visibleRatio * 0.4); // يبدأ بـ 0.8 ويصل إلى 1.2
+        earthRef.current.scale.set(scale, scale, scale);
+        cloudsRef.current?.scale.set(scale, scale, scale);
+        
+        // تدوير الكرة
+        earthRef.current.rotation.y = visibleRatio * Math.PI;
+        
+        // تقريب الكاميرا مع التمرير للأعلى
+        cameraRef.current.position.z = 17 - (visibleRatio * 5);
         cameraRef.current.updateProjectionMatrix();
       }
     };
