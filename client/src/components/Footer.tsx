@@ -19,8 +19,9 @@ interface SocialLink {
 
 interface PaymentMethod {
   id: string;
-  icon: string;
+  icon?: string;
   text?: string;
+  image?: string;
 }
 
 const menuItems: MenuItem[] = [
@@ -37,13 +38,11 @@ const socialLinks: SocialLink[] = [
   { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
   { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
   { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
-  { id: 'telegram', icon: 'fab fa-telegram', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'visa', icon: 'fab fa-cc-visa' },
-  { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
-  { id: 'zain-cash', icon: '', text: 'زين كاش' },
+  { id: 'mastercard', image: '/img/logos/mastercard.png' },
+  { id: 'zain-cash', image: '/img/logos/zaincash.png' },
 ];
 
 const Footer: React.FC = () => {
@@ -165,7 +164,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           
-          <p className="text-white/80 text-sm">© {new Date().getFullYear()} التَرَف. جميع الحقوق محفوظة.</p>
+          <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
