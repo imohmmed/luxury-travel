@@ -45,7 +45,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
+    <header className={`sticky top-0 w-full z-50 transition-all duration-500 ease-in-out ${
         scrolled 
           ? 'bg-secondary bg-opacity-85 backdrop-blur-md shadow-md py-3' 
           : 'bg-transparent py-6'
