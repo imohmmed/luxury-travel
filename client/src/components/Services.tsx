@@ -96,15 +96,76 @@ const Services: React.FC = () => {
     }
   };
 
+  // متغيرات الحركة للخلفية (Parallax effect مُحسّن)
+  const backgroundVariants = {
+    hidden: { 
+      opacity: 0,
+      scale: 1.1,
+      y: 50
+    },
+    visible: { 
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        duration: 1.5,
+        ease: "easeOut"
+      }
+    }
+  };
+  
+  // تأثير Parallax عند التمرير
+  const [scrollY, setScrollY] = React.useState(0);
+  
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <section id="services" className="py-10 text-secondary relative bg-fixed bg-cover" 
-      ref={sectionRef}
-      style={{
-        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.94), rgba(245, 250, 255, 0.94)), url('/img/airlines-new-bg.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed'
-      }}>
+    <section id="services" className="py-10 text-secondary relative overflow-hidden" 
+      ref={sectionRef}>
+      
+      {/* خلفية متحركة مع تأثير Parallax محسّن */}
+      <motion.div 
+        className="absolute inset-0 -z-10 w-full h-full"
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+        variants={backgroundVariants}
+        style={{
+          y: scrollY * 0.3, // حركة الخلفية بتأثير parallax عند التمرير
+        }}
+      >
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            filter: 'brightness(0.9) contrast(1.1)',
+            transform: `scale(${1 + scrollY * 0.0003})` // تكبير بسيط للخلفية عند التمرير
+          }}
+        />
+      </motion.div>
+      
+      {/* طبقة خلفية إضافية للعمق */}
+      <div className="absolute inset-0 opacity-30" 
+        style={{
+          backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
+          backgroundSize: '200px',
+          backgroundAttachment: 'fixed',
+          mixBlendMode: 'overlay',
+          transform: `translateY(${scrollY * -0.05}px)` // حركة معاكسة للنقوش
+        }} 
+      />
+      
+      {/* طبقة خلفية لتضاد النص */}
+      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-primary/20 -z-5"></div>
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-8"
@@ -114,11 +175,11 @@ const Services: React.FC = () => {
         >
           <AnimatedText 
             text="خدماتنا" 
-            className="text-4xl font-bold text-primary mb-4"
+            className="text-4xl font-bold text-white mb-4"
             once 
           />
           <div className="w-20 h-1 bg-accent mx-auto"></div>
-          <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
+          <p className="text-xl text-white text-opacity-90 mt-4 max-w-3xl mx-auto">
             نقدم باقة متنوعة من الخدمات السياحية الفاخرة من خلال أقسامنا المتخصصة
           </p>
         </motion.div>
@@ -128,9 +189,13 @@ const Services: React.FC = () => {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
+          style={{
+            willChange: 'transform',
+            transform: `translateY(${scrollY * -0.02}px)` // حركة بسيطة عكس التمرير
+          }}
         >
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex group-hover:text-accent transition-colors">
                 <span>قسم</span>
                 <span className="mr-1">الفيز</span>
               </h3>
