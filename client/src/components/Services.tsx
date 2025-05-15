@@ -152,7 +152,8 @@ const Services: React.FC = () => {
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white text-right">
-                قسم الكروبات السياحية وتنظيم المؤتمرات
+                <div>قسم الكروبات السياحية</div>
+                <div className="mt-1">وتنظيم المؤتمرات</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
