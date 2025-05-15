@@ -36,10 +36,10 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
-  { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
-  { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
-  { id: 'telegram', icon: 'fab fa-telegram-plane', href: 'https://t.me/mohmmed' },
+  { id: 'instagram', image: '/img/social-icons/instagram.png', href: '#' },
+  { id: 'facebook', image: '/img/social-icons/facebook.png', href: '#' },
+  { id: 'whatsapp', image: '/img/social-icons/whatsapp.png', href: '#' },
+  { id: 'telegram', image: '/img/social-icons/telegram.png', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
