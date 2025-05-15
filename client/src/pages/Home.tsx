@@ -23,15 +23,10 @@ const Home: React.FC = () => {
     
     // Initialize scroll reveal
     revealElements();
-    window.addEventListener('scroll', revealElements);
-    
-    return () => {
-      window.removeEventListener('scroll', revealElements);
-    };
   }, [revealElements]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden scroll-smooth">
+    <div className="min-h-screen overflow-x-hidden">
       <Header />
       <HeroSlider />
       <AboutUs />

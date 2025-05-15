@@ -18,37 +18,8 @@ function Router() {
 
 function App() {
   useEffect(() => {
-    // Fix for scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
-    // Add scroll to top button
-    const scrollToTopBtn = document.createElement('button');
-    scrollToTopBtn.innerHTML = '&#8593;'; // Up arrow
-    scrollToTopBtn.setAttribute('aria-label', 'الرجوع للأعلى');
-    scrollToTopBtn.className = 'scroll-to-top';
-    document.body.appendChild(scrollToTopBtn);
-    
-    const toggleScrollToTopBtn = () => {
-      if (window.scrollY > 200) {
-        scrollToTopBtn.style.opacity = '1';
-      } else {
-        scrollToTopBtn.style.opacity = '0';
-      }
-    };
-    
-    scrollToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-    
-    window.addEventListener('scroll', toggleScrollToTopBtn);
-    
-    return () => {
-      window.removeEventListener('scroll', toggleScrollToTopBtn);
-      document.body.removeChild(scrollToTopBtn);
-    };
+    // Reset scroll behavior
+    document.documentElement.style.scrollBehavior = 'auto';
   }, []);
   
   return (
