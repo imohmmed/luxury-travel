@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
-import AnimatedTitle from '@/lib/AnimatedTitle';
 
 interface Service {
   id: number;
@@ -131,8 +130,9 @@ const Services: React.FC = () => {
           variants={containerVariants}
         >
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم الفيز" className="text-white" delay={0.1} />
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+                <span>قسم</span>
+                <span className="mr-1">الفيز</span>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
@@ -151,8 +151,12 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم الكروبات السياحية وتنظيم المؤتمرات" className="text-white" delay={0.15} />
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+                <span>قسم</span>
+                <span className="mr-1">الكروبات</span>
+                <span className="mr-1">السياحية</span>
+                <span className="mr-1">وتنظيم</span>
+                <span className="mr-1">المؤتمرات</span>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
@@ -171,8 +175,9 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم التذاكر" className="text-white" delay={0.2} />
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+                <span>قسم</span>
+                <span className="mr-1">التذاكر</span>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
@@ -191,8 +196,11 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم إجازات السوق الدولية" className="text-white" delay={0.25} />
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+                <span>قسم</span>
+                <span className="mr-1">إجازات</span>
+                <span className="mr-1">السوق</span>
+                <span className="mr-1">الدولية</span>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
@@ -211,8 +219,10 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم التأمين الصحي" className="text-white" delay={0.3} />
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+                <span>قسم</span>
+                <span className="mr-1">التأمين</span>
+                <span className="mr-1">الصحي</span>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
@@ -232,13 +242,12 @@ const Services: React.FC = () => {
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">
-                <AnimatedTitle text="قسم الاستقبال والتوديع" className="text-white" delay={0.35} />
-                <motion.div 
-                  className="text-center text-xl mt-1"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5, duration: 0.3 }}
-                >(ترانسفير)</motion.div>
+                <div className="inline-flex">
+                  <span>قسم</span>
+                  <span className="mr-1">الاستقبال</span>
+                  <span className="mr-1">والتوديع</span>
+                </div>
+                <div className="text-center text-xl mt-1">(ترانسفير)</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
