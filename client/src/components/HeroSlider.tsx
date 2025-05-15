@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useMotionValue, useDragControls } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useTransform, useDragControls } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import MotionText from '@/lib/MotionText';
+import AnimatedText from '@/lib/AnimatedText';
 
 interface Slide {
   id: number;
@@ -128,21 +128,19 @@ const HeroSlider: React.FC = () => {
           <div className="container mx-auto px-4 text-center">
             {/* استخدام مكون النص المتحرك للعنوان */}
             <div className="text-4xl md:text-6xl text-white font-bold mb-6">
-              <MotionText 
+              <AnimatedText 
                 text={slides[currentSlide].title}
                 className="text-white font-bold"
-                type="bounce"
-                delay={0.1}
+                once={true}
               />
             </div>
             
             {/* استخدام مكون النص المتحرك للوصف */}
             <div className="text-xl md:text-2xl text-white mb-8">
-              <MotionText 
+              <AnimatedText 
                 text={slides[currentSlide].subtitle}
                 className="text-white"
-                type="slide"
-                delay={0.3}
+                once={true}
               />
             </div>
             

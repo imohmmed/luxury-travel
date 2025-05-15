@@ -1,103 +1,87 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
 import { Link } from 'wouter';
-import MotionText from '@/lib/MotionText';
+import AnimatedText from '@/lib/AnimatedText';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs: React.FC = () => {
-  // تأثيرات ظهور العناصر عند التمرير
-  const fadeInVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.6,
-        ease: "easeOut"
-      }
+  const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (sectionRef.current && contentRef.current) {
+      // تكوين ScrollTrigger للأداء الأفضل
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        ignoreMobileResize: true,
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize" // تحسين أحداث التحديث التلقائي
+      });
+
+      // تطبيق تأثير متحرك محسن على المحتوى
+      const childElements = contentRef.current ? Array.from(contentRef.current.children) : [];
+      
+      const ctx = gsap.context(() => {
+        gsap.from(childElements, {
+          y: 30, // تقليل المسافة للحركة الأكثر سلاسة
+          opacity: 0,
+          stagger: 0.12, // تقليل التباعد بين العناصر
+          duration: 0.7, // مدة قصيرة قليلاً للحركة الأكثر سرعة
+          ease: "power2.out", // منحنى تسارع أكثر طبيعية
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%", // بدء التأثير قبل وصول القسم بقليل
+            end: "top 30%",
+            scrub: 0.8, // قيمة أقل للتحكم الأكثر دقة
+            invalidateOnRefresh: true, // إعادة الحساب عند التحديث
+            fastScrollEnd: true, // تحسين نهاية التمرير السريع
+          }
+        });
+      });
+
+      // تنظيف السياق عند إزالة المكون
+      return () => ctx.revert();
     }
-  };
+  }, []);
 
   return (
-    <section id="about" className="py-10 bg-white text-secondary overflow-hidden">
+    <section id="about" className="py-10 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={fadeInVariants}
-        >
+        <div className="text-center mb-12 reveal">
           <h2 className="text-4xl font-bold text-primary mb-4 justify-center w-full">
-            <MotionText text="من نحن؟" className="text-primary" type="slide" />
+            <AnimatedText text="من نحن؟" className="text-primary" />
           </h2>
-          <motion.div 
-            className="w-20 h-1 bg-accent mx-auto"
-            initial={{ width: 0 }}
-            whileInView={{ width: 80 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          ></motion.div>
-        </motion.div>
+          <div className="w-20 h-1 bg-accent mx-auto"></div>
+        </div>
         
         <div className="flex flex-col items-center">
           {/* About Content */}
-          <motion.div 
-            className="w-full"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.2 } }
-            }}
-          >
-            <motion.h3 
-              className="text-3xl font-bold text-secondary mb-6 text-center"
-              variants={fadeInVariants}
-            >
-              <MotionText 
-                text="شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر" 
-                className="text-secondary"
-                type="bounce"
-              />
-            </motion.h3>
-            
-            <motion.div 
-              className="text-lg text-gray-600 mb-6"
-              variants={fadeInVariants}
-            >
-              <MotionText 
+          <div className="w-full reveal" ref={contentRef}>
+            <h3 className="text-3xl font-bold text-secondary mb-6 text-center">
+              <AnimatedText text="شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر" className="text-secondary" />
+            </h3>
+            <div className="text-lg text-gray-600 mb-6">
+              <AnimatedText 
                 text="نحن شركة التَرَف المتخصصة في تقديم خدمات السفر والسياحة الفاخرة، ونقدم مجموعة متكاملة من الخدمات بدءاً من الفيز والتذاكر وصولاً إلى التأمين الصحي وإجازات السوق الدولية. نسعى جاهدين لتوفير تجارب سفر استثنائية تلبي أعلى توقعات عملائنا بعناية فائقة للتفاصيل."
                 className="text-gray-600"
-                type="fade"
-                delay={0.2}
               />
-            </motion.div>
-            
-            <motion.div 
-              className="text-lg text-gray-600 mb-8"
-              variants={fadeInVariants}
-            >
-              <MotionText 
+            </div>
+            <div className="text-lg text-gray-600 mb-8">
+              <AnimatedText 
                 text="يتكون فريقنا من خبراء متخصصين في مختلف أقسام الشركة، بدءاً من قسم الفيز إلى قسم الكروبات السياحية وتنظيم المؤتمرات، وقسم الاستقبال والتوديع (ترانسفير) وغيرها من الخدمات المتميزة."
                 className="text-gray-600"
-                type="slide"
-                delay={0.4}
               />
-            </motion.div>
-            
-            <motion.div 
-              className="text-center w-full"
-              variants={fadeInVariants}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
+            </div>
+            <div className="text-center w-full">
               <Link to="/about-us" className="inline-block bg-primary text-white font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
                 اقرأ المزيد
                 <i className="fas fa-arrow-left mr-2"></i>
               </Link>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
