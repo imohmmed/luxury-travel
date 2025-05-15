@@ -5,14 +5,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
-import DiscoverWorldPage from "@/pages/DiscoverWorldPage";
+// import DiscoverWorldPage from "@/pages/DiscoverWorldPage";
 import { useEffect } from "react";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/discover-world" component={DiscoverWorldPage} />
       <Route component={NotFound} />
     </Switch>
   );
