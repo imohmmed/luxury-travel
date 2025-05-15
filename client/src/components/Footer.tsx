@@ -43,8 +43,8 @@ const socialLinks: SocialLink[] = [
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', image: '/img/payment-new/mastercard.png' },
-  { id: 'zain-cash', image: '/img/payment-new/zaincash.png' },
+  { id: 'mastercard', image: mastercardImg },
+  { id: 'zain-cash', image: zaincashImg },
 ];
 
 const Footer: React.FC = () => {
@@ -139,7 +139,7 @@ const Footer: React.FC = () => {
                     <img 
                       src={method.image} 
                       alt={method.id} 
-                      className={`object-contain ${method.id === 'mastercard' ? 'h-8' : 'h-7'}`}
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-8 w-auto' : 'h-8 w-auto'}`}
                     />
                   </div>
                 ))}
