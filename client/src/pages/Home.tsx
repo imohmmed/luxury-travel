@@ -13,12 +13,12 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Set document title
-    document.title = 'سفر الفخامة | Luxury Travel';
+    document.title = 'التَرَف | Luxury Travel & Tourism';
     
     // Add meta description
     const metaDescription = document.createElement('meta');
     metaDescription.name = 'description';
-    metaDescription.content = 'سفر الفخامة - شركة متخصصة في تقديم خدمات السفر والسياحة الفاخرة. استمتع بتجارب سفر استثنائية إلى أجمل وجهات العالم مع خدمات متكاملة.';
+    metaDescription.content = 'التَرَف - شركة متخصصة في تقديم خدمات السفر والسياحة الفاخرة. نقدم خدمات متكاملة من الفيز والتذاكر إلى التأمين الصحي وإجازات السوق الدولية، مع خدمات الاستقبال والتوديع المميزة.';
     document.head.appendChild(metaDescription);
     
     // Initialize scroll reveal

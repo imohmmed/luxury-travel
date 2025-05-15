@@ -74,11 +74,11 @@ const Footer: React.FC = () => {
           <div className="w-full md:w-1/3 mb-10 md:mb-0 reveal">
             <div className="mb-6">
               <a href="#" className="text-white font-bold text-3xl">
-                <span className="text-accent">سفر</span> الفخامة
+                <span className="text-accent">الت</span>َرَف
               </a>
             </div>
             <p className="text-gray-400 mb-6">
-              نوفر لك تجارب سفر استثنائية إلى أجمل وجهات العالم مع خدمات متكاملة وحلول سفر مخصصة تلبي احتياجاتك.
+              نقدم خدمات سياحية متكاملة من الفيز والتذاكر إلى التأمين الصحي وإجازات السوق الدولية، مع الاهتمام بجميع التفاصيل لضمان تجربة سفر استثنائية.
             </p>
             <div className="flex space-x-4 rtl:space-x-reverse">
               {socialLinks.map(social => (
