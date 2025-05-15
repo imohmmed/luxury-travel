@@ -1,11 +1,7 @@
 import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Service {
   id: number;
@@ -56,48 +52,49 @@ const services = [
 
 const Services: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
 
-  useGSAP(() => {
-    if (sectionRef.current && cardsRef.current) {
-      const cards = cardsRef.current.children;
-      
-      // تكوين ScrollTrigger للأداء الأفضل
-      ScrollTrigger.config({
-        limitCallbacks: true,
-        ignoreMobileResize: true
-      });
-      
-      // تأثير متوازي خفيف للخلفية (تعديل مع قيم أكثر سلاسة)
-      gsap.to(sectionRef.current, {
-        backgroundPosition: `50% ${window.innerHeight / 8}px`,
-        ease: "power1.out", // تغيير التسارع لحركة أكثر سلاسة
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.5, // قيمة أعلى للتمرير الأكثر سلاسة
-          fastScrollEnd: true,
-        }
-      });
-      
-      // تحسين رسوم متحركة للبطاقات
-      gsap.from(cards, {
-        y: 50, // تقليل المسافة للتحريك الأكثر سلاسة
-        opacity: 0,
-        stagger: 0.08, // تقليل الـstagger لجعل الحركة أكثر سلاسة
-        duration: 0.8, // زيادة المدة
-        ease: "power1.out", // تغيير التسارع
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-          end: "center center",
-          toggleActions: "play none none reverse", // إضافة انعكاس عند التمرير للأعلى
-          scrub: 1.2,
-        }
-      });
+  // متغيرات الحركة للعناوين
+  const titleVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5
+      }
     }
-  }, []);
+  };
+
+  // متغيرات الحركة للبطاقات
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  // متغيرات الحركة للبطاقات الفردية
+  const cardVariants = {
+    hidden: { 
+      y: 50, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 60,
+        damping: 12,
+        duration: 0.6
+      }
+    }
+  };
 
   return (
     <section id="services" className="py-10 text-secondary relative bg-fixed bg-cover" 
@@ -109,7 +106,12 @@ const Services: React.FC = () => {
         backgroundAttachment: 'fixed'
       }}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8 reveal">
+        <motion.div 
+          className="text-center mb-8"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={titleVariants}
+        >
           <AnimatedText 
             text="خدماتنا" 
             className="text-4xl font-bold text-primary mb-4"
@@ -119,10 +121,15 @@ const Services: React.FC = () => {
           <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
             نقدم باقة متنوعة من الخدمات السياحية الفاخرة من خلال أقسامنا المتخصصة
           </p>
-        </div>
+        </motion.div>
         
-        <div className="grid grid-cols-1 gap-6 mb-8" ref={cardsRef}>
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+        <motion.div 
+          className="grid grid-cols-1 gap-6 mb-8"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={containerVariants}
+        >
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">الفيز</span>
@@ -141,9 +148,9 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
+          </motion.div>
           
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">الكروبات</span>
@@ -165,9 +172,9 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
+          </motion.div>
           
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">التذاكر</span>
@@ -186,9 +193,9 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
+          </motion.div>
           
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">إجازات</span>
@@ -209,9 +216,9 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
+          </motion.div>
           
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">التأمين</span>
@@ -231,9 +238,9 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
+          </motion.div>
           
-          <div className="rounded-lg shadow-lg bg-primary p-6">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
               <h3 className="text-2xl font-bold mb-2 text-white">
                 <div className="inline-flex">
                   <span>قسم</span>
@@ -256,8 +263,8 @@ const Services: React.FC = () => {
                   <i className="fas fa-arrow-left mr-2"></i>
                 </Link>
               </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
