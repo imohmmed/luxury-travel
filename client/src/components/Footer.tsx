@@ -36,10 +36,10 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', image: 'https://cdn-icons-png.flaticon.com/512/2111/2111463.svg', href: '#' },
-  { id: 'facebook', image: 'https://cdn-icons-png.flaticon.com/512/733/733547.svg', href: '#' },
-  { id: 'whatsapp', image: 'https://cdn-icons-png.flaticon.com/512/733/733585.svg', href: '#' },
-  { id: 'telegram', image: 'https://cdn-icons-png.flaticon.com/512/2111/2111646.svg', href: 'https://t.me/mohmmed' },
+  { id: 'instagram', image: '/img/icons/instagram.svg', href: '#' },
+  { id: 'facebook', image: '/img/icons/facebook.svg', href: '#' },
+  { id: 'whatsapp', image: '/img/icons/whatsapp.svg', href: '#' },
+  { id: 'telegram', image: '/img/icons/telegram.svg', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
@@ -171,7 +171,7 @@ const Footer: React.FC = () => {
                   <img 
                     src={social.image} 
                     alt={social.id} 
-                    className="h-6 w-6 filter invert opacity-90 hover:opacity-100"
+                    className="h-6 w-6 filter invert opacity-90 hover:opacity-100 transition-all"
                   />
                 ) : (
                   <i className={`${social.icon} text-xl`}></i>
