@@ -25,7 +25,9 @@ const Globe: React.FC = () => {
       0.1,
       1000
     );
-    camera.position.z = 15;
+    // تحديد موقع الكاميرا بناءً على نسبة العرض إلى الارتفاع لضمان رؤية الكرة كاملة
+    const aspectRatio = containerRef.current.clientWidth / containerRef.current.clientHeight;
+    camera.position.z = aspectRatio < 1 ? 18 : 15; // إبعاد الكاميرا أكثر للشاشات الطويلة
     cameraRef.current = camera;
 
     // Initialize renderer

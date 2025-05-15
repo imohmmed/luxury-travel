@@ -86,16 +86,16 @@ const DiscoverWorld: React.FC = () => {
           
           {/* Globe Animation */}
           <div 
-            className="globe-container relative flex items-center justify-center mb-12"
+            className="globe-container relative flex items-center justify-center mb-12 w-full"
             ref={globeRef}
           >
-            <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] transition-all duration-700">
+            <div className="relative w-full h-[250px] md:h-[400px] transition-all duration-700">
               <Globe />
               
               {/* Decorative orbit rings */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div className="w-[105%] h-[105%] border-2 border-white/20 rounded-full absolute animate-spin" style={{ animationDuration: '30s' }}></div>
-                <div className="w-[115%] h-[115%] border border-white/10 rounded-full absolute animate-spin" style={{ animationDuration: '50s' }}></div>
+                <div className="w-[80%] h-[80%] max-w-[600px] max-h-[600px] border-2 border-white/20 rounded-full absolute animate-spin" style={{ animationDuration: '30s' }}></div>
+                <div className="w-[90%] h-[90%] max-w-[680px] max-h-[680px] border border-white/10 rounded-full absolute animate-spin" style={{ animationDuration: '50s' }}></div>
               </div>
             </div>
           </div>
