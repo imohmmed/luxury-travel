@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Tajawal:wght@300;400;500;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -74,12 +74,18 @@
   }
 
   body {
-    @apply font-tajawal antialiased bg-background text-foreground;
+    @apply font-cairo antialiased bg-background text-foreground;
     direction: rtl;
     letter-spacing: normal;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cairo;
+    word-spacing: 0.1em;
+    text-wrap: balance;
   }
 }
 

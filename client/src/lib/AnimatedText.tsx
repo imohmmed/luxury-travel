@@ -16,28 +16,16 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', once 
   useEffect(() => {
     if (!textRef.current) return;
 
-    const splitText = text.split('');
-    textRef.current.innerHTML = ''; // Clear any existing content
-
-    // Wrap each character in a span
-    splitText.forEach((char) => {
-      const span = document.createElement('span');
-      span.textContent = char;
-      span.style.opacity = '0';
-      span.style.display = 'inline-block';
-      span.style.transform = 'translateY(20px)';
-      textRef.current?.appendChild(span);
-    });
-
-    // Animate each character
-    const chars = textRef.current.querySelectorAll('span');
+    // Instead of animating character by character, we'll animate the whole text
+    textRef.current.innerHTML = text;
+    textRef.current.style.opacity = '0';
+    textRef.current.style.transform = 'translateY(20px)';
     
     const animateIn = () => {
-      gsap.to(chars, {
+      gsap.to(textRef.current, {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        stagger: 0.03,
       });
     };
 
@@ -54,11 +42,10 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className = '', once 
         start: "top 80%",
         onEnter: animateIn,
         onLeaveBack: () => {
-          gsap.to(chars, {
+          gsap.to(textRef.current, {
             opacity: 0,
             y: 20,
             duration: 0.5,
-            stagger: 0.02,
           });
         },
       });
