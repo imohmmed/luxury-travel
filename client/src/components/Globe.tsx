@@ -25,9 +25,7 @@ const Globe: React.FC = () => {
       0.1,
       1000
     );
-    // تحديد موقع الكاميرا بناءً على نسبة العرض إلى الارتفاع لضمان رؤية الكرة كاملة
-    const aspectRatio = containerRef.current.clientWidth / containerRef.current.clientHeight;
-    camera.position.z = aspectRatio < 1 ? 21 : 18; // إبعاد الكاميرا أكثر للشاشات الطويلة
+    camera.position.z = 15;
     cameraRef.current = camera;
 
     // Initialize renderer
@@ -40,8 +38,8 @@ const Globe: React.FC = () => {
     containerRef.current.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // Create Earth - جعل الكرة أكبر
-    const geometry = new THREE.SphereGeometry(6.5, 64, 64);
+    // Create Earth
+    const geometry = new THREE.SphereGeometry(5, 64, 64);
     
     // Load Earth texture and bump map
     const textureLoader = new THREE.TextureLoader();
@@ -144,28 +142,18 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // دالة تحريك وتكبير الكرة الأرضية بناءً على اتجاه التمرير
+    // دالة تحريك الكرة الأرضية بناءً على نسبة تمرير الصفحة (مُبسطة)
     const handleScroll = () => {
-      if (earthRef.current && cameraRef.current && containerRef.current) {
-        // قياس موقع العنصر بالنسبة لنافذة العرض
-        const rect = containerRef.current.getBoundingClientRect();
+      if (earthRef.current && cameraRef.current) {
+        // حساب نسبة التمرير
+        const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
+        const documentHeight = document.body.scrollHeight;
+        const progress = Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
         
-        // حساب نسبة رؤية العنصر في النافذة
-        const visibleRatio = Math.min(Math.max((windowHeight - rect.top) / windowHeight, 0), 1);
-
-        // تطبيق التغييرات على الكرة الأرضية
-        
-        // تكبير الكرة عند التمرير للأعلى
-        const scale = 0.8 + (visibleRatio * 0.4); // يبدأ بـ 0.8 ويصل إلى 1.2
-        earthRef.current.scale.set(scale, scale, scale);
-        cloudsRef.current?.scale.set(scale, scale, scale);
-        
-        // تدوير الكرة
-        earthRef.current.rotation.y = visibleRatio * Math.PI;
-        
-        // تقريب الكاميرا مع التمرير للأعلى
-        cameraRef.current.position.z = 17 - (visibleRatio * 5);
+        // تطبيق التغييرات على الكرة الأرضية والكاميرا
+        earthRef.current.rotation.y = progress * Math.PI * 2;
+        cameraRef.current.position.z = 15 - (progress * 5);
         cameraRef.current.updateProjectionMatrix();
       }
     };
