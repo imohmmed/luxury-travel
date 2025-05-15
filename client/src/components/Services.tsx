@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
-import SlideInText from '@/components/SlideInText';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -63,35 +62,31 @@ const Services: React.FC = () => {
     if (sectionRef.current && cardsRef.current) {
       const cards = cardsRef.current.children;
       
-      // تحسين تأثير البارالاكس للخلفية كما طلب المستخدم
-      gsap.fromTo(
-        sectionRef.current,
-        { backgroundPosition: "50% 0%" },
-        {
-          backgroundPosition: "50% 30%",
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.5, // زيادة قليلة لتأثير parallax واضح
-            preventOverlaps: true,
-            fastScrollEnd: true
-          }
+      // تخفيف تأثير البارالاكس للخلفية
+      gsap.to(sectionRef.current, {
+        backgroundPosition: `50% ${window.innerHeight / 8}px`,
+        ease: "power1.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.2, // تقليل قيمة scrub لجعل التأثير أسرع
+          preventOverlaps: true,
+          fastScrollEnd: true
         }
-      );
+      });
       
       // تسريع انيميشن البطاقات
       gsap.from(cards, {
-        y: 30, // تقليل المسافة
+        y: 50, // تقليل المسافة
         opacity: 0,
         stagger: 0.05, // تقليل فاصل الوقت بين العناصر
         duration: 0.3, // تقليل مدة الانيميشن
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none", 
-          once: true 
+          start: "top 80%",
+          toggleActions: "play none none none", // التشغيل مرة واحدة فقط بدون تكرار مع السكرول
+          once: true // تشغيل مرة واحدة فقط
         }
       });
     }
@@ -121,10 +116,10 @@ const Services: React.FC = () => {
         
         <div className="grid grid-cols-1 gap-6 mb-8" ref={cardsRef}>
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white inline-flex" direction="right">
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">الفيز</span>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
                 <li>متابعة كاملة من التقديم إلى الاستلام.</li>
@@ -142,7 +137,7 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white" direction="left">
+              <h3 className="text-2xl font-bold mb-2 text-white">
                 <div className="inline-flex">
                   <span>قسم</span>
                   <span className="mr-1">الكروبات</span>
@@ -152,7 +147,7 @@ const Services: React.FC = () => {
                   <span>وتنظيم</span>
                   <span className="mr-1">المؤتمرات</span>
                 </div>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
                 <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
@@ -170,10 +165,10 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white inline-flex" direction="right">
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">التذاكر</span>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
                 <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
@@ -191,12 +186,12 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white inline-flex" direction="left">
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">إجازات</span>
                 <span className="mr-1">السوق</span>
                 <span className="mr-1">الدولية</span>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
                 <li>خدمة سريعة ومعتمدة دوليًا.</li>
@@ -214,11 +209,11 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white inline-flex" direction="right">
+              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">التأمين</span>
                 <span className="mr-1">الصحي</span>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
                 <li>معتمد من السفارات وشركات الطيران.</li>
@@ -236,14 +231,14 @@ const Services: React.FC = () => {
           </div>
           
           <div className="rounded-lg shadow-lg bg-primary p-6">
-              <SlideInText className="text-2xl font-bold mb-2 text-white" direction="left">
+              <h3 className="text-2xl font-bold mb-2 text-white">
                 <div className="inline-flex">
                   <span>قسم</span>
                   <span className="mr-1">الاستقبال</span>
                   <span className="mr-1">والتوديع</span>
                 </div>
                 <div className="text-center text-xl mt-1">(ترانسفير)</div>
-              </SlideInText>
+              </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
                 <li>توفير سيارات فخمة وسواقين محترفين.</li>

@@ -7,24 +7,17 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      
-      // تغيير مظهر الهيدر عند السكرول - تبسيط الكود
-      if (scrollPosition > 50) {
+      if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
     };
 
-    // إضافة مستمع حدث السكرول
     window.addEventListener('scroll', handleScroll);
-    
-    // التحقق من وضع السكرول الأولي
-    handleScroll();
+    handleScroll(); // Check initial scroll position
 
     return () => {
-      // إزالة مستمع الحدث عند إزالة المكون
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
@@ -49,21 +42,12 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header 
-      className={`sticky top-0 w-full z-50 transition-all duration-500 ease-in-out ${
-        scrolled 
-          ? 'bg-secondary bg-opacity-90 backdrop-blur-sm shadow-md py-3' 
-          : 'bg-transparent py-6'
-      }`}>
-      <div className="container mx-auto px-4 flex justify-between items-center transition-all duration-500 ease-in-out">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : ''}`}>
+      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <div className={`logo text-center mx-auto transition-all duration-500 ${
-            scrolled ? 'w-36 md:w-40' : 'w-40 md:w-48'
-          }`}>
-          <Link href="/" className={`text-white font-bold whitespace-nowrap transition-all duration-500 ${
-            scrolled ? 'text-xl' : 'text-2xl'
-          }`}>
-            <span className="text-accent">التَرَف</span>
+        <div className="logo w-40 md:w-48 text-center mx-auto">
+          <Link href="/" className="text-white font-bold text-2xl">
+            <span className="text-accent whitespace-nowrap">التَرَف</span>
           </Link>
         </div>
         
@@ -72,21 +56,9 @@ const Header: React.FC = () => {
           className={`hamburger z-50 cursor-pointer ${isMenuOpen ? 'menu-active' : ''}`} 
           onClick={toggleMenu}
         >
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
-            isMenuOpen 
-              ? 'rotate-[-45deg] translate-y-[6px] bg-white' 
-              : scrolled ? 'bg-white' : 'bg-white'
-            }`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
-            isMenuOpen 
-              ? 'opacity-0' 
-              : scrolled ? 'bg-white' : 'bg-white'
-            }`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
-            isMenuOpen 
-              ? 'rotate-[45deg] -translate-y-[6px] bg-white' 
-              : scrolled ? 'bg-white' : 'bg-white'
-            }`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
         </div>
         
         {/* Menu Overlay */}
@@ -97,7 +69,7 @@ const Header: React.FC = () => {
                 <li key={index} className="my-4">
                   <a 
                     href={item.href} 
-                    className="hover:text-accent transition-all duration-300 px-3 py-1 rounded-md hover:bg-white/10"
+                    className="hover:text-accent transition-colors"
                     onClick={closeMenu}
                   >
                     {item.name}

@@ -60,7 +60,7 @@ const HeroSlider: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative h-[100vh] overflow-hidden">
+    <section id="home" className="relative h-[90vh] overflow-hidden">
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
           <div
@@ -80,7 +80,7 @@ const HeroSlider: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.5 }}
-          className="absolute inset-0 flex items-center justify-center z-10 pt-20"
+          className="absolute inset-0 flex items-center justify-center z-10"
         >
           <div className="container mx-auto px-4 text-center">
             <motion.h1
