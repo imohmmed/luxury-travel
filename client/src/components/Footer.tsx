@@ -36,15 +36,15 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', image: '/img/icons/instagram.svg', href: '#' },
-  { id: 'facebook', image: '/img/icons/facebook.svg', href: '#' },
-  { id: 'whatsapp', image: '/img/icons/whatsapp.svg', href: '#' },
-  { id: 'telegram', image: '/img/icons/telegram.svg', href: 'https://t.me/mohmmed' },
+  { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
+  { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
+  { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
+  { id: 'telegram', icon: 'fab fa-telegram-plane', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', image: '/img/logos/mastercard.png' },
-  { id: 'zain-cash', image: '/img/logos/zaincash.png' },
+  { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
+  { id: 'zain-cash', text: 'زين كاش' },
 ];
 
 const Footer: React.FC = () => {
@@ -167,15 +167,7 @@ const Footer: React.FC = () => {
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                {social.image ? (
-                  <img 
-                    src={social.image} 
-                    alt={social.id} 
-                    className="h-6 w-6 filter invert opacity-90 hover:opacity-100 transition-all"
-                  />
-                ) : (
-                  <i className={`${social.icon} text-xl`}></i>
-                )}
+                <i className={`${social.icon} text-xl`}></i>
               </motion.a>
             ))}
           </div>
