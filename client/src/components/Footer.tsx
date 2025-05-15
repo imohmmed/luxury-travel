@@ -25,7 +25,8 @@ interface PaymentMethod {
 
 const menuItems: MenuItem[] = [
   { name: 'الرئيسية', href: '#home' },
-  { name: 'من نحن | تعليقات العملاء', href: '#about' },
+  { name: 'من نحن', href: '#about' },
+  { name: 'تعليقات العملاء', href: '#testimonials' },
   { name: 'خدماتنا', href: '#services' },
   { name: 'اكتشف العالم', href: '#discover' },
   { name: 'سياسة الخصوصية', href: '#' },

@@ -33,11 +33,10 @@ const AboutUs: React.FC = () => {
     <section id="about" className="py-10 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12 reveal">
-          <AnimatedText 
-            text="من نحن؟" 
-            className="text-4xl font-bold text-primary mb-4"
-            once 
-          />
+          <h2 className="text-4xl font-bold text-primary mb-4 inline-flex justify-center w-full">
+            <span>من</span>
+            <span className="mx-1">نحن؟</span>
+          </h2>
           <div className="w-20 h-1 bg-accent mx-auto"></div>
         </div>
         
