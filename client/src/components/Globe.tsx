@@ -1,9 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Globe: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -146,41 +142,40 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // تحسين إعدادات ScrollTrigger للكرة الأرضية
-    // تكوين تحسينات الأداء للتمرير
-    ScrollTrigger.config({
-      limitCallbacks: true,
-      ignoreMobileResize: true,
-      syncInterval: 60 // زيادة المزامنة للحصول على حركة أكثر سلاسة
-    });
-    
-    // إنشاء تأثير تمرير محسن للكرة الأرضية
-    ScrollTrigger.create({
-      trigger: containerRef.current,
-      start: 'top bottom-=10%', // بدء التأثير بشكل أبكر قليلاً
-      end: 'bottom top+=10%',
-      scrub: 1.2, // قيمة أعلى لتأثير حركة أكثر سلاسة وأقل تقطعاً
-      fastScrollEnd: true, // تحسين نهاية التمرير السريع
-      invalidateOnRefresh: true, // إعادة حساب القيم عند تحديث الصفحة
-      onUpdate: (self) => {
-        if (earthRef.current && cameraRef.current) {
-          // استخدام الدالة easeInOut للحصول على حركة أكثر سلاسة
-          const easedProgress = easeInOutQuad(self.progress);
-          
-          // تعيين القيم مباشرة للحصول على أداء أفضل
-          earthRef.current.rotation.y = easedProgress * Math.PI * 2; // دوران كامل 360 درجة
-          cameraRef.current.position.z = 15 - (easedProgress * 5); // بدء من 15، وتقريب إلى 10
-          
-          // تحديث الكاميرا فقط عند الحاجة
-          cameraRef.current.updateProjectionMatrix();
-        }
+    // تأثير الدوران البطيء للكرة الأرضية
+    const setupRotation = () => {
+      if (earthRef.current) {
+        // معدل دوران الكرة الأرضية
+        earthRef.current.rotation.y = 0;
       }
-    });
+      
+      // تعديل موضع الكاميرا للحصول على منظر أفضل
+      if (cameraRef.current) {
+        cameraRef.current.position.z = 15;
+        cameraRef.current.updateProjectionMatrix();
+      }
+    };
     
-    // دالة مساعدة لتسريع الحركة
-    function easeInOutQuad(t: number): number {
-      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-    }
+    setupRotation();
+    
+    // دالة تحريك الكرة الأرضية بناءً على نسبة تمرير الصفحة (مُبسطة)
+    const handleScroll = () => {
+      if (earthRef.current && cameraRef.current) {
+        // حساب نسبة التمرير
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.body.scrollHeight;
+        const progress = Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
+        
+        // تطبيق التغييرات على الكرة الأرضية والكاميرا
+        earthRef.current.rotation.y = progress * Math.PI * 2;
+        cameraRef.current.position.z = 15 - (progress * 5);
+        cameraRef.current.updateProjectionMatrix();
+      }
+    };
+    
+    // إضافة مستمع حدث التمرير
+    window.addEventListener('scroll', handleScroll);
     
     // Handle window resize
     const handleResize = () => {

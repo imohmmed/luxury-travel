@@ -1,56 +1,12 @@
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
 import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
 
-gsap.registerPlugin(ScrollTrigger);
-
 const AboutUs: React.FC = () => {
-  const sectionRef = useRef<HTMLElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (sectionRef.current && contentRef.current) {
-      // تكوين ScrollTrigger للأداء الأفضل
-      ScrollTrigger.config({
-        limitCallbacks: true,
-        ignoreMobileResize: true,
-        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize" // تحسين أحداث التحديث التلقائي
-      });
-
-      // تطبيق تأثير متحرك محسن على المحتوى
-      const childElements = contentRef.current ? Array.from(contentRef.current.children) : [];
-      
-      const ctx = gsap.context(() => {
-        gsap.from(childElements, {
-          y: 30, // تقليل المسافة للحركة الأكثر سلاسة
-          opacity: 0,
-          stagger: 0.12, // تقليل التباعد بين العناصر
-          duration: 0.7, // مدة قصيرة قليلاً للحركة الأكثر سرعة
-          ease: "power2.out", // منحنى تسارع أكثر طبيعية
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%", // بدء التأثير قبل وصول القسم بقليل
-            end: "top 30%",
-            scrub: 0.8, // قيمة أقل للتحكم الأكثر دقة
-            invalidateOnRefresh: true, // إعادة الحساب عند التحديث
-            fastScrollEnd: true, // تحسين نهاية التمرير السريع
-          }
-        });
-      });
-
-      // تنظيف السياق عند إزالة المكون
-      return () => ctx.revert();
-    }
-  }, []);
-
   return (
-    <section id="about" className="py-10 bg-white text-secondary" ref={sectionRef}>
+    <section id="about" className="py-10 bg-white text-secondary">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 reveal">
+        <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-primary mb-4 justify-center w-full">
             <AnimatedText text="من نحن؟" className="text-primary" />
           </h2>
@@ -59,7 +15,7 @@ const AboutUs: React.FC = () => {
         
         <div className="flex flex-col items-center">
           {/* About Content */}
-          <div className="w-full reveal" ref={contentRef}>
+          <div className="w-full">
             <h3 className="text-3xl font-bold text-secondary mb-6 text-center">
               <AnimatedText text="شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر" className="text-secondary" />
             </h3>
