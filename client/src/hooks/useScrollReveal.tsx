@@ -5,34 +5,35 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 export const useScrollReveal = () => {
   const revealRef = useRef(null);
   
-  // تسريع السكرول وتحسين الأداء
+  // Improved version that doesn't block scrolling
   const revealElements = useCallback(() => {
     gsap.registerPlugin(ScrollTrigger);
     
-    // الحصول على جميع العناصر المراد تأثيرها
+    // Get all reveal elements
     const reveals = document.querySelectorAll('.reveal');
     
-    // تعيين الحالة الأولية للعناصر - تقليل المسافة
-    gsap.set(reveals, { autoAlpha: 0, y: 30 });
+    // Set initial state for reveal elements
+    gsap.set(reveals, { autoAlpha: 0, y: 50 });
     
-    // إنشاء مجموعة للتحسين
+    // Create a batch for better performance
     reveals.forEach((element) => {
-      // تسريع الانيميشن لتجنب تأخير السكرول
+      // Use quick fade to avoid scroll blocking
       gsap.to(element, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.3, // تقليل مدة الانيميشن
-        ease: "power1.out", // استخدام تأثير أسرع
+        duration: 0.5,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: element,
-          start: "top bottom-=50", // تحسين نقطة البداية
+          start: "top bottom-=100",
           toggleActions: "play none none none",
-          once: true, // عرض مرة واحدة فقط
-          markers: false
+          once: true,
+          fastScrollEnd: true,
+          preventOverlaps: true
         }
       });
       
-      // إضافة فئة نشطة للتأثيرات CSS
+      // Add active class for CSS transitions
       element.classList.add('active');
     });
   }, []);

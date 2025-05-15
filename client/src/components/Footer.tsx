@@ -43,8 +43,8 @@ const socialLinks: SocialLink[] = [
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', image: '/img/payment-new/mastercard.png' },
-  { id: 'zain-cash', image: '/img/payment-new/zaincash.png' },
+  { id: 'mastercard', image: '/img/payment-methods/mastercard.png' },
+  { id: 'zain-cash', image: '/img/payment-methods/zain-cash.png' },
 ];
 
 const Footer: React.FC = () => {
@@ -54,15 +54,15 @@ const Footer: React.FC = () => {
   useGSAP(() => {
     if (footerRef.current && contentRef.current) {
       gsap.from(contentRef.current.children, {
-        y: 30,
+        y: 50,
         opacity: 0,
-        stagger: 0.05,
-        duration: 0.3,
+        stagger: 0.1,
+        duration: 0.5,
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 90%",
-          toggleActions: "play none none none",
-          once: true
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
         }
       });
     }
@@ -125,21 +125,21 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <div className="mt-8 mb-4 flex justify-end items-center">
-              <h3 className="text-xl font-bold ml-3 inline-flex">
-                <span>وسائل</span>
-                <span className="mx-1">الدفع</span>
-              </h3>
-              <div className="bg-white rounded-lg p-2 flex items-center justify-between max-w-[120px]">
+            <h3 className="text-xl font-bold mt-8 mb-4 text-right">
+              <span>وسائل</span>
+              <span className="mx-1">الدفع</span>
+            </h3>
+            <div className="flex justify-center">
+              <div className="bg-white rounded-lg p-3 flex items-center justify-between w-full max-w-[220px]">
                 {paymentMethods.map(method => (
                   <div 
                     key={method.id}
-                    className="px-1 flex items-center justify-center"
+                    className="px-3 flex items-center justify-center"
                   >
                     <img 
                       src={method.image} 
                       alt={method.id} 
-                      className={`object-contain ${method.id === 'mastercard' ? 'h-7' : 'h-6'}`}
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-9' : 'h-7'}`}
                     />
                   </div>
                 ))}

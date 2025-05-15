@@ -4,23 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* تحسين السكرول في الموقع */
-html {
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-}
-
-body {
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  /* تحسين أداء الرندر والتسريع */
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
 :root {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
