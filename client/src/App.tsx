@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import DiscoverWorldPage from "@/pages/DiscoverWorldPage";
+import VisaBooking from "@/pages/VisaBooking";
+import HotelsBooking from "@/pages/HotelsBooking";
 import { useEffect } from "react";
 
 function Router() {
