@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       const scrollPosition = window.scrollY;
       
       // تغيير مظهر الهيدر عند السكرول
-      if (scrollPosition > 5) {
+      if (scrollPosition > 10) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -45,7 +45,7 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`w-full z-50 transition-all duration-500 ease-in-out ${
+    <header className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
         scrolled 
           ? 'bg-secondary bg-opacity-85 backdrop-blur-md shadow-md py-3' 
           : 'bg-transparent py-6'
@@ -67,15 +67,21 @@ const Header: React.FC = () => {
           className={`hamburger z-50 cursor-pointer ${isMenuOpen ? 'menu-active' : ''}`} 
           onClick={toggleMenu}
         >
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
-            ? 'rotate-[-45deg] translate-y-[6px] bg-white' 
-            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
-            ? 'opacity-0' 
-            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
-            ? 'rotate-[45deg] -translate-y-[6px] bg-white' 
-            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
+            isMenuOpen 
+              ? 'rotate-[-45deg] translate-y-[6px] bg-white' 
+              : scrolled ? 'bg-white' : 'bg-white'
+            }`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
+            isMenuOpen 
+              ? 'opacity-0' 
+              : scrolled ? 'bg-white' : 'bg-white'
+            }`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${
+            isMenuOpen 
+              ? 'rotate-[45deg] -translate-y-[6px] bg-white' 
+              : scrolled ? 'bg-white' : 'bg-white'
+            }`}></div>
         </div>
         
         {/* Menu Overlay */}
