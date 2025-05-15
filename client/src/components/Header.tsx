@@ -13,12 +13,12 @@ const Header: React.FC = () => {
       if (scrollTimer) clearTimeout(scrollTimer);
       
       scrollTimer = setTimeout(() => {
-        if (window.scrollY > 30) {
+        if (window.scrollY > 10) {
           setScrolled(true);
         } else {
           setScrolled(false);
         }
-      }, 50); // تأخير بسيط للاستجابة المتوازنة
+      }, 20); // تأخير بسيط جدا للاستجابة السريعة
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -50,12 +50,12 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : 'bg-secondary/80 backdrop-blur-md'}`}>
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-500 ${scrolled ? 'bg-secondary/95 shadow-lg backdrop-blur-sm' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
-          <Link href="/" className="text-white font-bold text-2xl">
-            <span className="text-accent whitespace-nowrap">التَرَف</span>
+          <Link href="/" className={`font-bold text-2xl ${scrolled ? 'text-accent' : 'text-accent'}`}>
+            <span className="whitespace-nowrap transition-all duration-500 text-shadow-sm">التَرَف</span>
           </Link>
         </div>
         
@@ -64,9 +64,9 @@ const Header: React.FC = () => {
           className={`hamburger z-50 cursor-pointer ${isMenuOpen ? 'menu-active' : ''}`} 
           onClick={toggleMenu}
         >
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
         </div>
         
         {/* Menu Overlay */}

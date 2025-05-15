@@ -19,8 +19,6 @@ body {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
-  /* إضافة هوامش للمحتوى تحت الهيدر */
-  padding-top: 72px;
 }
 
 :root {
@@ -131,6 +129,10 @@ body {
     direction: ltr;
     unicode-bidi: bidi-override;
     display: inline-block;
+  }
+  
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
 
   .reveal {
