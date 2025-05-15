@@ -150,12 +150,10 @@ const Testimonials: React.FC = () => {
                     alt={testimonials[currentIndex].name} 
                     className="w-20 h-20 rounded-full object-cover shadow-md mb-3"
                   />
-                  <div className="text-right">
-                    {testimonials[currentIndex].name.split(' ').map((namePart, i) => (
-                      <div key={i} className="text-xl font-bold text-secondary leading-tight">
-                        {namePart}
-                      </div>
-                    ))}
+                  <div className="text-center">
+                    <h4 className="text-xl font-bold text-secondary">
+                      {testimonials[currentIndex].name}
+                    </h4>
                   </div>
                 </div>
                 <p className="text-gray-600 text-md text-right overflow-y-auto max-h-60">
