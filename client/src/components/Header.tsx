@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [headerVisible, setHeaderVisible] = useState(true);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,15 +15,6 @@ const Header: React.FC = () => {
       } else {
         setScrolled(false);
       }
-      
-      // إخفاء الهيدر عند السكرول للأسفل وإظهاره عند السكرول للأعلى
-      if (scrollPosition > lastScrollY.current && scrollPosition > 300) {
-        setHeaderVisible(false);
-      } else {
-        setHeaderVisible(true);
-      }
-      
-      lastScrollY.current = scrollPosition;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -56,12 +45,10 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
+    <header className={`w-full z-50 transition-all duration-500 ease-in-out ${
         scrolled 
           ? 'bg-secondary bg-opacity-85 backdrop-blur-md shadow-md py-3' 
           : 'bg-transparent py-6'
-      } ${
-        headerVisible ? 'translate-y-0' : '-translate-y-full'
       }`}>
       <div className="container mx-auto px-4 flex justify-between items-center transition-all duration-500 ease-in-out">
         {/* Logo */}
