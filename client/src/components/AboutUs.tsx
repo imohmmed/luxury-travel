@@ -44,7 +44,7 @@ const AboutUs: React.FC = () => {
         <div className="flex flex-col items-center">
           {/* About Content */}
           <div className="w-full reveal" ref={contentRef}>
-            <h3 className="text-3xl font-bold text-secondary mb-6">شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر</h3>
+            <h3 className="text-3xl font-bold text-secondary mb-6 whitespace-nowrap text-center">شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر</h3>
             <p className="text-lg text-gray-600 mb-6">
               نحن شركة التَرَف المتخصصة في تقديم خدمات السفر والسياحة الفاخرة، ونقدم مجموعة متكاملة من الخدمات بدءاً من الفيز والتذاكر وصولاً إلى التأمين الصحي وإجازات السوق الدولية. نسعى جاهدين لتوفير تجارب سفر استثنائية تلبي أعلى توقعات عملائنا بعناية فائقة للتفاصيل.
             </p>
