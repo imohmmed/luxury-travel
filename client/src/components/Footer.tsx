@@ -174,7 +174,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           
-          <p className="text-white/80 text-sm">© 2024 التَرَف. جميع الحقوق محفوظة.</p>
+          <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
