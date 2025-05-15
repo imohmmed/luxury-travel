@@ -125,12 +125,12 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <div className="mt-10 mb-6 flex flex-col items-end">
+            <div className="mt-10 mb-6 flex flex-col items-start">
               <h3 className="text-xl font-bold mb-4 inline-flex">
                 <span>وسائل</span>
                 <span className="mx-1">الدفع</span>
               </h3>
-              <div className="flex justify-end gap-6 p-2">
+              <div className="flex justify-start gap-6 p-2">
                 {paymentMethods.map(method => (
                   <motion.div 
                     key={method.id}
