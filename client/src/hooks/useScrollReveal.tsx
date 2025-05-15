@@ -1,6 +1,8 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 export const useScrollReveal = () => {
+  const revealRef = useRef(null);
+  
   const revealElements = useCallback(() => {
     const reveals = document.querySelectorAll('.reveal');
     
@@ -14,5 +16,5 @@ export const useScrollReveal = () => {
     revealElements();
   }, [revealElements]);
 
-  return { revealElements };
+  return { revealElements, revealRef };
 };

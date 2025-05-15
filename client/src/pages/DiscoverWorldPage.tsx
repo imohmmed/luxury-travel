@@ -57,7 +57,8 @@ const countries = [
 
 const DiscoverWorldPage: React.FC = () => {
   // Initialize scroll reveal animation
-  const sectionRef = useScrollReveal();
+  const { revealRef } = useScrollReveal();
+  const sectionRef = React.useRef<HTMLElement>(null);
 
   return (
     <>
