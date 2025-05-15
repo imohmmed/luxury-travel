@@ -61,16 +61,21 @@ const HeroSlider: React.FC = () => {
     return () => clearInterval(interval);
   }, [dragging]);
   
-  // معالجة حدث السحب
+  // معالجة حدث السحب - تعديل ليتناسب مع تجربة اللمس
   const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, info: { offset: { x: number } }) => {
-    const threshold = 100; // الحد الأدنى للمسافة للتبديل
+    const threshold = 50; // تقليل الحد الأدنى للمسافة للتبديل لتسهيل التفاعل
     
-    if (info.offset.x > threshold) {
-      // سحب لليمين (الشريحة السابقة)
-      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    } else if (info.offset.x < -threshold) {
-      // سحب لليسار (الشريحة التالية)
-      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    // التحقق من أن السحب كان أفقياً بشكل كافٍ لتغيير الشريحة
+    const isHorizontalDrag = Math.abs(info.offset.x) > 20;
+    
+    if (isHorizontalDrag) {
+      if (info.offset.x > threshold) {
+        // سحب لليمين (الشريحة السابقة)
+        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      } else if (info.offset.x < -threshold) {
+        // سحب لليسار (الشريحة التالية)
+        setCurrentSlide((prev) => (prev + 1) % slides.length);
+      }
     }
     
     setDragging(false);
@@ -83,17 +88,20 @@ const HeroSlider: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative h-[90vh] overflow-hidden touch-none">
+    <section id="home" className="relative h-[90vh] overflow-hidden" style={{ touchAction: 'pan-y' }}>
       {/* منطقة السحب - تغطي الشاشة بالكامل */}
+      {/* تقليل مساحة منطقة السحب للسماح بالتمرير الطبيعي في أغلب المساحة */}
       <motion.div 
         ref={sliderRef}
-        className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing"
+        className="absolute inset-0 z-20 cursor-default md:cursor-grab md:active:cursor-grabbing"
         drag="x"
+        dragDirectionLock={true}
+        dragElastic={0.2}
         dragControls={dragControls}
         dragConstraints={{ left: 0, right: 0 }}
         onDragStart={() => setDragging(true)}
         onDragEnd={handleDragEnd}
-        style={{ x: dragX }}
+        style={{ x: dragX, touchAction: 'pan-y' }}
       />
       
       {/* خلفيات الشرائح */}
