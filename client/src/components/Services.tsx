@@ -13,8 +13,45 @@ interface Service {
   description: string;
 }
 
-// Import services from lib/constants.ts
-import { services } from '@/lib/constants';
+// Custom services data
+const services = [
+  {
+    id: 1,
+    title: "قسم الفيز",
+    image: "https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول."
+  },
+  {
+    id: 2,
+    title: "قسم الكروبات السياحية وتنظيم المؤتمرات",
+    image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق."
+  },
+  {
+    id: 3,
+    title: "قسم التذاكر",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "حجز تذاكر الطيران لجميع الخطوط الجوية."
+  },
+  {
+    id: 4,
+    title: "قسم إجازات السوق الدولية",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "إصدار إجازات سوق دولية (رخص القيادة الدولية)."
+  },
+  {
+    id: 5,
+    title: "قسم التأمين الصحي",
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث."
+  },
+  {
+    id: 6,
+    title: "قسم الاستقبال والتوديع (ترانسفير)",
+    image: "https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300",
+    description: "خدمات استقبال من المطارات وتوديع عند السفر."
+  }
+];
 
 const Services: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);

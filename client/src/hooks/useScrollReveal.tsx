@@ -12,8 +12,10 @@ export const useScrollReveal = () => {
   }, []);
 
   useEffect(() => {
-    // Show all elements immediately
-    revealElements();
+    // Add active class to all elements immediately
+    setTimeout(() => {
+      revealElements();
+    }, 100);
   }, [revealElements]);
 
   return { revealElements, revealRef };
