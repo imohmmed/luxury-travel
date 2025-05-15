@@ -1,6 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence, useInView } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import AnimatedText from '@/lib/AnimatedText';
+
+// Import testimonials from constants
+import { testimonials } from '@/lib/constants';
 
 interface Testimonial {
   id: number;
@@ -10,38 +13,10 @@ interface Testimonial {
   comment: string;
 }
 
-// Import testimonials from constants
-import { testimonials } from '@/lib/constants';
-
 const Testimonials: React.FC = () => {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // استخدام Framer Motion لتحريك العناصر عند ظهورها في منطقة العرض
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
   
-  // متغيرات حركة سلايدر التعليقات
-  const sliderVariants = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
-      }
-    }
-  };
-
   // Function to render stars based on rating
   const renderStars = (rating: number) => {
     const stars = [];
@@ -64,6 +39,46 @@ const Testimonials: React.FC = () => {
     return stars;
   };
 
+  // متغيرات حركة العنوان
+  const titleVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  // متغيرات حركة الشبكة
+  const gridVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  // متغيرات حركة بطاقات التعليقات
+  const cardVariants = {
+    hidden: { 
+      y: 50, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 50,
+        damping: 10,
+        duration: 0.5
+      }
+    }
+  };
+
   return (
     <section id="testimonials" className="py-20 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
@@ -71,14 +86,7 @@ const Testimonials: React.FC = () => {
           className="text-center mb-12"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          variants={{
-            hidden: { opacity: 0, y: -20 },
-            visible: { 
-              opacity: 1, 
-              y: 0,
-              transition: { duration: 0.5 }
-            }
-          }}
+          variants={titleVariants}
         >
           <h2 className="text-4xl font-bold text-primary mb-4 inline-flex justify-center w-full">
             <span>تعليقات</span>
@@ -91,70 +99,44 @@ const Testimonials: React.FC = () => {
         </motion.div>
         
         <motion.div 
-          className="relative overflow-hidden" 
-          ref={sliderRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          variants={sliderVariants}
+          variants={gridVariants}
         >
-          <div className="testimonial-slider" style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}>
-            <AnimatePresence mode="sync">
-              {testimonials.map((testimonial, index) => (
-                <motion.div
-                  key={testimonial.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ 
-                    opacity: index === currentTestimonial ? 1 : 0,
-                    transition: { duration: 0.5 }
-                  }}
-                  exit={{ opacity: 0 }}
-                  className="testimonial-slide px-4"
-                >
-                  <motion.div 
-                    className="bg-neutral rounded-xl shadow-lg p-8"
-                    whileHover={{ 
-                      scale: 1.02,
-                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                    }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <div className="flex items-center mb-6">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name} 
-                        className="w-16 h-16 rounded-full object-cover mr-4"
-                      />
-                      <div>
-                        <h4 className="text-xl font-bold text-secondary">{testimonial.name}</h4>
-                        <div className="flex text-accent mt-1">
-                          {renderStars(testimonial.rating)}
-                        </div>
-                      </div>
+          {testimonials.map((testimonial) => (
+            <motion.div
+              key={testimonial.id}
+              variants={cardVariants}
+              className="h-full"
+            >
+              <motion.div 
+                className="bg-neutral rounded-xl shadow-lg p-6 h-full flex flex-col"
+                whileHover={{ 
+                  scale: 1.02,
+                  boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <div className="flex items-center mb-4">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name} 
+                    className="w-16 h-16 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="text-xl font-bold text-secondary">{testimonial.name}</h4>
+                    <div className="flex text-accent mt-1">
+                      {renderStars(testimonial.rating)}
                     </div>
-                    <p className="text-gray-600">
-                      {testimonial.comment}
-                    </p>
-                  </motion.div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </div>
-          
-          {/* Navigation Dots */}
-          <div className="flex justify-center mt-6">
-            {testimonials.map((_, index) => (
-              <motion.button 
-                key={index} 
-                className={`w-3 h-3 rounded-full mx-1 transition-all ${
-                  index === currentTestimonial ? 'bg-primary scale-125' : 'bg-gray-300'
-                }`}
-                onClick={() => setCurrentTestimonial(index)}
-                aria-label={`View testimonial ${index + 1}`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              />
-            ))}
-          </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 flex-grow">
+                  {testimonial.comment}
+                </p>
+              </motion.div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>
