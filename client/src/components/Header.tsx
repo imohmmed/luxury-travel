@@ -47,7 +47,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
           <Link href="/" className="text-white font-bold text-2xl">
-            <span className="text-accent">سفر</span> الفخامة
+            <span className="text-accent">الت</span>َرَف
           </Link>
         </div>
         

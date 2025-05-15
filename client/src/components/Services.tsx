@@ -13,44 +13,8 @@ interface Service {
   description: string;
 }
 
-const services: Service[] = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'رحلات طيران فاخرة',
-    description: 'احجز رحلات الطيران على الدرجة الأولى ودرجة رجال الأعمال مع أفضل شركات الطيران العالمية'
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'فنادق ومنتجعات فاخرة',
-    description: 'تمتع بإقامة لا تُنسى في أفخم الفنادق والمنتجعات حول العالم مع خدمات حصرية'
-  },
-  {
-    id: 3,
-    image: 'https://images.pexels.com/photos/843633/pexels-photo-843633.jpeg?auto=compress&cs=tinysrgb&w=600&h=400',
-    title: 'رحلات بحرية فاخرة',
-    description: 'استمتع برحلات بحرية على متن أفخم اليخوت والسفن السياحية مع خدمة شخصية متميزة'
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'رحلات سفاري فاخرة',
-    description: 'عش تجربة سفاري فريدة في أفضل المحميات الطبيعية بإفريقيا مع إقامة في أفخم المخيمات'
-  },
-  {
-    id: 5,
-    image: 'https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'جولات سياحية خاصة',
-    description: 'استمتع بجولات سياحية خاصة مع مرشدين متخصصين يتحدثون لغتك ويعرفون أفضل الأماكن'
-  },
-  {
-    id: 6,
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'خدمات سفر الأعمال',
-    description: 'خدمات متكاملة لرجال الأعمال تشمل حجز الرحلات والفنادق وتنظيم المؤتمرات والفعاليات'
-  }
-];
+// Import services from lib/constants.ts
+import { services as servicesData } from '@/lib/constants';
 
 const Services: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -91,7 +55,7 @@ const Services: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={cardsRef}>
-          {services.map((service) => (
+          {servicesData.map((service) => (
             <div 
               key={service.id} 
               className="bg-white rounded-xl shadow-lg overflow-hidden hover-scale reveal"

@@ -58,7 +58,7 @@ const AboutUs: React.FC = () => {
             <div className="relative overflow-hidden rounded-lg shadow-xl hover-scale">
               <img 
                 src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                alt="فريق سفر الفخامة" 
+                alt="فريق التَرَف" 
                 className="w-full h-auto transform hover:scale-105 transition-transform duration-700"
               />
             </div>
@@ -66,12 +66,12 @@ const AboutUs: React.FC = () => {
           
           {/* About Content */}
           <div className="w-full md:w-1/2 md:pr-10 reveal" ref={contentRef}>
-            <h3 className="text-3xl font-bold text-secondary mb-6">شركة رائدة في مجال السياحة والسفر الفاخر</h3>
+            <h3 className="text-3xl font-bold text-secondary mb-6">شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر</h3>
             <p className="text-lg text-gray-600 mb-6">
-              نحن شركة متخصصة في تقديم خدمات السفر والسياحة الفاخرة، نسعى جاهدين لتوفير تجارب سفر استثنائية تلبي أعلى توقعات عملائنا. منذ تأسيسنا، نجحنا في بناء سمعة متميزة في مجال السياحة الفاخرة من خلال التزامنا بتقديم خدمات شخصية مخصصة وعناية فائقة بالتفاصيل.
+              نحن شركة التَرَف المتخصصة في تقديم خدمات السفر والسياحة الفاخرة، ونقدم مجموعة متكاملة من الخدمات بدءاً من الفيز والتذاكر وصولاً إلى التأمين الصحي وإجازات السوق الدولية. نسعى جاهدين لتوفير تجارب سفر استثنائية تلبي أعلى توقعات عملائنا بعناية فائقة للتفاصيل.
             </p>
             <p className="text-lg text-gray-600 mb-8">
-              يتكون فريقنا من خبراء السفر المحترفين الذين يمتلكون معرفة واسعة بأفضل الوجهات السياحية والفنادق الفاخرة حول العالم.
+              يتكون فريقنا من خبراء متخصصين في مختلف أقسام الشركة، بدءاً من قسم الفيز إلى قسم الكروبات السياحية وتنظيم المؤتمرات، وقسم الاستقبال والتوديع (ترانسفير) وغيرها من الخدمات المتميزة.
             </p>
             <a href="#" className="inline-block bg-primary text-white font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
               اقرأ المزيد
