@@ -133,7 +133,7 @@ const Testimonials: React.FC = () => {
           animate={isInView ? "visible" : "hidden"}
           variants={sliderVariants}
         >
-          <div className="testimonial-slider min-h-[400px] max-w-2xl mx-auto relative">
+          <div className="testimonial-slider min-h-[350px] max-w-xl mx-auto relative bg-neutral rounded-xl shadow-lg">
             <AnimatePresence custom={direction} mode="popLayout" initial={false}>
               <motion.div
                 key={currentIndex}
@@ -142,22 +142,19 @@ const Testimonials: React.FC = () => {
                 initial="enter"
                 animate="center"
                 exit="exit"
-                className="bg-neutral rounded-xl shadow-lg p-8 absolute w-full left-0 right-0"
+                className="p-6 absolute w-full left-0 right-0"
               >
-                <div className="flex items-center mb-6">
+                <div className="flex flex-col items-center text-center mb-4">
                   <img 
                     src={testimonials[currentIndex].image} 
                     alt={testimonials[currentIndex].name} 
-                    className="w-20 h-20 rounded-full object-cover mr-4 shadow-md"
+                    className="w-20 h-20 rounded-full object-cover shadow-md mb-3"
                   />
                   <div>
                     <h4 className="text-2xl font-bold text-secondary">{testimonials[currentIndex].name}</h4>
-                    <div className="flex text-accent mt-1 text-xl">
-                      {renderStars(testimonials[currentIndex].rating)}
-                    </div>
                   </div>
                 </div>
-                <p className="text-gray-600 text-lg">
+                <p className="text-gray-600 text-lg text-center">
                   {testimonials[currentIndex].comment}
                 </p>
               </motion.div>
@@ -165,20 +162,20 @@ const Testimonials: React.FC = () => {
           </div>
           
           {/* Navigation Dots */}
-          <div className="flex justify-center mt-24">
+          <div className="flex justify-center mt-5">
             {testimonials.map((_, index) => (
               <motion.button 
                 key={index} 
-                className={`w-3 h-3 rounded-full mx-1 transition-colors duration-300 ${
-                  index === currentIndex ? 'bg-primary scale-125' : 'bg-gray-300'
+                className={`w-4 h-4 rounded-full mx-2 transition-colors duration-300 ${
+                  index === currentIndex ? 'bg-primary' : 'bg-gray-300'
                 }`}
                 onClick={() => {
                   setDirection(index > currentIndex ? 1 : -1);
                   setCurrentIndex(index);
                 }}
                 aria-label={`تعليق ${index + 1}`}
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
               />
             ))}
           </div>
