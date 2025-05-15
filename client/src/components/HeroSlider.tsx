@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useMotionValue, useTransform, useDragControls } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import AnimatedText from '@/lib/AnimatedText';
 
 interface Slide {
   id: number;
@@ -44,14 +45,36 @@ const slides: Slide[] = [
 
 const HeroSlider: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
+  const [dragging, setDragging] = useState(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const dragX = useMotionValue(0);
+  const dragControls = useDragControls();
+  
+  // مؤقت التبديل التلقائي
   useEffect(() => {
+    if (dragging) return; // إيقاف التبديل التلقائي أثناء السحب
+    
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 3000);
+    }, 5000); // زيادة المدة لإتاحة مزيد من الوقت للتفاعل
 
     return () => clearInterval(interval);
-  }, []);
+  }, [dragging]);
+  
+  // معالجة حدث السحب
+  const handleDragEnd = (e: MouseEvent | TouchEvent | PointerEvent, info: { offset: { x: number } }) => {
+    const threshold = 100; // الحد الأدنى للمسافة للتبديل
+    
+    if (info.offset.x > threshold) {
+      // سحب لليمين (الشريحة السابقة)
+      setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+    } else if (info.offset.x < -threshold) {
+      // سحب لليسار (الشريحة التالية)
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }
+    
+    setDragging(false);
+  };
 
   const buttonClasses = {
     accent: 'bg-accent text-dark hover:bg-opacity-90',
@@ -60,46 +83,66 @@ const HeroSlider: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative h-[90vh] overflow-hidden">
+    <section id="home" className="relative h-[90vh] overflow-hidden touch-none">
+      {/* منطقة السحب - تغطي الشاشة بالكامل */}
+      <motion.div 
+        ref={sliderRef}
+        className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing"
+        drag="x"
+        dragControls={dragControls}
+        dragConstraints={{ left: 0, right: 0 }}
+        onDragStart={() => setDragging(true)}
+        onDragEnd={handleDragEnd}
+        style={{ x: dragX }}
+      />
+      
+      {/* خلفيات الشرائح */}
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
-          <div
+          <motion.div
             key={slide.id}
-            className={`slide ${index === currentSlide ? 'active' : ''}`}
-            style={{ backgroundImage: `url(${slide.image})` }}
+            className={`absolute inset-0 slide transition-opacity duration-500 ease-in-out ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
+            initial={false}
+            animate={{ opacity: index === currentSlide ? 1 : 0 }}
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center' 
+            }}
           >
             <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          </div>
+          </motion.div>
         ))}
       </div>
 
+      {/* محتوى الشرائح */}
       <AnimatePresence mode="sync">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}
           className="absolute inset-0 flex items-center justify-center z-10"
         >
           <div className="container mx-auto px-4 text-center">
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="text-4xl md:text-6xl text-white font-bold mb-6 reveal"
-            >
-              {slides[currentSlide].title}
-            </motion.h1>
+            {/* استخدام مكون النص المتحرك للعنوان */}
+            <div className="text-4xl md:text-6xl text-white font-bold mb-6">
+              <AnimatedText 
+                text={slides[currentSlide].title}
+                className="text-white font-bold"
+                once={true}
+              />
+            </div>
             
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="text-xl md:text-2xl text-white mb-8 reveal"
-            >
-              {slides[currentSlide].subtitle}
-            </motion.p>
+            {/* استخدام مكون النص المتحرك للوصف */}
+            <div className="text-xl md:text-2xl text-white mb-8">
+              <AnimatedText 
+                text={slides[currentSlide].subtitle}
+                className="text-white"
+                once={true}
+              />
+            </div>
             
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -120,7 +163,7 @@ const HeroSlider: React.FC = () => {
         </motion.div>
       </AnimatePresence>
 
-      {/* Slider navigation dots */}
+      {/* مؤشرات التنقل بين الشرائح */}
       <div className="absolute bottom-8 left-0 right-0 flex justify-center z-10">
         {slides.map((_, index) => (
           <button
@@ -129,9 +172,34 @@ const HeroSlider: React.FC = () => {
             className={`w-3 h-3 mx-1 rounded-full transition-all ${
               index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
+            aria-label={`الانتقال إلى الشريحة ${index + 1}`}
           />
         ))}
+      </div>
+      
+      {/* أسهم التنقل */}
+      <div className="absolute inset-y-0 left-4 right-4 z-10 flex items-center justify-between pointer-events-none">
+        <button 
+          onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-all pointer-events-auto"
+          aria-label="الشريحة السابقة"
+        >
+          <span className="sr-only">السابق</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 rtl:rotate-180">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        
+        <button 
+          onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+          className="w-10 h-10 flex items-center justify-center rounded-full bg-black/30 text-white hover:bg-black/50 transition-all pointer-events-auto"
+          aria-label="الشريحة التالية"
+        >
+          <span className="sr-only">التالي</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 rtl:rotate-180">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
       </div>
     </section>
   );
