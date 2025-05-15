@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { Link } from 'wouter';
 import Globe from '@/components/Globe';
 import AnimatedText from '@/lib/AnimatedText';
 
@@ -93,20 +92,20 @@ const DiscoverWorld: React.FC = () => {
           <div 
             className="mb-8 globe-container reveal relative"
             ref={globeRef}
-            style={{ height: "450px", width: "450px" }}
+            style={{ height: "400px", width: "400px" }}
           >
             <Globe />
           </div>
           
           {/* Action Button */}
           <div className="text-center mb-8">
-            <Link 
-              to="/discover-world" 
+            <a 
+              href="/discover-world" 
               className="inline-block bg-accent text-dark font-bold px-10 py-4 rounded-full hover:bg-opacity-90 transition-all text-xl shadow-lg"
             >
               اكتشف العالم الآن
               <i className="fas fa-globe-americas mr-2"></i>
-            </Link>
+            </a>
           </div>
         </div>
       </div>
