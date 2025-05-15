@@ -1,0 +1,161 @@
+import React, { useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import { motion } from 'framer-motion';
+
+gsap.registerPlugin(ScrollTrigger);
+
+interface MenuItem {
+  name: string;
+  href: string;
+}
+
+interface SocialLink {
+  id: string;
+  icon: string;
+  href: string;
+}
+
+interface PaymentMethod {
+  id: string;
+  icon: string;
+  text?: string;
+}
+
+const menuItems: MenuItem[] = [
+  { name: 'الرئيسية', href: '#home' },
+  { name: 'من نحن', href: '#about' },
+  { name: 'خدماتنا', href: '#services' },
+  { name: 'اكتشف العالم', href: '#discover' },
+  { name: 'تعليقات العملاء', href: '#testimonials' },
+  { name: 'سياسة الخصوصية', href: '#' },
+  { name: 'الشروط والأحكام', href: '#' },
+];
+
+const socialLinks: SocialLink[] = [
+  { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
+  { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
+  { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
+];
+
+const paymentMethods: PaymentMethod[] = [
+  { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
+  { id: 'cash', icon: 'fas fa-wallet' },
+  { id: 'zain', text: 'ZAIN' },
+];
+
+const Footer: React.FC = () => {
+  const footerRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    if (footerRef.current && contentRef.current) {
+      gsap.from(contentRef.current.children, {
+        y: 50,
+        opacity: 0,
+        stagger: 0.1,
+        duration: 0.5,
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 80%",
+          end: "top 50%",
+          scrub: 1,
+        }
+      });
+    }
+  }, []);
+
+  return (
+    <footer id="contact" className="bg-dark text-white pt-16 pb-8" ref={footerRef}>
+      <div className="container mx-auto px-4" ref={contentRef}>
+        <div className="flex flex-wrap">
+          {/* Logo and About */}
+          <div className="w-full md:w-1/3 mb-10 md:mb-0 reveal">
+            <div className="mb-6">
+              <a href="#" className="text-white font-bold text-3xl">
+                <span className="text-accent">سفر</span> الفخامة
+              </a>
+            </div>
+            <p className="text-gray-400 mb-6">
+              نوفر لك تجارب سفر استثنائية إلى أجمل وجهات العالم مع خدمات متكاملة وحلول سفر مخصصة تلبي احتياجاتك.
+            </p>
+            <div className="flex space-x-4 rtl:space-x-reverse">
+              {socialLinks.map(social => (
+                <motion.a 
+                  key={social.id}
+                  href={social.href} 
+                  className="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-accent hover:text-dark transition-all"
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <i className={social.icon}></i>
+                </motion.a>
+              ))}
+            </div>
+          </div>
+          
+          {/* Quick Links */}
+          <div className="w-full md:w-1/3 mb-10 md:mb-0 md:px-8 reveal">
+            <h3 className="text-xl font-bold mb-6">روابط سريعة</h3>
+            <ul className="space-y-3">
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <a 
+                    href={item.href} 
+                    className="text-gray-400 hover:text-accent transition-colors"
+                  >
+                    {item.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          {/* Contact Info */}
+          <div className="w-full md:w-1/3 reveal">
+            <h3 className="text-xl font-bold mb-6">اتصل بنا</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center">
+                <i className="fas fa-map-marker-alt text-accent w-6"></i>
+                <span className="text-gray-400">شارع الملك فهد، الرياض، المملكة العربية السعودية</span>
+              </li>
+              <li className="flex items-center">
+                <i className="fas fa-phone-alt text-accent w-6"></i>
+                <span className="text-gray-400">+966 123 456 789</span>
+              </li>
+              <li className="flex items-center">
+                <i className="fas fa-envelope text-accent w-6"></i>
+                <span className="text-gray-400">info@luxurytravel.com</span>
+              </li>
+            </ul>
+            
+            <h3 className="text-xl font-bold mt-8 mb-4">وسائل الدفع</h3>
+            <div className="flex space-x-4 rtl:space-x-reverse">
+              {paymentMethods.map(method => (
+                <motion.div 
+                  key={method.id}
+                  className="w-12 h-8 bg-white rounded flex items-center justify-center"
+                  whileHover={{ y: -5 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {method.icon ? (
+                    <i className={`${method.icon} text-secondary text-xl`}></i>
+                  ) : (
+                    <span className="text-xs font-bold text-secondary">{method.text}</span>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400 text-sm reveal">
+          <p>© {new Date().getFullYear()} سفر الفخامة. جميع الحقوق محفوظة.</p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
