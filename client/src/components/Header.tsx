@@ -1,42 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'wouter';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    // استخدام Intersection Observer API للتعامل مع حالة الهيدر
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // عند عدم رؤية الجزء العلوي من الصفحة (بدء السكرول) نجعل الهيدر معتم
-        setScrolled(!entry.isIntersecting);
-        console.log('Header visibility changed:', !entry.isIntersecting);
-      },
-      { 
-        threshold: 0,
-        rootMargin: '-5px 0px 0px 0px' // حساسية عالية جدا للسكرول
-      }
-    );
-    
-    // إنشاء عنصر وهمي في أعلى الصفحة لمراقبته
-    const topMarker = document.createElement('div');
-    topMarker.style.position = 'absolute';
-    topMarker.style.top = '0';
-    topMarker.style.height = '1px';
-    topMarker.style.width = '100%';
-    topMarker.style.pointerEvents = 'none';
-    document.body.prepend(topMarker);
-    
-    // بدء المراقبة
-    observer.observe(topMarker);
-    
-    // التنظيف عند إزالة المكون
-    return () => {
-      observer.disconnect();
-      topMarker.remove();
-    };
-  }, []);
+  
+  // الهيدر دائماً شفاف وثابت في الأعلى
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -58,12 +26,12 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ease-in-out ${scrolled ? 'bg-secondary/95 shadow-md backdrop-blur-sm' : 'bg-transparent'}`}>
+    <header className="fixed top-0 left-0 right-0 w-full z-50 bg-transparent">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
-          <Link href="/" className={`font-bold text-2xl ${scrolled ? 'text-accent' : 'text-accent'}`}>
-            <span className="whitespace-nowrap transition-all duration-500 text-shadow-sm">التَرَف</span>
+          <Link href="/" className="font-bold text-2xl text-accent">
+            <span className="whitespace-nowrap text-shadow-sm">التَرَف</span>
           </Link>
         </div>
         
@@ -72,9 +40,9 @@ const Header: React.FC = () => {
           className={`hamburger z-50 cursor-pointer ${isMenuOpen ? 'menu-active' : ''}`} 
           onClick={toggleMenu}
         >
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen || scrolled ? 'bg-white' : 'bg-white shadow-sm'} ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white shadow-sm ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white shadow-sm ${isMenuOpen ? 'opacity-0' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white shadow-sm ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
         </div>
         
         {/* Menu Overlay */}
