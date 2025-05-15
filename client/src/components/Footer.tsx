@@ -165,7 +165,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           
-          <p className="text-white/80 text-sm">© {new Date().getFullYear()} سفر الفخامة. جميع الحقوق محفوظة.</p>
+          <p className="text-white/80 text-sm">© {new Date().getFullYear()} التَرَف. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>

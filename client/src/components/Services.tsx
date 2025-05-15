@@ -96,7 +96,7 @@ const Services: React.FC = () => {
     <section id="services" className="py-10 text-secondary relative bg-fixed bg-cover" 
       ref={sectionRef}
       style={{
-        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.94), rgba(245, 250, 255, 0.94)), url('/img/airlines-bg.png')",
+        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.94), rgba(245, 250, 255, 0.94)), url('/img/airlines-new-bg.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'
