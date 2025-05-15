@@ -53,16 +53,26 @@ const Footer: React.FC = () => {
 
   useGSAP(() => {
     if (footerRef.current && contentRef.current) {
-      gsap.from(contentRef.current.children, {
-        y: 50,
+      // تكوين ScrollTrigger للأداء الأفضل
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        ignoreMobileResize: true
+      });
+
+      // تحسين رسوم متحركة محتوى الفوتر
+      const children = contentRef.current.children;
+      gsap.from(children, {
+        y: 30, // تقليل مسافة الحركة
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
+        stagger: 0.05, // تقليل وقت التباعد بين العناصر
+        duration: 0.8, // زيادة المدة
+        ease: "power1.out", // سلاسة التسارع
         scrollTrigger: {
           trigger: footerRef.current,
-          start: "top 80%",
-          end: "top 50%",
-          scrub: 1,
+          start: "top 85%", // ظهور أبكر قليلا
+          end: "top 45%",
+          scrub: 0.8, // تقليل قيمة scrub للحركة الأكثر سلاسة
+          fastScrollEnd: true, // تحسين أداء النهاية
         }
       });
     }

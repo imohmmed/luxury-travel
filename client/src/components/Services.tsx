@@ -62,31 +62,38 @@ const Services: React.FC = () => {
     if (sectionRef.current && cardsRef.current) {
       const cards = cardsRef.current.children;
       
-      // Subtle parallax effect for background
+      // تكوين ScrollTrigger للأداء الأفضل
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        ignoreMobileResize: true
+      });
+      
+      // تأثير متوازي خفيف للخلفية (تعديل مع قيم أكثر سلاسة)
       gsap.to(sectionRef.current, {
-        backgroundPosition: `50% ${window.innerHeight / 4}px`,
-        ease: "none",
+        backgroundPosition: `50% ${window.innerHeight / 8}px`,
+        ease: "power1.out", // تغيير التسارع لحركة أكثر سلاسة
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: 0.5,
+          scrub: 1.5, // قيمة أعلى للتمرير الأكثر سلاسة
           fastScrollEnd: true,
-          preventOverlaps: true
         }
       });
       
-      // Card animations
+      // تحسين رسوم متحركة للبطاقات
       gsap.from(cards, {
-        y: 100,
+        y: 50, // تقليل المسافة للتحريك الأكثر سلاسة
         opacity: 0,
-        stagger: 0.1,
-        duration: 0.5,
+        stagger: 0.08, // تقليل الـstagger لجعل الحركة أكثر سلاسة
+        duration: 0.8, // زيادة المدة
+        ease: "power1.out", // تغيير التسارع
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 70%",
-          end: "bottom 70%",
-          scrub: 1,
+          start: "top 75%",
+          end: "center center",
+          toggleActions: "play none none reverse", // إضافة انعكاس عند التمرير للأعلى
+          scrub: 1.2,
         }
       });
     }
