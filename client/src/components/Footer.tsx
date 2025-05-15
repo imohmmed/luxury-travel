@@ -25,10 +25,9 @@ interface PaymentMethod {
 
 const menuItems: MenuItem[] = [
   { name: 'الرئيسية', href: '#home' },
-  { name: 'من نحن', href: '#about' },
+  { name: 'من نحن | تعليقات العملاء', href: '#about' },
   { name: 'خدماتنا', href: '#services' },
   { name: 'اكتشف العالم', href: '#discover' },
-  { name: 'تعليقات العملاء', href: '#testimonials' },
   { name: 'سياسة الخصوصية', href: '#' },
   { name: 'الشروط والأحكام', href: '#' },
 ];
@@ -40,9 +39,9 @@ const socialLinks: SocialLink[] = [
 ];
 
 const paymentMethods: PaymentMethod[] = [
+  { id: 'visa', icon: 'fab fa-cc-visa' },
   { id: 'mastercard', icon: 'fab fa-cc-mastercard' },
-  { id: 'cash', icon: 'fas fa-wallet' },
-  { id: 'zain', icon: '', text: 'ZAIN' },
+  { id: 'zain-cash', icon: '', text: 'زين كاش' },
 ];
 
 const Footer: React.FC = () => {
@@ -74,7 +73,7 @@ const Footer: React.FC = () => {
           <div className="w-full md:w-1/3 mb-10 md:mb-0 reveal">
             <div className="mb-6">
               <a href="#" className="text-white font-bold text-3xl">
-                <span className="text-accent">الت</span>َرَف
+                <span className="text-accent">ال</span>تَرَف
               </a>
             </div>
             <p className="text-gray-400 mb-6">
@@ -89,7 +88,7 @@ const Footer: React.FC = () => {
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <i className={social.icon}></i>
+                  <i className={`${social.icon} text-lg`}></i>
                 </motion.a>
               ))}
             </div>
@@ -135,14 +134,14 @@ const Footer: React.FC = () => {
               {paymentMethods.map(method => (
                 <motion.div 
                   key={method.id}
-                  className="w-12 h-8 bg-white rounded flex items-center justify-center"
+                  className="w-16 h-10 bg-white rounded-md flex items-center justify-center shadow-md overflow-hidden"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {method.icon ? (
-                    <i className={`${method.icon} text-secondary text-xl`}></i>
+                    <i className={`${method.icon} text-secondary text-2xl`}></i>
                   ) : (
-                    <span className="text-xs font-bold text-secondary">{method.text}</span>
+                    <span className="text-sm font-bold text-secondary">{method.text}</span>
                   )}
                 </motion.div>
               ))}

@@ -34,10 +34,9 @@ const Header: React.FC = () => {
 
   const menuItems = [
     { name: 'الرئيسية', href: '/' },
-    { name: 'من نحن', href: '/' },
+    { name: 'من نحن | تعليقات العملاء', href: '/' },
     { name: 'خدماتنا', href: '/' },
     { name: 'اكتشف العالم', href: '/' },
-    { name: 'تعليقات العملاء', href: '/' },
     { name: 'اتصل بنا', href: '/' },
   ];
 
@@ -47,7 +46,7 @@ const Header: React.FC = () => {
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
           <Link href="/" className="text-white font-bold text-2xl">
-            <span className="text-accent">الت</span>َرَف
+            <span className="text-accent">ال</span>تَرَف
           </Link>
         </div>
         
