@@ -15,26 +15,31 @@ interface Testimonial {
 
 const Testimonials: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
   
-  // تقسيم التعليقات إلى مجموعات من 3
-  const testimonialsGroups = [];
-  for (let i = 0; i < testimonials.length; i += 3) {
-    testimonialsGroups.push(testimonials.slice(i, i + 3));
-  }
+  // متغير لتتبع التعليق الحالي
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // -1: left, 1: right
   
-  // متغير لتتبع المجموعة الحالية
-  const [currentGroup, setCurrentGroup] = useState(0);
-  
-  // تبديل الشرائح تلقائيًا
+  // تغيير التعليق تلقائيًا كل 3 ثوانٍ
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentGroup((prev) => (prev + 1) % testimonialsGroups.length);
-    }, 6000); // تغيير كل 6 ثوانٍ
+      handleNext();
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [testimonialsGroups.length]);
+  }, [currentIndex]);
+
+  // وظائف التنقل
+  const handlePrev = () => {
+    setDirection(-1);
+    setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setDirection(1);
+    setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+  };
 
   // Function to render stars based on rating
   const renderStars = (rating: number) => {
@@ -77,44 +82,30 @@ const Testimonials: React.FC = () => {
     }
   };
 
-  // متغيرات حركة مجموعة التعليقات
-  const groupVariants = {
-    hidden: { 
-      opacity: 0,
-      x: 100
-    },
-    visible: { 
-      opacity: 1,
+  // متغيرات حركة التعليقات
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
       x: 0,
-      transition: {
-        duration: 0.5,
-        staggerChildren: 0.1
-      }
-    },
-    exit: {
-      opacity: 0,
-      x: -100,
-      transition: {
-        duration: 0.3
-      }
-    }
-  };
-
-  // متغيرات حركة بطاقات التعليقات الفردية
-  const cardVariants = {
-    hidden: { 
-      y: 30, 
-      opacity: 0 
-    },
-    visible: {
-      y: 0,
       opacity: 1,
       transition: {
         type: "spring",
-        stiffness: 50,
-        damping: 10
+        stiffness: 300,
+        damping: 30
       }
-    }
+    },
+    exit: (direction: number) => ({
+      x: direction > 0 ? -1000 : 1000,
+      opacity: 0,
+      transition: {
+        type: "spring",
+        stiffness: 300,
+        damping: 30
+      }
+    })
   };
 
   return (
@@ -137,69 +128,55 @@ const Testimonials: React.FC = () => {
         </motion.div>
         
         <motion.div 
-          className="relative overflow-hidden" 
-          ref={sliderRef}
+          className="relative overflow-hidden"
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           variants={sliderVariants}
         >
-          <div className="testimonial-slider min-h-[400px]">
-            <AnimatePresence mode="wait">
+          <div className="testimonial-slider min-h-[400px] max-w-2xl mx-auto relative">
+            <AnimatePresence custom={direction} mode="popLayout" initial={false}>
               <motion.div
-                key={currentGroup}
-                initial="hidden"
-                animate="visible"
+                key={currentIndex}
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
                 exit="exit"
-                variants={groupVariants}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                className="bg-neutral rounded-xl shadow-lg p-8 absolute w-full left-0 right-0"
               >
-                {testimonialsGroups[currentGroup].map((testimonial) => (
-                  <motion.div
-                    key={testimonial.id}
-                    variants={cardVariants}
-                    className="h-full"
-                  >
-                    <motion.div 
-                      className="bg-neutral rounded-xl shadow-lg p-6 h-full flex flex-col"
-                      whileHover={{ 
-                        scale: 1.02,
-                        boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
-                      }}
-                      transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                    >
-                      <div className="flex items-center mb-4">
-                        <img 
-                          src={testimonial.image} 
-                          alt={testimonial.name} 
-                          className="w-16 h-16 rounded-full object-cover mr-4"
-                        />
-                        <div>
-                          <h4 className="text-xl font-bold text-secondary">{testimonial.name}</h4>
-                          <div className="flex text-accent mt-1">
-                            {renderStars(testimonial.rating)}
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-gray-600 flex-grow">
-                        {testimonial.comment}
-                      </p>
-                    </motion.div>
-                  </motion.div>
-                ))}
+                <div className="flex items-center mb-6">
+                  <img 
+                    src={testimonials[currentIndex].image} 
+                    alt={testimonials[currentIndex].name} 
+                    className="w-20 h-20 rounded-full object-cover mr-4 shadow-md"
+                  />
+                  <div>
+                    <h4 className="text-2xl font-bold text-secondary">{testimonials[currentIndex].name}</h4>
+                    <div className="flex text-accent mt-1 text-xl">
+                      {renderStars(testimonials[currentIndex].rating)}
+                    </div>
+                  </div>
+                </div>
+                <p className="text-gray-600 text-lg">
+                  {testimonials[currentIndex].comment}
+                </p>
               </motion.div>
             </AnimatePresence>
           </div>
           
-          {/* Pagination Dots */}
-          <div className="flex justify-center mt-8">
-            {testimonialsGroups.map((_, index) => (
+          {/* Navigation Dots */}
+          <div className="flex justify-center mt-24">
+            {testimonials.map((_, index) => (
               <motion.button 
                 key={index} 
                 className={`w-3 h-3 rounded-full mx-1 transition-colors duration-300 ${
-                  index === currentGroup ? 'bg-primary scale-125' : 'bg-gray-300'
+                  index === currentIndex ? 'bg-primary scale-125' : 'bg-gray-300'
                 }`}
-                onClick={() => setCurrentGroup(index)}
-                aria-label={`مجموعة التعليقات ${index + 1}`}
+                onClick={() => {
+                  setDirection(index > currentIndex ? 1 : -1);
+                  setCurrentIndex(index);
+                }}
+                aria-label={`تعليق ${index + 1}`}
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               />
@@ -207,26 +184,26 @@ const Testimonials: React.FC = () => {
           </div>
           
           {/* Navigation Arrows */}
-          <div className="hidden md:block">
+          <div className="block">
             <motion.button 
-              className="absolute top-1/2 right-0 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
-              onClick={() => setCurrentGroup((prev) => (prev - 1 + testimonialsGroups.length) % testimonialsGroups.length)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </motion.button>
-            
-            <motion.button 
-              className="absolute top-1/2 left-0 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md"
-              onClick={() => setCurrentGroup((prev) => (prev + 1) % testimonialsGroups.length)}
+              className="absolute top-1/2 right-0 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hidden md:block"
+              onClick={handlePrev}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
                 <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </motion.button>
+            
+            <motion.button 
+              className="absolute top-1/2 left-0 -translate-y-1/2 bg-white bg-opacity-80 rounded-full p-2 shadow-md hidden md:block"
+              onClick={handleNext}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary">
+                <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </motion.button>
           </div>
