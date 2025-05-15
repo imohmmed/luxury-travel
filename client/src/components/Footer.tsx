@@ -37,6 +37,7 @@ const socialLinks: SocialLink[] = [
   { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
   { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
   { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
+  { id: 'telegram', icon: 'fab fa-telegram', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
@@ -67,7 +68,7 @@ const Footer: React.FC = () => {
   }, []);
 
   return (
-    <footer id="contact" className="bg-secondary text-white pt-16 pb-8" ref={footerRef}>
+    <footer id="contact" className="bg-secondary text-white pt-16 pb-8 relative z-10" ref={footerRef}>
       <div className="container mx-auto px-4" ref={contentRef}>
         <div className="flex flex-wrap">
           {/* Logo and About */}
@@ -80,19 +81,6 @@ const Footer: React.FC = () => {
             <p className="text-gray-400 mb-6">
               نقدم خدمات سياحية متكاملة من الفيز والتذاكر إلى التأمين الصحي وإجازات السوق الدولية، مع الاهتمام بجميع التفاصيل لضمان تجربة سفر استثنائية.
             </p>
-            <div className="flex space-x-4 rtl:space-x-reverse">
-              {socialLinks.map(social => (
-                <motion.a 
-                  key={social.id}
-                  href={social.href} 
-                  className="w-10 h-10 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-accent hover:text-dark transition-all"
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <i className={`${social.icon} text-lg`}></i>
-                </motion.a>
-              ))}
-            </div>
           </div>
           
           {/* Quick Links */}
@@ -117,7 +105,10 @@ const Footer: React.FC = () => {
           
           {/* Contact Info */}
           <div className="w-full md:w-1/3 reveal">
-            <h3 className="text-xl font-bold mb-6">اتصل بنا</h3>
+            <h3 className="text-xl font-bold mb-6 inline-flex">
+              <span>اتصل</span>
+              <span className="mx-1">بنا</span>
+            </h3>
             <ul className="space-y-3">
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt text-accent w-6"></i>
@@ -133,12 +124,15 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <h3 className="text-xl font-bold mt-8 mb-4">وسائل الدفع</h3>
+            <h3 className="text-xl font-bold mt-8 mb-4 inline-flex">
+              <span>وسائل</span>
+              <span className="mx-1">الدفع</span>
+            </h3>
             <div className="flex space-x-4 rtl:space-x-reverse">
               {paymentMethods.map(method => (
                 <motion.div 
                   key={method.id}
-                  className="w-16 h-10 bg-white rounded-md flex items-center justify-center shadow-md overflow-hidden"
+                  className="w-20 h-12 bg-white rounded-md flex items-center justify-center shadow-md overflow-hidden"
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -153,8 +147,25 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="border-t border-white/20 mt-12 pt-8 text-center text-white/80 text-sm reveal">
-          <p>© {new Date().getFullYear()} سفر الفخامة. جميع الحقوق محفوظة.</p>
+        {/* Social media links in center */}
+        <div className="border-t border-white/20 mt-12 pt-8 text-center flex flex-col items-center gap-6">
+          <div className="flex items-center justify-center space-x-6 rtl:space-x-reverse mb-4">
+            {socialLinks.map(social => (
+              <motion.a 
+                key={social.id}
+                href={social.href} 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-accent hover:text-dark transition-all"
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <i className={`${social.icon} text-xl`}></i>
+              </motion.a>
+            ))}
+          </div>
+          
+          <p className="text-white/80 text-sm">© {new Date().getFullYear()} سفر الفخامة. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
