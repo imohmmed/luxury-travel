@@ -82,7 +82,7 @@ const DiscoverWorld: React.FC = () => {
             once 
           />
           <div className="w-20 h-1 bg-accent mx-auto"></div>
-          <p className="text-xl text-gray-300 mt-4 max-w-3xl mx-auto">
+          <p className="text-xl text-white mt-4 max-w-3xl mx-auto">
             استكشف أجمل الوجهات السياحية حول العالم مع باقات سفر مخصصة لتناسب تطلعاتك
           </p>
         </div>
@@ -99,7 +99,7 @@ const DiscoverWorld: React.FC = () => {
           {/* Destinations Content */}
           <div className="w-full lg:w-1/2 lg:pr-10 text-white reveal" ref={contentRef}>
             <h3 className="text-3xl font-bold mb-6">وجهات سياحية فاخرة</h3>
-            <p className="text-lg text-gray-300 mb-6">
+            <p className="text-lg text-white mb-6">
               نقدم لك مجموعة من أفخم الوجهات السياحية العالمية، مختارة بعناية لتوفير تجارب سفر استثنائية. من الشواطئ الاستوائية الخلابة إلى المدن التاريخية العريقة والمنتجعات الجبلية الفاخرة، نضمن لك تجربة سفر لا تُنسى.
             </p>
             

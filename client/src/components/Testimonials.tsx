@@ -107,7 +107,7 @@ const Testimonials: React.FC = () => {
         
         <div className="relative overflow-hidden reveal" ref={sliderRef}>
           <div className="testimonial-slider" style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}>
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="sync">
               {testimonials.map((testimonial, index) => (
                 <motion.div
                   key={testimonial.id}
