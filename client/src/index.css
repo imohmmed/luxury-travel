@@ -124,6 +124,12 @@ body {
   .hover-scale:hover {
     @apply transform scale-105;
   }
+  
+  .dir-ltr {
+    direction: ltr;
+    unicode-bidi: bidi-override;
+    display: inline-block;
+  }
 
   .reveal {
     @apply opacity-0 translate-y-4 transition-all duration-300 ease-out;
