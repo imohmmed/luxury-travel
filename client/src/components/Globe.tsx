@@ -142,18 +142,30 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // دالة تحريك الكرة الأرضية بناءً على نسبة تمرير الصفحة (مُبسطة)
+    // دالة تحريك الكرة الأرضية وتكبيرها بناءً على نسبة تمرير الصفحة
     const handleScroll = () => {
-      if (earthRef.current && cameraRef.current) {
+      if (earthRef.current && cloudsRef.current && cameraRef.current) {
         // حساب نسبة التمرير
         const scrollY = window.scrollY;
         const windowHeight = window.innerHeight;
         const documentHeight = document.body.scrollHeight;
         const progress = Math.min(Math.max(scrollY / (documentHeight - windowHeight), 0), 1);
         
-        // تطبيق التغييرات على الكرة الأرضية والكاميرا
+        // الحد الأقصى للزيادة في الحجم (1.5 = زيادة 50% من الحجم الأصلي)
+        const maxScale = 1.5;
+        
+        // حساب مقياس جديد بناءً على نسبة التمرير
+        const newScale = 1 + (progress * (maxScale - 1));
+        
+        // تطبيق المقياس الجديد على الأرض
+        earthRef.current.scale.set(newScale, newScale, newScale);
+        
+        // تطبيق نفس المقياس على السحب
+        cloudsRef.current.scale.set(newScale, newScale, newScale);
+        
+        // تطبيق التغييرات على دوران الكرة الأرضية والكاميرا
         earthRef.current.rotation.y = progress * Math.PI * 2;
-        cameraRef.current.position.z = 15 - (progress * 5);
+        cameraRef.current.position.z = 15 - (progress * 3);
         cameraRef.current.updateProjectionMatrix();
       }
     };
