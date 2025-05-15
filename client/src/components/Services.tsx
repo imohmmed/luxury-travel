@@ -78,12 +78,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-10 text-secondary relative" ref={sectionRef}
-      style={{
-        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.95), rgba(245, 250, 255, 0.95)), url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
+    <section id="services" className="py-10 text-secondary relative bg-sky-50" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 reveal">
           <AnimatedText 
@@ -99,12 +94,7 @@ const Services: React.FC = () => {
         
         <div className="space-y-6 mb-8" ref={cardsRef}>
           {/* قسم الفيز */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
@@ -128,12 +118,7 @@ const Services: React.FC = () => {
           </div>
           
           {/* قسم الكروبات السياحية وتنظيم المؤتمرات */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1505373877841-8d25f7d46678?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
@@ -157,12 +142,7 @@ const Services: React.FC = () => {
           </div>
           
           {/* قسم التذاكر */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
@@ -186,12 +166,7 @@ const Services: React.FC = () => {
           </div>
           
           {/* قسم إجازات السوق الدولية */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
@@ -215,12 +190,7 @@ const Services: React.FC = () => {
           </div>
           
           {/* قسم التأمين الصحي */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
@@ -244,12 +214,7 @@ const Services: React.FC = () => {
           </div>
           
           {/* قسم الاستقبال والتوديع (ترانسفير) */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
-            style={{
-              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1464037866556-6812c9d1c72e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative bg-primary"
           >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
