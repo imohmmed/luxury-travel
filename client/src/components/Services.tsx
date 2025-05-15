@@ -137,7 +137,7 @@ const Services: React.FC = () => {
         animate={isInView ? "visible" : "hidden"}
         variants={backgroundVariants}
         style={{
-          x: scrollY * -0.1, // حركة الخلفية إلى اليسار عند السكرول للأسفل
+          x: scrollY * -0.5, // زيادة قوة حركة الخلفية إلى اليسار عند السكرول للأسفل
         }}
       >
         <div 
@@ -146,9 +146,9 @@ const Services: React.FC = () => {
             backgroundImage: "linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1488085061387-422e29b40080?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'fixed',
+            backgroundAttachment: 'scroll', // تغيير من fixed لـ scroll للسماح بالحركة
             filter: 'brightness(0.9) contrast(1.1)',
-            transform: `scale(${1 + scrollY * 0.0005})` // تكبير أكثر وضوحاً للخلفية عند التمرير
+            transform: `translateX(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0002})` // إضافة حركة أفقية للخلفية نفسها
           }}
         />
       </motion.div>
@@ -158,19 +158,29 @@ const Services: React.FC = () => {
         style={{
           backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
           backgroundSize: '200px',
-          backgroundAttachment: 'fixed',
+          backgroundAttachment: 'scroll',
           mixBlendMode: 'overlay',
-          transform: `translate(${scrollY * 0.15}px, ${scrollY * -0.05}px)` // حركة معاكسة للنقوش - تتحرك لليمين عند السكرول للأسفل
+          transform: `translate(${scrollY * 0.6}px, ${scrollY * -0.05}px)` // زيادة قوة الحركة لليمين بشكل كبير
         }} 
       />
       
-      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد */}
+      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - حركة مكثفة للجانب الآخر */}
       <div className="absolute inset-0 opacity-20" 
         style={{
           backgroundImage: "linear-gradient(45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%), linear-gradient(-45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%)",
           backgroundSize: '40px 40px',
-          transform: `translate(${scrollY * -0.05}px, 0)`, // حركة لليسار عند السكرول للأسفل
+          transform: `translate(${scrollY * -0.3}px, 0)`, // زيادة قوة الحركة لليسار عند السكرول
           zIndex: -8
+        }} 
+      />
+      
+      {/* طبقة إضافية رابعة - حركة سريعة في الاتجاه المعاكس */}
+      <div className="absolute inset-0 opacity-10" 
+        style={{
+          backgroundImage: "linear-gradient(0deg, transparent 95%, rgba(255,255,255,0.05) 98%, transparent 100%)",
+          backgroundSize: '15px 15px',
+          transform: `translate(${scrollY * 0.8}px, 0)`, // حركة سريعة للغاية في الاتجاه المعاكس
+          zIndex: -7
         }} 
       />
       
