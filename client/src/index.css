@@ -116,7 +116,12 @@
   }
 
   .globe-container {
-    @apply relative h-[400px] overflow-hidden;
+    @apply relative overflow-hidden;
+  }
+  
+  @keyframes orbitSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
   }
 
   .slide {
