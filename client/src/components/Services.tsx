@@ -157,7 +157,10 @@ const Services: React.FC = () => {
                   <span className="mr-1">الكروبات</span>
                   <span className="mr-1">السياحية</span>
                 </div>
-                <div className="mt-1">وتنظيم المؤتمرات</div>
+                <div className="inline-flex mt-1">
+                  <span>وتنظيم</span>
+                  <span className="mr-1">المؤتمرات</span>
+                </div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
