@@ -62,6 +62,19 @@ const Services: React.FC = () => {
     if (sectionRef.current && cardsRef.current) {
       const cards = cardsRef.current.children;
       
+      // Parallax effect for background
+      gsap.to(sectionRef.current, {
+        backgroundPosition: `50% ${window.innerHeight / 2}px`,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true
+        }
+      });
+      
+      // Card animations
       gsap.from(cards, {
         y: 100,
         opacity: 0,
@@ -78,7 +91,14 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-10 text-secondary relative" ref={sectionRef}>
+    <section id="services" className="py-10 text-secondary relative bg-fixed bg-cover" 
+      ref={sectionRef}
+      style={{
+        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.92), rgba(245, 250, 255, 0.92)), url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed'
+      }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-8 reveal">
           <AnimatedText 
