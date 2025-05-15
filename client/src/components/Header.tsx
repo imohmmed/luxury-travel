@@ -1,17 +1,31 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'wouter';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [headerVisible, setHeaderVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      const scrollPosition = window.scrollY;
+      
+      // تغيير مظهر الهيدر عند السكرول
+      if (scrollPosition > 5) {
         setScrolled(true);
       } else {
         setScrolled(false);
       }
+      
+      // إخفاء الهيدر عند السكرول للأسفل وإظهاره عند السكرول للأعلى
+      if (scrollPosition > lastScrollY.current && scrollPosition > 300) {
+        setHeaderVisible(false);
+      } else {
+        setHeaderVisible(true);
+      }
+      
+      lastScrollY.current = scrollPosition;
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -42,12 +56,22 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : ''}`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header className={`fixed w-full z-50 transition-all duration-500 ease-in-out ${
+        scrolled 
+          ? 'bg-secondary bg-opacity-85 backdrop-blur-md shadow-md py-3' 
+          : 'bg-transparent py-6'
+      } ${
+        headerVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}>
+      <div className="container mx-auto px-4 flex justify-between items-center transition-all duration-500 ease-in-out">
         {/* Logo */}
-        <div className="logo w-40 md:w-48 text-center mx-auto">
-          <Link href="/" className="text-white font-bold text-2xl">
-            <span className="text-accent whitespace-nowrap">التَرَف</span>
+        <div className={`logo text-center mx-auto transition-all duration-500 ${
+            scrolled ? 'w-36 md:w-40' : 'w-40 md:w-48'
+          }`}>
+          <Link href="/" className={`text-white font-bold whitespace-nowrap transition-all duration-500 ${
+            scrolled ? 'text-xl' : 'text-2xl'
+          }`}>
+            <span className="text-accent">التَرَف</span>
           </Link>
         </div>
         
@@ -56,9 +80,15 @@ const Header: React.FC = () => {
           className={`hamburger z-50 cursor-pointer ${isMenuOpen ? 'menu-active' : ''}`} 
           onClick={toggleMenu}
         >
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[-45deg] translate-y-[6px]' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'opacity-0' : ''}`}></div>
-          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 bg-white ${isMenuOpen ? 'rotate-[45deg] -translate-y-[6px]' : ''}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
+            ? 'rotate-[-45deg] translate-y-[6px] bg-white' 
+            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
+            ? 'opacity-0' 
+            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
+          <div className={`w-[30px] h-[3px] my-[6px] transition-all duration-400 ${isMenuOpen 
+            ? 'rotate-[45deg] -translate-y-[6px] bg-white' 
+            : scrolled ? 'bg-white' : 'bg-white'}`}></div>
         </div>
         
         {/* Menu Overlay */}
@@ -69,7 +99,7 @@ const Header: React.FC = () => {
                 <li key={index} className="my-4">
                   <a 
                     href={item.href} 
-                    className="hover:text-accent transition-colors"
+                    className="hover:text-accent transition-all duration-300 px-3 py-1 rounded-md hover:bg-white/10"
                     onClick={closeMenu}
                   >
                     {item.name}
