@@ -43,8 +43,8 @@ const socialLinks: SocialLink[] = [
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', image: mastercardImg },
-  { id: 'zain-cash', image: zaincashImg },
+  { id: 'mastercard', image: '/img/payment-new/mastercard.png' },
+  { id: 'zain-cash', image: '/img/payment-new/zaincash.png' },
 ];
 
 const Footer: React.FC = () => {
@@ -125,23 +125,26 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <div className="mt-8 mb-4 flex flex-col items-end">
-              <h3 className="text-xl font-bold mb-2 inline-flex">
+            <div className="mt-10 mb-6 flex flex-col items-end">
+              <h3 className="text-xl font-bold mb-4 inline-flex">
                 <span>وسائل</span>
                 <span className="mx-1">الدفع</span>
               </h3>
-              <div className="flex justify-end gap-4">
+              <div className="flex justify-end gap-6 p-2">
                 {paymentMethods.map(method => (
-                  <div 
+                  <motion.div 
                     key={method.id}
                     className="flex items-center justify-center"
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
                     <img 
                       src={method.image} 
                       alt={method.id} 
-                      className={`object-contain ${method.id === 'mastercard' ? 'h-8 w-auto' : 'h-8 w-auto'}`}
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-10 w-auto' : 'h-11 w-auto'}`}
                     />
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
