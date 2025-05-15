@@ -1,10 +1,5 @@
-import React, { useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
 import { motion } from 'framer-motion';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface MenuItem {
   name: string;
@@ -48,42 +43,12 @@ const paymentMethods: PaymentMethod[] = [
 ];
 
 const Footer: React.FC = () => {
-  const footerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-
-  useGSAP(() => {
-    if (footerRef.current && contentRef.current) {
-      // تكوين ScrollTrigger للأداء الأفضل
-      ScrollTrigger.config({
-        limitCallbacks: true,
-        ignoreMobileResize: true
-      });
-
-      // تحسين رسوم متحركة محتوى الفوتر
-      const children = contentRef.current.children;
-      gsap.from(children, {
-        y: 30, // تقليل مسافة الحركة
-        opacity: 0,
-        stagger: 0.05, // تقليل وقت التباعد بين العناصر
-        duration: 0.8, // زيادة المدة
-        ease: "power1.out", // سلاسة التسارع
-        scrollTrigger: {
-          trigger: footerRef.current,
-          start: "top 85%", // ظهور أبكر قليلا
-          end: "top 45%",
-          scrub: 0.8, // تقليل قيمة scrub للحركة الأكثر سلاسة
-          fastScrollEnd: true, // تحسين أداء النهاية
-        }
-      });
-    }
-  }, []);
-
   return (
-    <footer id="contact" className="bg-secondary text-white pt-16 pb-8 relative z-10" ref={footerRef}>
-      <div className="container mx-auto px-4" ref={contentRef}>
+    <footer id="contact" className="bg-secondary text-white pt-16 pb-8 relative z-10">
+      <div className="container mx-auto px-4">
         <div className="flex flex-wrap">
           {/* Logo and About */}
-          <div className="w-full md:w-1/3 mb-10 md:mb-0 reveal">
+          <div className="w-full md:w-1/3 mb-10 md:mb-0">
             <div className="mb-6">
               <a href="#" className="text-white font-bold text-3xl">
                 <span className="text-accent">ال</span>تَرَف
@@ -95,8 +60,8 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Quick Links */}
-          <div className="w-full md:w-1/3 mb-10 md:mb-0 md:px-8 reveal">
-            <h3 className="text-xl font-bold mb-6 inline-flex">
+          <div className="w-full md:w-1/3 mb-10 md:mb-0 md:px-8">
+            <h3 className="text-xl font-bold mb-6">
               <span>روابط</span>
               <span className="mx-1">سريعة</span>
             </h3>
@@ -115,7 +80,7 @@ const Footer: React.FC = () => {
           </div>
           
           {/* Contact Info */}
-          <div className="w-full md:w-1/3 reveal">
+          <div className="w-full md:w-1/3">
             <h3 className="text-xl font-bold mb-6">
               <span>اتصل</span>
               <span className="mx-1">بنا</span>
@@ -208,7 +173,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           
-          <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
+          <p className="text-white/80 text-sm">© 2024 التَرَف. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>

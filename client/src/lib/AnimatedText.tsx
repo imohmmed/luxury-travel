@@ -1,10 +1,6 @@
-import React, { useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface AnimatedTextProps {
   text: string;
@@ -12,69 +8,48 @@ interface AnimatedTextProps {
   once?: boolean;
 }
 
-// مكون لعرض النص بتأثير متحرك
+// مكون لعرض النص بتأثير متحرك باستخدام Framer Motion
 const AnimatedText: React.FC<AnimatedTextProps> = ({ text, className, once = false }) => {
-  const textRef = useRef<HTMLDivElement>(null);
-  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  // إنشاء متغيرات للتأثيرات المتحركة
+  const container = {
+    hidden: { opacity: 0 },
+    visible: (i = 1) => ({
+      opacity: 1,
+      transition: { staggerChildren: 0.08, delayChildren: 0.04 * i }
+    })
+  };
 
-  // إعادة تعيين مراجع الكلمات عندما يتغير النص
-  useEffect(() => {
-    wordRefs.current = wordRefs.current.slice(0, text.split(' ').length);
-  }, [text]);
-
-  useGSAP(() => {
-    if (!textRef.current) return;
-
-    // تكوين مرجع للتأثير
-    const words = wordRefs.current.filter(Boolean);
-    
-    if (words.length) {
-      // تعيين الإعدادات الأولية
-      gsap.set(words, { 
-        y: 30, 
-        opacity: 0 
-      });
-
-      // إنشاء تأثير متحرك
-      const animation = gsap.to(words, {
-        y: 0,
-        opacity: 1,
-        stagger: 0.1,
-        duration: 0.4,
-        ease: "power2.out",
-        paused: true
-      });
-
-      // إنشاء تأثير عند التمرير أو تشغيله مباشرة
-      if (once) {
-        // إذا كان التأثير يعمل مرة واحدة فقط
-        animation.play();
-      } else {
-        // إذا كان التأثير يعمل عند التمرير
-        ScrollTrigger.create({
-          trigger: textRef.current,
-          start: "top 90%",
-          end: "bottom 60%",
-          toggleActions: "play none none reverse",
-          onEnter: () => animation.play(),
-          onLeaveBack: () => animation.reverse(),
-        });
+  const child = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        damping: 12,
+        stiffness: 100
       }
     }
-  }, [text, once]);
+  };
 
   return (
-    <div ref={textRef} className={cn("overflow-hidden", className)}>
+    <motion.div
+      className={cn("overflow-hidden", className)}
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once }}
+    >
       {text.split(' ').map((word, index) => (
-        <span
+        <motion.span
           key={index}
           className="inline-block mx-1"
-          ref={el => wordRefs.current[index] = el}
+          variants={child}
         >
           {word}
-        </span>
+        </motion.span>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

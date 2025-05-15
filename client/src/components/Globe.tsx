@@ -142,22 +142,6 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // تأثير الدوران البطيء للكرة الأرضية
-    const setupRotation = () => {
-      if (earthRef.current) {
-        // معدل دوران الكرة الأرضية
-        earthRef.current.rotation.y = 0;
-      }
-      
-      // تعديل موضع الكاميرا للحصول على منظر أفضل
-      if (cameraRef.current) {
-        cameraRef.current.position.z = 15;
-        cameraRef.current.updateProjectionMatrix();
-      }
-    };
-    
-    setupRotation();
-    
     // دالة تحريك الكرة الأرضية بناءً على نسبة تمرير الصفحة (مُبسطة)
     const handleScroll = () => {
       if (earthRef.current && cameraRef.current) {
@@ -194,12 +178,11 @@ const Globe: React.FC = () => {
     // Cleanup
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', handleScroll);
       
       if (frameIdRef.current !== null) {
         cancelAnimationFrame(frameIdRef.current);
       }
-
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
       
       if (rendererRef.current && containerRef.current) {
         containerRef.current.removeChild(rendererRef.current.domElement);
