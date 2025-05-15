@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   }, [revealElements]);
 
   return (
-    <div className="min-h-screen overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden scroll-smooth">
       <Header />
       <HeroSlider />
       <AboutUs />

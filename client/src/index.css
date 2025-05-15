@@ -71,11 +71,13 @@
 
   html {
     @apply scroll-smooth;
+    scroll-behavior: smooth;
   }
 
   body {
-    @apply font-tajawal antialiased bg-background text-foreground;
+    @apply font-tajawal antialiased bg-background text-foreground overflow-y-auto;
     direction: rtl;
+    overscroll-behavior-y: contain;
   }
 }
 

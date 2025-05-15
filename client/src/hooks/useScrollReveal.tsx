@@ -11,6 +11,9 @@ export const useScrollReveal = () => {
       
       if (elementTop < windowHeight - elementVisible) {
         element.classList.add('active');
+      } else {
+        // Allow elements to hide again when scrolling back up
+        element.classList.remove('active');
       }
     });
   }, []);

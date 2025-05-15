@@ -41,7 +41,7 @@ const AboutUs: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" className="py-20 bg-white text-secondary" ref={sectionRef}>
+    <section id="about" className="py-10 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
           <AnimatedText 

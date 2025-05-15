@@ -60,7 +60,7 @@ const HeroSlider: React.FC = () => {
   };
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
+    <section id="home" className="relative h-[90vh] overflow-hidden">
       <div className="absolute inset-0 z-0">
         {slides.map((slide, index) => (
           <div
