@@ -58,7 +58,7 @@ const DiscoverWorld: React.FC = () => {
   }, []);
 
   return (
-    <section id="discover" className="py-20 relative overflow-hidden bg-dark" ref={sectionRef}>
+    <section id="discover" className="py-20 relative overflow-hidden bg-secondary" ref={sectionRef}>
       {/* Video Background with Overlay */}
       <div className="absolute inset-0 z-0">
         <video 

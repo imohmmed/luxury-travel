@@ -81,7 +81,7 @@ const Services: React.FC = () => {
         <div className="text-center mb-16 reveal">
           <AnimatedText 
             text="خدماتنا" 
-            className="text-4xl font-bold text-secondary mb-4"
+            className="text-4xl font-bold text-primary mb-4"
             once 
           />
           <div className="w-20 h-1 bg-accent mx-auto"></div>
@@ -104,7 +104,7 @@ const Services: React.FC = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-2xl font-bold text-secondary mb-3">{service.title}</h3>
+                <h3 className="text-2xl font-bold text-primary mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-4">{service.description}</p>
                 <a href="#" className="text-primary font-bold hover:text-accent transition-colors">
                   اكتشف المزيد <i className="fas fa-chevron-left mr-1"></i>

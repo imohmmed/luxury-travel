@@ -91,12 +91,12 @@ const Testimonials: React.FC = () => {
   };
 
   return (
-    <section id="testimonials" className="py-20 bg-white" ref={sectionRef}>
+    <section id="testimonials" className="py-20 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16 reveal">
           <AnimatedText 
             text="تعليقات العملاء" 
-            className="text-4xl font-bold text-secondary mb-4"
+            className="text-4xl font-bold text-primary mb-4"
             once 
           />
           <div className="w-20 h-1 bg-accent mx-auto"></div>
