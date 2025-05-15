@@ -103,7 +103,7 @@ const DiscoverWorld: React.FC = () => {
           {/* Action Button */}
           <div ref={buttonRef} className="text-center">
             <a 
-              href="/discover-world" 
+              href="#discover" 
               className="inline-block bg-accent text-dark font-bold px-10 py-4 rounded-full hover:bg-opacity-90 transition-all text-xl shadow-lg transform hover:scale-105 duration-300"
             >
               اكتشف العالم الآن

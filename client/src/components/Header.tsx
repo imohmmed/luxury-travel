@@ -41,12 +41,12 @@ const Header: React.FC = () => {
   };
 
   const menuItems = [
-    { name: 'الرئيسية', href: '/' },
-    { name: 'من نحن', href: '/' },
-    { name: 'خدماتنا', href: '/' },
-    { name: 'اكتشف العالم', href: '/' },
-    { name: 'تعليقات العملاء', href: '/' },
-    { name: 'اتصل بنا', href: '/' },
+    { name: 'الرئيسية', href: '#home' },
+    { name: 'من نحن', href: '#about' },
+    { name: 'خدماتنا', href: '#services' },
+    { name: 'اكتشف العالم', href: '#discover' },
+    { name: 'تعليقات العملاء', href: '#testimonials' },
+    { name: 'اتصل بنا', href: '#contact' },
   ];
 
   // Allows scrolling to continue even when touch starts on header
@@ -86,7 +86,18 @@ const Header: React.FC = () => {
                   <a 
                     href={item.href} 
                     className="hover:text-accent transition-colors"
-                    onClick={closeMenu}
+                    onClick={(e) => {
+                      closeMenu();
+                      // تأخير التمرير قليلاً للسماح بإغلاق القائمة أولاً
+                      setTimeout(() => {
+                        const targetId = item.href.substring(1); // إزالة الـ # من بداية الرابط
+                        const targetElement = document.getElementById(targetId);
+                        if (targetElement) {
+                          targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }, 300);
+                      e.preventDefault();
+                    }}
                   >
                     {item.name}
                   </a>
