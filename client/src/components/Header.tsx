@@ -6,19 +6,27 @@ const Header: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
+    // نستخدم debounce لتحسين الأداء ومنع التنفيذ المتكرر للدالة أثناء السكرول
+    let scrollTimer: NodeJS.Timeout | null = null;
+    
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      if (scrollTimer) clearTimeout(scrollTimer);
+      
+      scrollTimer = setTimeout(() => {
+        if (window.scrollY > 30) {
+          setScrolled(true);
+        } else {
+          setScrolled(false);
+        }
+      }, 50); // تأخير بسيط للاستجابة المتوازنة
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Check initial scroll position
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // التحقق من موضع السكرول الأولي
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      if (scrollTimer) clearTimeout(scrollTimer);
     };
   }, []);
 
@@ -42,8 +50,8 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : ''}`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header className={`fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : 'bg-secondary/80 backdrop-blur-md'}`}>
+      <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <div className="logo w-40 md:w-48 text-center mx-auto">
           <Link href="/" className="text-white font-bold text-2xl">

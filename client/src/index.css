@@ -19,6 +19,8 @@ body {
   backface-visibility: hidden;
   transform-style: preserve-3d;
   perspective: 1000px;
+  /* إضافة هوامش للمحتوى تحت الهيدر */
+  padding-top: 72px;
 }
 
 :root {
