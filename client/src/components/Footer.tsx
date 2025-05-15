@@ -36,15 +36,15 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', image: '/img/social-icons/instagram.png', href: '#' },
-  { id: 'facebook', image: '/img/social-icons/facebook.png', href: '#' },
-  { id: 'whatsapp', image: '/img/social-icons/whatsapp.png', href: '#' },
-  { id: 'telegram', image: '/img/social-icons/telegram.png', href: 'https://t.me/mohmmed' },
+  { id: 'instagram', image: '/img/social-media/instagram.png', href: '#' },
+  { id: 'facebook', image: '/img/social-media/facebook.png', href: '#' },
+  { id: 'whatsapp', image: '/img/social-media/whatsapp.png', href: '#' },
+  { id: 'telegram', image: '/img/social-media/telegram.png', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
-  { id: 'mastercard', image: '/img/logos/mastercard.png' },
-  { id: 'zain-cash', image: '/img/logos/zaincash.png' },
+  { id: 'mastercard', image: '/img/payment-methods/mastercard.png' },
+  { id: 'zain-cash', image: '/img/payment-methods/zain-cash.png' },
 ];
 
 const Footer: React.FC = () => {
@@ -130,23 +130,17 @@ const Footer: React.FC = () => {
               <span className="mx-1">الدفع</span>
             </h3>
             <div className="flex justify-center">
-              <div className="bg-white rounded-lg p-2 flex items-center justify-around w-full max-w-xs">
+              <div className="bg-white rounded-lg p-3 flex items-center justify-between w-full max-w-[220px]">
                 {paymentMethods.map(method => (
                   <div 
                     key={method.id}
-                    className="px-2 flex items-center justify-center"
+                    className="px-3 flex items-center justify-center"
                   >
-                    {method.image ? (
-                      <img 
-                        src={method.image} 
-                        alt={method.id} 
-                        className="h-10 object-contain"
-                      />
-                    ) : method.icon ? (
-                      <i className={`${method.icon} text-2xl text-primary`}></i>
-                    ) : (
-                      <span className="text-primary font-bold">{method.text}</span>
-                    )}
+                    <img 
+                      src={method.image} 
+                      alt={method.id} 
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-9' : 'h-7'}`}
+                    />
                   </div>
                 ))}
               </div>
@@ -156,14 +150,14 @@ const Footer: React.FC = () => {
         
         {/* Social media links in center */}
         <div className="border-t border-white/20 mt-12 pt-8 text-center flex flex-col items-center gap-6">
-          <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse mb-4">
+          <div className="flex items-center justify-center gap-4 mb-4">
             {socialLinks.map((social, index) => {
               // تعيين لون مختلف لكل أيقونة
               const bgColors = [
                 "bg-[#E1306C]",  // وردي للانستغرام
                 "bg-[#3b5998]",  // أزرق للفيسبوك
-                "bg-[#833AB4]",  // أرجواني للواتساب
-                "bg-[#F56040]",  // برتقالي للتيليجرام
+                "bg-[#25D366]",  // أخضر للواتساب
+                "bg-[#0088cc]",  // أزرق للتيليجرام
               ];
               
               return (
@@ -172,19 +166,15 @@ const Footer: React.FC = () => {
                   href={social.href} 
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-10 h-10 rounded-full ${bgColors[index]} flex items-center justify-center hover:opacity-90 transition-all`}
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
+                  className={`w-12 h-12 rounded-full ${bgColors[index]} flex items-center justify-center hover:opacity-90 transition-all`}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {social.image ? (
-                    <img 
-                      src={social.image} 
-                      alt={social.id} 
-                      className="h-5 w-5 filter brightness-0 invert"
-                    />
-                  ) : (
-                    <i className={`${social.icon} text-xl text-white`}></i>
-                  )}
+                  <img 
+                    src={social.image} 
+                    alt={social.id} 
+                    className="h-6 w-6 filter brightness-0 invert"
+                  />
                 </motion.a>
               );
             })}
