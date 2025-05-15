@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { Link } from 'wouter';
 import AnimatedText from '@/lib/AnimatedText';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,10 +51,12 @@ const AboutUs: React.FC = () => {
             <p className="text-lg text-gray-600 mb-8">
               يتكون فريقنا من خبراء متخصصين في مختلف أقسام الشركة، بدءاً من قسم الفيز إلى قسم الكروبات السياحية وتنظيم المؤتمرات، وقسم الاستقبال والتوديع (ترانسفير) وغيرها من الخدمات المتميزة.
             </p>
-            <a href="#" className="inline-block bg-primary text-white font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
-              اقرأ المزيد
-              <i className="fas fa-arrow-left mr-2"></i>
-            </a>
+            <div className="text-center w-full">
+              <Link to="/about-us" className="inline-block bg-primary text-white font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all">
+                اقرأ المزيد
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -99,15 +99,13 @@ const Services: React.FC = () => {
         
         <div className="space-y-6 mb-8" ref={cardsRef}>
           {/* قسم الفيز */}
-          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative">
-            <div className="absolute inset-0">
-              <img 
-                src="https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300" 
-                alt="قسم الفيز" 
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/50"></div>
-            </div>
+          <div className="h-72 rounded-lg overflow-hidden shadow-lg reveal relative"
+            style={{
+              backgroundImage: "linear-gradient(to right, rgba(14, 165, 233, 0.9), rgba(14, 165, 233, 0.5)), url('https://images.unsplash.com/photo-1526495124232-a04e1849168c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=300')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
             <div className="absolute inset-0 z-10 p-6 text-white flex flex-col justify-between">
               <div>
                 <h3 className="text-2xl font-bold mb-2">قسم الفيز</h3>

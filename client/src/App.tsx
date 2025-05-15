@@ -8,6 +8,7 @@ import Home from "@/pages/Home";
 import DiscoverWorldPage from "@/pages/DiscoverWorldPage";
 import VisaBooking from "@/pages/VisaBooking";
 import HotelsBooking from "@/pages/HotelsBooking";
+import AboutUsPage from "@/pages/AboutUsPage";
 import { useEffect } from "react";
 
 function Router() {
@@ -17,6 +18,12 @@ function Router() {
       <Route path="/discover-world" component={DiscoverWorldPage} />
       <Route path="/visa-booking" component={VisaBooking} />
       <Route path="/hotels-booking" component={HotelsBooking} />
+      <Route path="/about-us" component={AboutUsPage} />
+      <Route path="/groups-booking" component={NotFound} />
+      <Route path="/tickets-booking" component={NotFound} />
+      <Route path="/driving-license" component={NotFound} />
+      <Route path="/health-insurance" component={NotFound} />
+      <Route path="/transfer-services" component={NotFound} />
       <Route component={NotFound} />
     </Switch>
   );
