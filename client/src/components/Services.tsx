@@ -10,7 +10,7 @@ interface Service {
   description: string;
 }
 
-// Custom services data
+// بيانات الخدمات
 const services = [
   {
     id: 1,
@@ -127,7 +127,7 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-10 text-secondary relative overflow-hidden" 
+    <section id="services" className="py-16 md:py-24 text-secondary relative overflow-hidden" 
       ref={sectionRef}>
       
       {/* خلفية متحركة مع تأثير Parallax محسّن */}
@@ -137,7 +137,7 @@ const Services: React.FC = () => {
         animate={isInView ? "visible" : "hidden"}
         variants={backgroundVariants}
         style={{
-          y: scrollY * 0.3, // حركة الخلفية بتأثير parallax عند التمرير
+          x: scrollY * -0.1, // حركة الخلفية إلى اليسار عند السكرول للأسفل
         }}
       >
         <div 
@@ -148,24 +148,35 @@ const Services: React.FC = () => {
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',
             filter: 'brightness(0.9) contrast(1.1)',
-            transform: `scale(${1 + scrollY * 0.0003})` // تكبير بسيط للخلفية عند التمرير
+            transform: `scale(${1 + scrollY * 0.0005})` // تكبير أكثر وضوحاً للخلفية عند التمرير
           }}
         />
       </motion.div>
       
-      {/* طبقة خلفية إضافية للعمق */}
+      {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس */}
       <div className="absolute inset-0 opacity-30" 
         style={{
           backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
           backgroundSize: '200px',
           backgroundAttachment: 'fixed',
           mixBlendMode: 'overlay',
-          transform: `translateY(${scrollY * -0.05}px)` // حركة معاكسة للنقوش
+          transform: `translate(${scrollY * 0.15}px, ${scrollY * -0.05}px)` // حركة معاكسة للنقوش - تتحرك لليمين عند السكرول للأسفل
+        }} 
+      />
+      
+      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد */}
+      <div className="absolute inset-0 opacity-20" 
+        style={{
+          backgroundImage: "linear-gradient(45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%), linear-gradient(-45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%)",
+          backgroundSize: '40px 40px',
+          transform: `translate(${scrollY * -0.05}px, 0)`, // حركة لليسار عند السكرول للأسفل
+          zIndex: -8
         }} 
       />
       
       {/* طبقة خلفية لتضاد النص */}
       <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-primary/20 -z-5"></div>
+      
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-8"
@@ -195,143 +206,143 @@ const Services: React.FC = () => {
           }}
         >
           <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex group-hover:text-accent transition-colors">
+            <h3 className="text-2xl font-bold mb-2 text-white inline-flex group-hover:text-accent transition-colors">
+              <span>قسم</span>
+              <span className="mr-1">الفيز</span>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
+              <li>متابعة كاملة من التقديم إلى الاستلام.</li>
+              <li>يشمل تأشيرات سياحية، علاجية، تجارية، وزيارات خاصة.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/visa-booking" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احجز فيزا الآن
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
+          </motion.div>
+          
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+              <div className="inline-flex">
                 <span>قسم</span>
-                <span className="mr-1">الفيز</span>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
-                <li>متابعة كاملة من التقديم إلى الاستلام.</li>
-                <li>يشمل تأشيرات سياحية، علاجية، تجارية، وزيارات خاصة.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/visa-booking" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احجز فيزا الآن
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
+                <span className="mr-1">الكروبات</span>
+                <span className="mr-1">السياحية</span>
               </div>
+              <div className="inline-flex mt-1">
+                <span>وتنظيم</span>
+                <span className="mr-1">المؤتمرات</span>
+              </div>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
+              <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
+              <li>تنظيم مؤتمرات ومعارض وسفرات عمل متكاملة.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/groups-booking" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احجز رحلة جماعية
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <div className="inline-flex">
-                  <span>قسم</span>
-                  <span className="mr-1">الكروبات</span>
-                  <span className="mr-1">السياحية</span>
-                </div>
-                <div className="inline-flex mt-1">
-                  <span>وتنظيم</span>
-                  <span className="mr-1">المؤتمرات</span>
-                </div>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>تنظيم رحلات سياحية جماعية (Group Tours) داخل وخارج العراق.</li>
-                <li>تنسيق حجوزات الفنادق، التنقل، والبرامج اليومية.</li>
-                <li>تنظيم مؤتمرات ومعارض وسفرات عمل متكاملة.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/groups-booking" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احجز رحلة جماعية
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
-              </div>
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+              <span>قسم</span>
+              <span className="mr-1">التذاكر</span>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
+              <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
+              <li>دعم متكامل قبل وأثناء وبعد الحجز.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/tickets-booking" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احجز تذكرة طيران
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+              <span>قسم</span>
+              <span className="mr-1">إجازات</span>
+              <span className="mr-1">السوق</span>
+              <span className="mr-1">الدولية</span>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
+              <li>خدمة سريعة ومعتمدة دوليًا.</li>
+              <li>متوفرة لجميع الجنسيات.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/driving-license" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احصل على رخصة دولية
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
+          </motion.div>
+          
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+              <span>قسم</span>
+              <span className="mr-1">التأمين</span>
+              <span className="mr-1">الصحي</span>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
+              <li>معتمد من السفارات وشركات الطيران.</li>
+              <li>خطط مرنة حسب مدة السفر والدولة.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/health-insurance" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احجز تأمين صحي
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
+          </motion.div>
+          
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+              <div className="inline-flex">
                 <span>قسم</span>
-                <span className="mr-1">التذاكر</span>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
-                <li>إمكانية اختيار الدرجة (سياحية، رجال أعمال، أولى).</li>
-                <li>دعم متكامل قبل وأثناء وبعد الحجز.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/tickets-booking" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احجز تذكرة طيران
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
+                <span className="mr-1">الاستقبال</span>
+                <span className="mr-1">والتوديع</span>
               </div>
-          </motion.div>
-          
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">إجازات</span>
-                <span className="mr-1">السوق</span>
-                <span className="mr-1">الدولية</span>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
-                <li>خدمة سريعة ومعتمدة دوليًا.</li>
-                <li>متوفرة لجميع الجنسيات.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/driving-license" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احصل على رخصة دولية
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
-              </div>
-          </motion.div>
-          
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">التأمين</span>
-                <span className="mr-1">الصحي</span>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
-                <li>معتمد من السفارات وشركات الطيران.</li>
-                <li>خطط مرنة حسب مدة السفر والدولة.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/health-insurance" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احجز تأمين صحي
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
-              </div>
-          </motion.div>
-          
-          <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white">
-                <div className="inline-flex">
-                  <span>قسم</span>
-                  <span className="mr-1">الاستقبال</span>
-                  <span className="mr-1">والتوديع</span>
-                </div>
-                <div className="text-center text-xl mt-1">(ترانسفير)</div>
-              </h3>
-              <ul className="list-disc list-inside space-y-1 text-white mb-4">
-                <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
-                <li>توفير سيارات فخمة وسواقين محترفين.</li>
-                <li>متاحة لجميع الرحلات في دول متعددة.</li>
-              </ul>
-              <div className="mt-3 text-center">
-                <Link 
-                  to="/transfer-services" 
-                  className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
-                >
-                  احجز خدمة استقبال
-                  <i className="fas fa-arrow-left mr-2"></i>
-                </Link>
-              </div>
+              <div className="text-center text-xl mt-1">(ترانسفير)</div>
+            </h3>
+            <ul className="list-disc list-inside space-y-1 text-white mb-4">
+              <li>خدمات استقبال من المطارات وتوديع عند السفر.</li>
+              <li>توفير سيارات فخمة وسواقين محترفين.</li>
+              <li>متاحة لجميع الرحلات في دول متعددة.</li>
+            </ul>
+            <div className="mt-3 text-center">
+              <Link 
+                to="/transfer-services" 
+                className="inline-block bg-accent text-dark font-bold px-6 py-2 rounded-full hover:bg-white transition-colors"
+              >
+                احجز خدمة استقبال
+                <i className="fas fa-arrow-left mr-2"></i>
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
       </div>
