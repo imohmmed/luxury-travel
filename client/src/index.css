@@ -81,7 +81,7 @@
 
 @layer components {
   .parallax {
-    @apply bg-fixed bg-center bg-no-repeat bg-cover;
+    @apply bg-center bg-no-repeat bg-cover;
   }
 
   .overlay {

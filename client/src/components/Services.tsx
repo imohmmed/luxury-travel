@@ -40,9 +40,14 @@ const Services: React.FC = () => {
   }, []);
 
   return (
-    <section id="services" className="py-20 bg-neutral text-secondary" ref={sectionRef}>
+    <section id="services" className="py-16 text-secondary relative" ref={sectionRef}
+      style={{
+        backgroundImage: "linear-gradient(rgba(245, 250, 255, 0.95), rgba(245, 250, 255, 0.95)), url('https://images.unsplash.com/photo-1552733407-5d5c46c3bb3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-12 reveal">
           <AnimatedText 
             text="خدماتنا" 
             className="text-4xl font-bold text-primary mb-4"
@@ -52,50 +57,56 @@ const Services: React.FC = () => {
           <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
             نقدم باقة متنوعة من الخدمات السياحية الفاخرة من خلال أقسامنا المتخصصة
           </p>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4 max-w-4xl mx-auto text-center">
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم الفيز</p>
-            </div>
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم الكروبات السياحية وتنظيم المؤتمرات</p>
-            </div>
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم التذاكر</p>
-            </div>
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم إجازات السوق الدولية</p>
-            </div>
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم التأمين الصحي</p>
-            </div>
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <p className="font-bold text-primary">قسم الاستقبال والتوديع</p>
-            </div>
-          </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={cardsRef}>
-          {services.map((service) => (
-            <div 
-              key={service.id} 
-              className="bg-white rounded-xl shadow-lg overflow-hidden hover-scale reveal"
-            >
-              <div className="h-64 overflow-hidden">
-                <img 
-                  src={service.image} 
-                  alt={service.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-2xl font-bold text-primary mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <a href="#" className="text-primary font-bold hover:text-accent transition-colors">
-                  اكتشف المزيد <i className="fas fa-chevron-left mr-1"></i>
-                </a>
-              </div>
+        <div className="space-y-8 mb-10" ref={cardsRef}>
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1591261730899-5a78d7cddcee?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم الفيز" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم الفيز</h3>
+              <p className="text-gray-600">نقدم خدمات متكاملة لاستخراج التأشيرات السياحية والتجارية لكافة دول العالم بإجراءات سريعة وموثوقة. فريقنا من الخبراء يعمل على تسهيل الإجراءات وتوفير الوقت والجهد لعملائنا.</p>
             </div>
-          ))}
+          </div>
+          
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1532635224-cf024e9d1904?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم الكروبات السياحية وتنظيم المؤتمرات" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم الكروبات السياحية وتنظيم المؤتمرات</h3>
+              <p className="text-gray-600">خدمات احترافية لتنظيم رحلات المجموعات والمؤتمرات العالمية بأعلى مستويات الجودة والاهتمام بالتفاصيل. نضمن تجربة ناجحة ومميزة لجميع المشاركين.</p>
+            </div>
+          </div>
+          
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم التذاكر" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم التذاكر</h3>
+              <p className="text-gray-600">احجز تذاكر الطيران على الدرجة الأولى ودرجة رجال الأعمال مع أفضل شركات الطيران العالمية بأسعار تنافسية. نوفر خيارات متعددة تناسب جميع المتطلبات.</p>
+            </div>
+          </div>
+          
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم إجازات السوق الدولية" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم إجازات السوق الدولية</h3>
+              <p className="text-gray-600">خدمات استخراج وتجديد رخص القيادة الدولية لتمكينك من قيادة السيارات أثناء سفرك في مختلف دول العالم بسهولة وأمان.</p>
+            </div>
+          </div>
+          
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم التأمين الصحي" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم التأمين الصحي</h3>
+              <p className="text-gray-600">نوفر خدمات التأمين الصحي للمسافرين بتغطية شاملة في جميع أنحاء العالم لضمان رحلة آمنة ومطمئنة. خطط تأمين متنوعة تناسب جميع الميزانيات والاحتياجات.</p>
+            </div>
+          </div>
+          
+          <div className="p-6 bg-white rounded-xl shadow-lg reveal flex flex-col md:flex-row items-center gap-6">
+            <img src="https://images.unsplash.com/photo-1523475743164-9191dafcb0d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=300" alt="قسم الاستقبال والتوديع (ترانسفير)" className="w-full md:w-1/3 h-64 object-cover rounded-lg" />
+            <div>
+              <h3 className="text-2xl font-bold text-primary mb-3">قسم الاستقبال والتوديع (ترانسفير)</h3>
+              <p className="text-gray-600">خدمات VIP للاستقبال والتوديع في المطارات العالمية مع سيارات فاخرة وسائقين محترفين لراحة تامة خلال تنقلاتك.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
