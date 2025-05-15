@@ -1,11 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useGSAP } from '@gsap/react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import AnimatedText from '@/lib/AnimatedText';
-
-gsap.registerPlugin(ScrollTrigger);
 
 interface Testimonial {
   id: number;
@@ -31,39 +26,21 @@ const Testimonials: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  useGSAP(() => {
-    if (sectionRef.current && sliderRef.current) {
-      // تكوين ScrollTrigger للأداء المحسن
-      ScrollTrigger.config({
-        limitCallbacks: true,
-        ignoreMobileResize: true,
-        syncInterval: 40 // تحديث متكرر للحصول على حركة أكثر سلاسة
-      });
-
-      // إنشاء سياق GSAP للتحكم بشكل أفضل
-      const ctx = gsap.context(() => {
-        // تطبيق تأثير متحرك محسن على شريحة التعليقات
-        gsap.from(sliderRef.current, {
-          y: 40, // تقليل مسافة الحركة
-          opacity: 0,
-          duration: 0.7, // تقليل المدة قليلاً
-          ease: "power2.out", // منحنى تسارع أكثر طبيعية
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%", // بدء التأثير أبكر
-            end: "center center",
-            scrub: 0.7, // تقليل قيمة scrub للحركة الأكثر سلاسة
-            anticipatePin: 1, // تحسين تجربة التثبيت
-            fastScrollEnd: true, // تحسين نهاية التمرير السريع
-            preventOverlaps: true, // منع التداخل مع عناصر أخرى
-          }
-        });
-      });
-
-      // تنظيف السياق عند إزالة المكون
-      return () => ctx.revert();
+  // استخدام Framer Motion لتحريك العناصر عند ظهورها في منطقة العرض
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  
+  // متغيرات حركة سلايدر التعليقات
+  const sliderVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut"
+      }
     }
-  }, []);
+  };
 
   // Function to render stars based on rating
   const renderStars = (rating: number) => {
@@ -90,7 +67,19 @@ const Testimonials: React.FC = () => {
   return (
     <section id="testimonials" className="py-20 bg-white text-secondary" ref={sectionRef}>
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12 reveal">
+        <motion.div 
+          className="text-center mb-12"
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={{
+            hidden: { opacity: 0, y: -20 },
+            visible: { 
+              opacity: 1, 
+              y: 0,
+              transition: { duration: 0.5 }
+            }
+          }}
+        >
           <h2 className="text-4xl font-bold text-primary mb-4 inline-flex justify-center w-full">
             <span>تعليقات</span>
             <span className="mx-1">العملاء</span>
@@ -99,9 +88,15 @@ const Testimonials: React.FC = () => {
           <p className="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">
             استمع لآراء عملائنا المميزين عن تجاربهم معنا
           </p>
-        </div>
+        </motion.div>
         
-        <div className="relative overflow-hidden reveal" ref={sliderRef}>
+        <motion.div 
+          className="relative overflow-hidden" 
+          ref={sliderRef}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={sliderVariants}
+        >
           <div className="testimonial-slider" style={{ transform: `translateX(-${currentTestimonial * 100}%)` }}>
             <AnimatePresence mode="sync">
               {testimonials.map((testimonial, index) => (
@@ -115,7 +110,14 @@ const Testimonials: React.FC = () => {
                   exit={{ opacity: 0 }}
                   className="testimonial-slide px-4"
                 >
-                  <div className="bg-neutral rounded-xl shadow-lg p-8">
+                  <motion.div 
+                    className="bg-neutral rounded-xl shadow-lg p-8"
+                    whileHover={{ 
+                      scale: 1.02,
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)"
+                    }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
                     <div className="flex items-center mb-6">
                       <img 
                         src={testimonial.image} 
@@ -132,7 +134,7 @@ const Testimonials: React.FC = () => {
                     <p className="text-gray-600">
                       {testimonial.comment}
                     </p>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -141,17 +143,19 @@ const Testimonials: React.FC = () => {
           {/* Navigation Dots */}
           <div className="flex justify-center mt-6">
             {testimonials.map((_, index) => (
-              <button 
+              <motion.button 
                 key={index} 
                 className={`w-3 h-3 rounded-full mx-1 transition-all ${
                   index === currentTestimonial ? 'bg-primary scale-125' : 'bg-gray-300'
                 }`}
                 onClick={() => setCurrentTestimonial(index)}
                 aria-label={`View testimonial ${index + 1}`}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
               />
             ))}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
