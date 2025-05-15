@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Link } from 'wouter';
+import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 const countries = [
   {
@@ -56,7 +57,7 @@ const countries = [
 
 const DiscoverWorldPage: React.FC = () => {
   // Initialize scroll reveal animation
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useScrollReveal();
 
   return (
     <>

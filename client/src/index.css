@@ -64,80 +64,69 @@
   --ring: 200 100% 50%;
 }
 
-* {
-  border-color: hsl(var(--border));
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-pt-0;
+  }
+
+  body {
+    @apply font-tajawal antialiased bg-background text-foreground;
+    direction: rtl;
+    letter-spacing: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-html {
-  scroll-padding-top: 0;
-}
+@layer components {
+  .parallax {
+    @apply bg-center bg-no-repeat bg-cover;
+  }
 
-body {
-  font-family: 'Tajawal', sans-serif;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  direction: rtl;
-  letter-spacing: normal;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  .overlay {
+    @apply transition-all duration-300 ease-in-out;
+  }
 
-.parallax {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
+  .hover-scale {
+    @apply transition-transform duration-300 ease-in-out;
+  }
 
-.overlay {
-  transition: all 300ms ease-in-out;
-}
+  .hover-scale:hover {
+    @apply transform scale-105;
+  }
 
-.hover-scale {
-  transition: transform 300ms ease-in-out;
-}
+  .reveal {
+    @apply opacity-0 translate-y-8 transition-all duration-500 ease-in-out;
+    will-change: opacity, transform;
+  }
 
-.hover-scale:hover {
-  transform: scale(1.05);
-}
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(2rem);
-  transition: all 500ms ease-in-out;
-  will-change: opacity, transform;
-}
+  .globe-container {
+    @apply relative h-[400px] overflow-hidden;
+  }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
+  .slide {
+    @apply absolute w-full h-full opacity-0 transition-opacity duration-1000 ease-in-out bg-cover bg-center;
+  }
 
-.globe-container {
-  position: relative;
-  height: 400px;
-  overflow: hidden;
-}
+  .slide.active {
+    @apply opacity-100;
+  }
 
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  transition: opacity 1000ms ease-in-out;
-  background-size: cover;
-  background-position: center;
-}
+  .testimonial-slider {
+    @apply flex transition-transform duration-500 ease-in-out;
+  }
 
-.slide.active {
-  opacity: 1;
-}
+  .testimonial-slide {
+    @apply min-w-full;
+  }
 
-.testimonial-slider {
-  display: flex;
-  transition: transform 500ms ease-in-out;
-}
-
-.testimonial-slide {
-  min-width: 100%;
 }
