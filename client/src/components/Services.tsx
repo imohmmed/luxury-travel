@@ -130,9 +130,8 @@ const Services: React.FC = () => {
           variants={containerVariants}
         >
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">الفيز</span>
+              <h3 className="text-2xl font-bold mb-2 text-white text-right">
+                <div>قسم الفيز</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>نوفر خدمات استخراج تأشيرات السفر (Visa) لجميع الدول.</li>
@@ -172,9 +171,8 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">التذاكر</span>
+              <h3 className="text-2xl font-bold mb-2 text-white text-right">
+                <div>قسم التذاكر</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>حجز تذاكر الطيران لجميع الخطوط الجوية.</li>
@@ -193,11 +191,9 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">إجازات</span>
-                <span className="mr-1">السوق</span>
-                <span className="mr-1">الدولية</span>
+              <h3 className="text-2xl font-bold mb-2 text-white text-right">
+                <div>قسم إجازات السوق</div>
+                <div className="mt-1">الدولية</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>إصدار إجازات سوق دولية (رخص القيادة الدولية).</li>
@@ -216,10 +212,9 @@ const Services: React.FC = () => {
           </motion.div>
           
           <motion.div variants={cardVariants} className="rounded-lg shadow-lg bg-primary p-6">
-              <h3 className="text-2xl font-bold mb-2 text-white inline-flex">
-                <span>قسم</span>
-                <span className="mr-1">التأمين</span>
-                <span className="mr-1">الصحي</span>
+              <h3 className="text-2xl font-bold mb-2 text-white text-right">
+                <div>قسم التأمين</div>
+                <div className="mt-1">الصحي</div>
               </h3>
               <ul className="list-disc list-inside space-y-1 text-white mb-4">
                 <li>تأمين صحي للسفر يشمل الطوارئ، العلاج، الحوادث.</li>
