@@ -113,15 +113,15 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt text-accent w-6"></i>
-                <span className="text-gray-400">بغداد - زيونة - شارع دريم سيتي</span>
+                <span className="text-gray-400">شارع الملك فهد، الرياض، المملكة العربية السعودية</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-phone-alt text-accent w-6"></i>
-                <span className="text-gray-400 dir-ltr">+9647724166086</span>
+                <span className="text-gray-400">+966 123 456 789</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope text-accent w-6"></i>
-                <span className="text-gray-400">info@altaraf.net</span>
+                <span className="text-gray-400">info@luxurytravel.com</span>
               </li>
             </ul>
             
@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
             ))}
           </div>
           
-          <p className="text-white/80 text-sm">© 2025 التَرَف. جميع الحقوق محفوظة.</p>
+          <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
         </div>
       </div>
     </footer>
