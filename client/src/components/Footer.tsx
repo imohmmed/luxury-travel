@@ -135,7 +135,13 @@ const Footer: React.FC = () => {
                   whileHover={{ y: -5 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  {method.icon ? (
+                  {method.image ? (
+                    <img 
+                      src={method.image} 
+                      alt={method.id} 
+                      className="h-8 object-contain"
+                    />
+                  ) : method.icon ? (
                     <i className={`${method.icon} text-secondary text-2xl`}></i>
                   ) : (
                     <span className="text-sm font-bold text-secondary">{method.text}</span>
