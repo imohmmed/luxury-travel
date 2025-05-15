@@ -13,8 +13,9 @@ interface MenuItem {
 
 interface SocialLink {
   id: string;
-  icon: string;
+  icon?: string;
   href: string;
+  image?: string;
 }
 
 interface PaymentMethod {
@@ -35,9 +36,10 @@ const menuItems: MenuItem[] = [
 ];
 
 const socialLinks: SocialLink[] = [
-  { id: 'instagram', icon: 'fab fa-instagram', href: '#' },
-  { id: 'facebook', icon: 'fab fa-facebook-f', href: '#' },
-  { id: 'whatsapp', icon: 'fab fa-whatsapp', href: '#' },
+  { id: 'instagram', image: 'https://cdn-icons-png.flaticon.com/512/2111/2111463.svg', href: '#' },
+  { id: 'facebook', image: 'https://cdn-icons-png.flaticon.com/512/733/733547.svg', href: '#' },
+  { id: 'whatsapp', image: 'https://cdn-icons-png.flaticon.com/512/733/733585.svg', href: '#' },
+  { id: 'telegram', image: 'https://cdn-icons-png.flaticon.com/512/2111/2111646.svg', href: 'https://t.me/mohmmed' },
 ];
 
 const paymentMethods: PaymentMethod[] = [
@@ -165,7 +167,15 @@ const Footer: React.FC = () => {
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
               >
-                <i className={`${social.icon} text-xl`}></i>
+                {social.image ? (
+                  <img 
+                    src={social.image} 
+                    alt={social.id} 
+                    className="h-6 w-6 filter invert opacity-90 hover:opacity-100"
+                  />
+                ) : (
+                  <i className={`${social.icon} text-xl`}></i>
+                )}
               </motion.a>
             ))}
           </div>
