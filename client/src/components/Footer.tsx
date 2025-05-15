@@ -123,33 +123,33 @@ const Footer: React.FC = () => {
             <ul className="space-y-3">
               <li className="flex items-center">
                 <i className="fas fa-map-marker-alt text-accent w-6"></i>
-                <span className="text-gray-400">شارع الملك فهد، الرياض، المملكة العربية السعودية</span>
+                <span className="text-gray-400">بغداد - زيونة - شارع دريم سيتي</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-phone-alt text-accent w-6"></i>
-                <span className="text-gray-400">+966 123 456 789</span>
+                <span className="text-gray-400 dir-ltr">+964 772 416 6086</span>
               </li>
               <li className="flex items-center">
                 <i className="fas fa-envelope text-accent w-6"></i>
-                <span className="text-gray-400">info@luxurytravel.com</span>
+                <span className="text-gray-400">info@altaraf.net</span>
               </li>
             </ul>
             
-            <h3 className="text-xl font-bold mt-8 mb-4 text-right">
+            <h3 className="text-xl font-bold mt-8 mb-4">
               <span>وسائل</span>
               <span className="mx-1">الدفع</span>
             </h3>
-            <div className="flex justify-center">
-              <div className="bg-white rounded-lg p-3 flex items-center justify-between w-full max-w-[220px]">
+            <div className="flex justify-end">
+              <div className="flex items-center space-x-4 rtl:space-x-reverse">
                 {paymentMethods.map(method => (
                   <div 
                     key={method.id}
-                    className="px-3 flex items-center justify-center"
+                    className="flex items-center justify-center"
                   >
                     <img 
                       src={method.image} 
                       alt={method.id} 
-                      className={`object-contain ${method.id === 'mastercard' ? 'h-9' : 'h-7'}`}
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-10' : 'h-8'}`}
                     />
                   </div>
                 ))}

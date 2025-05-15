@@ -42,10 +42,10 @@ const Header: React.FC = () => {
   ];
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg' : ''}`}>
-      <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-secondary shadow-lg py-2' : 'py-6'}`}>
+      <div className="container mx-auto px-4 flex justify-between items-center transition-all">
         {/* Logo */}
-        <div className="logo w-40 md:w-48 text-center mx-auto">
+        <div className={`logo text-center mx-auto transition-all duration-300 ${scrolled ? 'w-36 md:w-44' : 'w-44 md:w-52'}`}>
           <Link href="/" className="text-white font-bold text-2xl">
             <span className="text-accent whitespace-nowrap">التَرَف</span>
           </Link>
