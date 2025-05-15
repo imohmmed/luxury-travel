@@ -1,52 +1,31 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'wouter';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    // تهيئة GSAP ScrollTrigger للهيدر
-    if (headerRef.current) {
-      // إخفاء الهيدر أثناء السكرول للأسفل وإظهاره عند السكرول للأعلى
-      const showAnim = gsap.from(headerRef.current, { 
-        yPercent: -100,
-        paused: true,
-        duration: 0.2,
-        ease: "power2.out"
-      }).progress(1); // بدء الهيدر مرئي
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      
+      // تغيير مظهر الهيدر عند السكرول - تبسيط الكود
+      if (scrollPosition > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
 
-      ScrollTrigger.create({
-        start: 'top top',
-        end: 99999,
-        onUpdate: (self) => {
-          // التحكم في ظهور الهيدر اعتمادًا على اتجاه السكرول
-          if (self.direction === -1) {
-            // عند السكرول للأعلى
-            showAnim.reverse(); // إظهار الهيدر
-          } else if (self.direction === 1 && self.progress > 0.1) {
-            // عند السكرول للأسفل بعد تجاوز 10%
-            showAnim.play(); // إخفاء الهيدر
-          }
-          
-          // تغيير خلفية الهيدر حسب الموضع
-          if (self.progress > 0.05) {
-            setScrolled(true);
-          } else {
-            setScrolled(false);
-          }
-        }
-      });
-    }
+    // إضافة مستمع حدث السكرول
+    window.addEventListener('scroll', handleScroll);
+    
+    // التحقق من وضع السكرول الأولي
+    handleScroll();
 
     return () => {
-      // تنظيف ScrollTrigger عند إزالة المكون
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      // إزالة مستمع الحدث عند إزالة المكون
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
@@ -71,10 +50,9 @@ const Header: React.FC = () => {
 
   return (
     <header 
-      ref={headerRef}
-      className={`fixed top-0 left-0 right-0 w-full z-[100] transition-all duration-300 ${
+      className={`sticky top-0 w-full z-50 transition-all duration-500 ease-in-out ${
         scrolled 
-          ? 'header-fixed bg-secondary bg-opacity-85 backdrop-blur-md shadow-md py-3' 
+          ? 'bg-secondary bg-opacity-90 backdrop-blur-sm shadow-md py-3' 
           : 'bg-transparent py-6'
       }`}>
       <div className="container mx-auto px-4 flex justify-between items-center transition-all duration-500 ease-in-out">
