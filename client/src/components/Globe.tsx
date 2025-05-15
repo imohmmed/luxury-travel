@@ -146,27 +146,41 @@ const Globe: React.FC = () => {
     // Start animation
     animate();
     
-    // Improved scroll animation with GSAP - optimized for performance
+    // تحسين إعدادات ScrollTrigger للكرة الأرضية
+    // تكوين تحسينات الأداء للتمرير
+    ScrollTrigger.config({
+      limitCallbacks: true,
+      ignoreMobileResize: true,
+      syncInterval: 60 // زيادة المزامنة للحصول على حركة أكثر سلاسة
+    });
+    
+    // إنشاء تأثير تمرير محسن للكرة الأرضية
     ScrollTrigger.create({
       trigger: containerRef.current,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 0.3, // Faster response
-      fastScrollEnd: true,
-      preventOverlaps: true,
+      start: 'top bottom-=10%', // بدء التأثير بشكل أبكر قليلاً
+      end: 'bottom top+=10%',
+      scrub: 1.2, // قيمة أعلى لتأثير حركة أكثر سلاسة وأقل تقطعاً
+      fastScrollEnd: true, // تحسين نهاية التمرير السريع
+      invalidateOnRefresh: true, // إعادة حساب القيم عند تحديث الصفحة
       onUpdate: (self) => {
         if (earthRef.current && cameraRef.current) {
-          // Set values directly instead of using animations for better performance
-          earthRef.current.rotation.y = self.progress * Math.PI * 2; // Full 360 rotation
-          cameraRef.current.position.z = 15 - (self.progress * 5); // Start at 15, zoom in to 10
+          // استخدام الدالة easeInOut للحصول على حركة أكثر سلاسة
+          const easedProgress = easeInOutQuad(self.progress);
           
-          // Only update the camera and renderer when needed
-          if (cameraRef.current) {
-            cameraRef.current.updateProjectionMatrix();
-          }
+          // تعيين القيم مباشرة للحصول على أداء أفضل
+          earthRef.current.rotation.y = easedProgress * Math.PI * 2; // دوران كامل 360 درجة
+          cameraRef.current.position.z = 15 - (easedProgress * 5); // بدء من 15، وتقريب إلى 10
+          
+          // تحديث الكاميرا فقط عند الحاجة
+          cameraRef.current.updateProjectionMatrix();
         }
       }
     });
+    
+    // دالة مساعدة لتسريع الحركة
+    function easeInOutQuad(t: number): number {
+      return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
     
     // Handle window resize
     const handleResize = () => {

@@ -14,18 +14,36 @@ const AboutUs: React.FC = () => {
 
   useGSAP(() => {
     if (sectionRef.current && contentRef.current) {
-      gsap.from(contentRef.current.children, {
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "top 30%",
-          scrub: 1,
-        }
+      // تكوين ScrollTrigger للأداء الأفضل
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        ignoreMobileResize: true,
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load,resize" // تحسين أحداث التحديث التلقائي
       });
+
+      // تطبيق تأثير متحرك محسن على المحتوى
+      const childElements = contentRef.current ? Array.from(contentRef.current.children) : [];
+      
+      const ctx = gsap.context(() => {
+        gsap.from(childElements, {
+          y: 30, // تقليل المسافة للحركة الأكثر سلاسة
+          opacity: 0,
+          stagger: 0.12, // تقليل التباعد بين العناصر
+          duration: 0.7, // مدة قصيرة قليلاً للحركة الأكثر سرعة
+          ease: "power2.out", // منحنى تسارع أكثر طبيعية
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%", // بدء التأثير قبل وصول القسم بقليل
+            end: "top 30%",
+            scrub: 0.8, // قيمة أقل للتحكم الأكثر دقة
+            invalidateOnRefresh: true, // إعادة الحساب عند التحديث
+            fastScrollEnd: true, // تحسين نهاية التمرير السريع
+          }
+        });
+      });
+
+      // تنظيف السياق عند إزالة المكون
+      return () => ctx.revert();
     }
   }, []);
 

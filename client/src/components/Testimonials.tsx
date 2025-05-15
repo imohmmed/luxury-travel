@@ -33,17 +33,35 @@ const Testimonials: React.FC = () => {
 
   useGSAP(() => {
     if (sectionRef.current && sliderRef.current) {
-      gsap.from(sliderRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          end: "center center",
-          scrub: 1,
-        }
+      // تكوين ScrollTrigger للأداء المحسن
+      ScrollTrigger.config({
+        limitCallbacks: true,
+        ignoreMobileResize: true,
+        syncInterval: 40 // تحديث متكرر للحصول على حركة أكثر سلاسة
       });
+
+      // إنشاء سياق GSAP للتحكم بشكل أفضل
+      const ctx = gsap.context(() => {
+        // تطبيق تأثير متحرك محسن على شريحة التعليقات
+        gsap.from(sliderRef.current, {
+          y: 40, // تقليل مسافة الحركة
+          opacity: 0,
+          duration: 0.7, // تقليل المدة قليلاً
+          ease: "power2.out", // منحنى تسارع أكثر طبيعية
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%", // بدء التأثير أبكر
+            end: "center center",
+            scrub: 0.7, // تقليل قيمة scrub للحركة الأكثر سلاسة
+            anticipatePin: 1, // تحسين تجربة التثبيت
+            fastScrollEnd: true, // تحسين نهاية التمرير السريع
+            preventOverlaps: true, // منع التداخل مع عناصر أخرى
+          }
+        });
+      });
+
+      // تنظيف السياق عند إزالة المكون
+      return () => ctx.revert();
     }
   }, []);
 
