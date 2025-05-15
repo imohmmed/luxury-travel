@@ -125,59 +125,69 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <h3 className="text-xl font-bold mt-8 mb-4 inline-flex">
+            <h3 className="text-xl font-bold mt-8 mb-4 text-right">
               <span>وسائل</span>
               <span className="mx-1">الدفع</span>
             </h3>
-            <div className="flex space-x-4 rtl:space-x-reverse">
-              {paymentMethods.map(method => (
-                <motion.div 
-                  key={method.id}
-                  className="w-20 h-12 bg-white rounded-md flex items-center justify-center shadow-md overflow-hidden"
-                  whileHover={{ y: -5 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  {method.image ? (
-                    <img 
-                      src={method.image} 
-                      alt={method.id} 
-                      className="h-8 object-contain"
-                    />
-                  ) : method.icon ? (
-                    <i className={`${method.icon} text-secondary text-2xl`}></i>
-                  ) : (
-                    <span className="text-sm font-bold text-secondary">{method.text}</span>
-                  )}
-                </motion.div>
-              ))}
+            <div className="flex justify-center">
+              <div className="bg-white rounded-lg p-2 flex items-center justify-around w-full max-w-xs">
+                {paymentMethods.map(method => (
+                  <div 
+                    key={method.id}
+                    className="px-2 flex items-center justify-center"
+                  >
+                    {method.image ? (
+                      <img 
+                        src={method.image} 
+                        alt={method.id} 
+                        className="h-10 object-contain"
+                      />
+                    ) : method.icon ? (
+                      <i className={`${method.icon} text-2xl text-primary`}></i>
+                    ) : (
+                      <span className="text-primary font-bold">{method.text}</span>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         
         {/* Social media links in center */}
         <div className="border-t border-white/20 mt-12 pt-8 text-center flex flex-col items-center gap-6">
-          <div className="flex items-center justify-center space-x-6 rtl:space-x-reverse mb-4">
-            {socialLinks.map(social => (
-              <motion.a 
-                key={social.id}
-                href={social.href} 
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-white bg-opacity-10 flex items-center justify-center hover:bg-accent hover:text-dark transition-all"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {social.image ? (
-                  <img 
-                    src={social.image} 
-                    alt={social.id} 
-                    className="h-6 w-6 filter invert"
-                  />
-                ) : (
-                  <i className={`${social.icon} text-xl`}></i>
-                )}
-              </motion.a>
-            ))}
+          <div className="flex items-center justify-center space-x-3 rtl:space-x-reverse mb-4">
+            {socialLinks.map((social, index) => {
+              // تعيين لون مختلف لكل أيقونة
+              const bgColors = [
+                "bg-[#E1306C]",  // وردي للانستغرام
+                "bg-[#3b5998]",  // أزرق للفيسبوك
+                "bg-[#833AB4]",  // أرجواني للواتساب
+                "bg-[#F56040]",  // برتقالي للتيليجرام
+              ];
+              
+              return (
+                <motion.a 
+                  key={social.id}
+                  href={social.href} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 rounded-full ${bgColors[index]} flex items-center justify-center hover:opacity-90 transition-all`}
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {social.image ? (
+                    <img 
+                      src={social.image} 
+                      alt={social.id} 
+                      className="h-5 w-5 filter brightness-0 invert"
+                    />
+                  ) : (
+                    <i className={`${social.icon} text-xl text-white`}></i>
+                  )}
+                </motion.a>
+              );
+            })}
           </div>
           
           <p className="text-white/80 text-sm">© 2019 التَرَف. جميع الحقوق محفوظة.</p>
