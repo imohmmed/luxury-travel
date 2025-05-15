@@ -87,39 +87,23 @@ const DiscoverWorld: React.FC = () => {
           </p>
         </div>
         
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col items-center justify-center">
           {/* Globe Animation Container */}
           <div 
-            className="w-full lg:w-1/2 mb-10 lg:mb-0 globe-container reveal"
+            className="mb-8 globe-container reveal relative"
             ref={globeRef}
+            style={{ height: "400px", width: "400px" }}
           >
             <Globe />
           </div>
           
-          {/* Destinations Content */}
-          <div className="w-full lg:w-1/2 lg:pr-10 text-white reveal" ref={contentRef}>
-            <h3 className="text-3xl font-bold mb-6">وجهات سياحية فاخرة</h3>
-            <p className="text-lg text-white mb-6">
-              نقدم لك مجموعة من أفخم الوجهات السياحية العالمية، مختارة بعناية لتوفير تجارب سفر استثنائية. من الشواطئ الاستوائية الخلابة إلى المدن التاريخية العريقة والمنتجعات الجبلية الفاخرة، نضمن لك تجربة سفر لا تُنسى.
-            </p>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-8">
-              {destinations.map(destination => (
-                <div 
-                  key={destination.id} 
-                  className="text-center p-3 bg-white bg-opacity-10 rounded-lg hover:bg-opacity-20 transition-all"
-                >
-                  <i className={`${destination.icon} text-accent text-2xl mb-2`}></i>
-                  <p>{destination.name}</p>
-                </div>
-              ))}
-            </div>
-            
+          {/* Action Button */}
+          <div className="text-center mb-8">
             <a 
-              href="#" 
-              className="inline-block bg-accent text-dark font-bold px-8 py-3 rounded-full hover:bg-opacity-90 transition-all"
+              href="/discover-world" 
+              className="inline-block bg-accent text-dark font-bold px-10 py-4 rounded-full hover:bg-opacity-90 transition-all text-xl shadow-lg"
             >
-              اضغط واكتشف الآن
+              اكتشف العالم الآن
               <i className="fas fa-globe-americas mr-2"></i>
             </a>
           </div>

@@ -76,6 +76,10 @@
   body {
     @apply font-tajawal antialiased bg-background text-foreground;
     direction: rtl;
+    letter-spacing: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
