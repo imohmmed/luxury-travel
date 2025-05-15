@@ -125,21 +125,21 @@ const Footer: React.FC = () => {
               </li>
             </ul>
             
-            <div className="mt-8 mb-4 flex justify-end items-center">
-              <h3 className="text-xl font-bold ml-3 inline-flex">
+            <div className="mt-8 mb-4 flex flex-col items-end">
+              <h3 className="text-xl font-bold mb-2 inline-flex">
                 <span>وسائل</span>
                 <span className="mx-1">الدفع</span>
               </h3>
-              <div className="bg-white rounded-lg p-2 flex items-center justify-between max-w-[120px]">
+              <div className="flex justify-end gap-4">
                 {paymentMethods.map(method => (
                   <div 
                     key={method.id}
-                    className="px-1 flex items-center justify-center"
+                    className="flex items-center justify-center"
                   >
                     <img 
                       src={method.image} 
                       alt={method.id} 
-                      className={`object-contain ${method.id === 'mastercard' ? 'h-7' : 'h-6'}`}
+                      className={`object-contain ${method.id === 'mastercard' ? 'h-8' : 'h-7'}`}
                     />
                   </div>
                 ))}
