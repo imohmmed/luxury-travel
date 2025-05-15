@@ -84,9 +84,6 @@
 }
 
 @layer components {
-  .parallax {
-    @apply bg-center bg-no-repeat bg-cover;
-  }
 
   .overlay {
     @apply transition-all duration-300 ease-in-out;
