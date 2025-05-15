@@ -14,7 +14,7 @@ interface Service {
 }
 
 // Import services from lib/constants.ts
-import { services as servicesData } from '@/lib/constants';
+import { services } from '@/lib/constants';
 
 const Services: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -55,7 +55,7 @@ const Services: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={cardsRef}>
-          {servicesData.map((service) => (
+          {services.map((service) => (
             <div 
               key={service.id} 
               className="bg-white rounded-xl shadow-lg overflow-hidden hover-scale reveal"

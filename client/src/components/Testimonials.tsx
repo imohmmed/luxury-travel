@@ -15,29 +15,8 @@ interface Testimonial {
   comment: string;
 }
 
-const testimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: 'أحمد محمد',
-    image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100',
-    rating: 5,
-    comment: '"تجربة رائعة مع سفر الفخامة! كانت رحلتنا إلى جزر المالديف مثالية بكل المقاييس. الفندق كان فاخرًا والخدمة متميزة والتنظيم احترافي. سأعتمد عليهم حتمًا في رحلاتي القادمة."'
-  },
-  {
-    id: 2,
-    name: 'سارة عبدالله',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100',
-    rating: 4.5,
-    comment: '"استمتعت كثيرًا برحلتي إلى سويسرا التي نظمتها سفر الفخامة. كانت الترتيبات دقيقة والفنادق فاخرة والبرنامج متنوع ومناسب لاهتماماتي. أنصح بشدة بالتعامل معهم."'
-  },
-  {
-    id: 3,
-    name: 'خالد العمري',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100',
-    rating: 5,
-    comment: '"كرجل أعمال، أقدر كثيرًا الاحترافية العالية التي يتمتع بها فريق سفر الفخامة. نظموا لي رحلات عمل متعددة إلى دبي ونيويورك ولندن بدقة متناهية. خدمة ممتازة تستحق كل تقدير."'
-  }
-];
+// Import testimonials from constants
+import { testimonials } from '@/lib/constants';
 
 const Testimonials: React.FC = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
