@@ -2,7 +2,7 @@ export const slides = [
   {
     id: 1,
     image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    title: 'اكتشف عالم الفخامة',
+    title: 'التَرَف للسفر والسياحة',
     subtitle: 'تجارب سفر استثنائية تفوق توقعاتك',
     buttonText: 'احجز رحلتك الآن',
     buttonLink: '#services',
@@ -11,18 +11,18 @@ export const slides = [
   {
     id: 2,
     image: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    title: 'إقامة فاخرة لا مثيل لها',
-    subtitle: 'استمتع بأفضل الفنادق والمنتجعات حول العالم',
-    buttonText: 'استكشف الفنادق',
+    title: 'خدمات التَرَف المتكاملة',
+    subtitle: 'من الفيز إلى التأمين الصحي وإجازات السوق الدولية',
+    buttonText: 'استكشف خدماتنا',
     buttonLink: '#services',
     buttonVariant: 'primary',
   },
   {
     id: 3,
     image: 'https://images.unsplash.com/photo-1540339832862-474599807836?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080',
-    title: 'سافر على درجة الأعمال',
-    subtitle: 'رحلات جوية مريحة بأعلى مستويات الخدمة',
-    buttonText: 'احجز تذكرتك',
+    title: 'خدمات ترانسفير VIP',
+    subtitle: 'استقبال وتوديع بأعلى مستويات الفخامة والراحة',
+    buttonText: 'احجز خدماتنا',
     buttonLink: '#services',
     buttonVariant: 'white',
   },
@@ -31,39 +31,39 @@ export const slides = [
 export const services = [
   {
     id: 1,
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'رحلات طيران فاخرة',
-    description: 'احجز رحلات الطيران على الدرجة الأولى ودرجة رجال الأعمال مع أفضل شركات الطيران العالمية'
+    image: 'https://images.unsplash.com/photo-1591261730899-5a78d7cddcee?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم الفيز',
+    description: 'نقدم خدمات متكاملة لاستخراج التأشيرات السياحية والتجارية لكافة دول العالم بإجراءات سريعة وموثوقة'
   },
   {
     id: 2,
-    image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'فنادق ومنتجعات فاخرة',
-    description: 'تمتع بإقامة لا تُنسى في أفخم الفنادق والمنتجعات حول العالم مع خدمات حصرية'
+    image: 'https://images.unsplash.com/photo-1532635224-cf024e9d1904?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم الكروبات السياحية وتنظيم المؤتمرات',
+    description: 'خدمات احترافية لتنظيم رحلات المجموعات والمؤتمرات العالمية بأعلى مستويات الجودة والاهتمام بالتفاصيل'
   },
   {
     id: 3,
-    image: 'https://images.pexels.com/photos/843633/pexels-photo-843633.jpeg?auto=compress&cs=tinysrgb&w=600&h=400',
-    title: 'رحلات بحرية فاخرة',
-    description: 'استمتع برحلات بحرية على متن أفخم اليخوت والسفن السياحية مع خدمة شخصية متميزة'
+    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم التذاكر',
+    description: 'احجز تذاكر الطيران على الدرجة الأولى ودرجة رجال الأعمال مع أفضل شركات الطيران العالمية بأسعار تنافسية'
   },
   {
     id: 4,
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'رحلات سفاري فاخرة',
-    description: 'عش تجربة سفاري فريدة في أفضل المحميات الطبيعية بإفريقيا مع إقامة في أفخم المخيمات'
+    image: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم إجازات السوق الدولية',
+    description: 'خدمات استخراج وتجديد رخص القيادة الدولية لتمكينك من قيادة السيارات أثناء سفرك في مختلف دول العالم'
   },
   {
     id: 5,
-    image: 'https://images.unsplash.com/photo-1569949381669-ecf31ae8e613?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'جولات سياحية خاصة',
-    description: 'استمتع بجولات سياحية خاصة مع مرشدين متخصصين يتحدثون لغتك ويعرفون أفضل الأماكن'
+    image: 'https://images.unsplash.com/photo-1504813184591-01572f98c85f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم التأمين الصحي',
+    description: 'نوفر خدمات التأمين الصحي للمسافرين بتغطية شاملة في جميع أنحاء العالم لضمان رحلة آمنة ومطمئنة'
   },
   {
     id: 6,
-    image: 'https://images.unsplash.com/photo-1517457373958-b7bdd4587205?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
-    title: 'خدمات سفر الأعمال',
-    description: 'خدمات متكاملة لرجال الأعمال تشمل حجز الرحلات والفنادق وتنظيم المؤتمرات والفعاليات'
+    image: 'https://images.unsplash.com/photo-1523475743164-9191dafcb0d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400',
+    title: 'قسم الاستقبال والتوديع (ترانسفير)',
+    description: 'خدمات VIP للاستقبال والتوديع في المطارات العالمية مع سيارات فاخرة وسائقين محترفين لراحة تامة'
   }
 ];
 
