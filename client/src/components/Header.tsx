@@ -33,12 +33,12 @@ const Header: React.FC = () => {
   };
 
   const menuItems = [
-    { name: 'الرئيسية', href: '#home' },
-    { name: 'من نحن', href: '#about' },
-    { name: 'خدماتنا', href: '#services' },
-    { name: 'اكتشف العالم', href: '#discover' },
-    { name: 'تعليقات العملاء', href: '#testimonials' },
-    { name: 'اتصل بنا', href: '#contact' },
+    { name: 'الرئيسية', href: '/' },
+    { name: 'من نحن', href: '/' },
+    { name: 'خدماتنا', href: '/' },
+    { name: 'اكتشف العالم', href: '/' },
+    { name: 'تعليقات العملاء', href: '/' },
+    { name: 'اتصل بنا', href: '/' },
   ];
 
   return (

@@ -12,19 +12,7 @@ const AboutUs: React.FC = () => {
   const contentRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    if (sectionRef.current && imageRef.current && contentRef.current) {
-      gsap.from(imageRef.current, {
-        scale: 0.8,
-        opacity: 0,
-        duration: 1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "top 30%",
-          scrub: 1,
-        }
-      });
-
+    if (sectionRef.current && contentRef.current) {
       gsap.from(contentRef.current.children, {
         y: 50,
         opacity: 0,
@@ -52,20 +40,9 @@ const AboutUs: React.FC = () => {
           <div className="w-20 h-1 bg-accent mx-auto"></div>
         </div>
         
-        <div className="flex flex-col md:flex-row items-center">
-          {/* About Image */}
-          <div className="w-full md:w-1/2 mb-10 md:mb-0 reveal" ref={imageRef}>
-            <div className="relative overflow-hidden rounded-lg shadow-xl hover-scale">
-              <img 
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                alt="فريق التَرَف" 
-                className="w-full h-auto transform hover:scale-105 transition-transform duration-700"
-              />
-            </div>
-          </div>
-          
+        <div className="flex flex-col items-center">
           {/* About Content */}
-          <div className="w-full md:w-1/2 md:pr-10 reveal" ref={contentRef}>
+          <div className="w-full reveal" ref={contentRef}>
             <h3 className="text-3xl font-bold text-secondary mb-6">شركة التَرَف - الرائدة في مجال السياحة والسفر الفاخر</h3>
             <p className="text-lg text-gray-600 mb-6">
               نحن شركة التَرَف المتخصصة في تقديم خدمات السفر والسياحة الفاخرة، ونقدم مجموعة متكاملة من الخدمات بدءاً من الفيز والتذاكر وصولاً إلى التأمين الصحي وإجازات السوق الدولية. نسعى جاهدين لتوفير تجارب سفر استثنائية تلبي أعلى توقعات عملائنا بعناية فائقة للتفاصيل.
