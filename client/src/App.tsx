@@ -10,6 +10,8 @@ import VisaBooking from "@/pages/VisaBooking";
 import HotelsBooking from "@/pages/HotelsBooking";
 import AboutUsPage from "@/pages/AboutUsPage";
 import { useEffect } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 function Router() {
   return (
@@ -31,8 +33,31 @@ function Router() {
 
 function App() {
   useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger);
+    
     // Reset scroll behavior
     document.documentElement.style.scrollBehavior = 'auto';
+    
+    // Configure ScrollTrigger globally
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+      autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+      limitCallbacks: true
+    });
+    
+    // Refresh all scroll triggers to avoid issues
+    const refreshScrollTriggers = () => {
+      ScrollTrigger.refresh();
+    };
+    
+    window.addEventListener('resize', refreshScrollTriggers);
+    
+    // Cleanup scroll triggers on unmount
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      window.removeEventListener('resize', refreshScrollTriggers);
+    };
   }, []);
   
   return (
