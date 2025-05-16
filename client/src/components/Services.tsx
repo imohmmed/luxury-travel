@@ -142,26 +142,26 @@ const Services: React.FC = () => {
       ref={sectionRef}>
       
       {/* خلفية متحركة مع تأثير Parallax محسّن */}
+      {/* إضافة الخلفية كعنصر صورة للتأكد من ظهورها */}
       <motion.div 
-        className="absolute inset-0 -z-10 w-full h-full"
+        className="absolute inset-0 -z-10 w-full h-full overflow-hidden"
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
         variants={backgroundVariants}
-        style={{
-          x: 0, // إلغاء حركة الكونتينر نفسه
-        }}
       >
-        <div 
-          className="absolute inset-0 w-full h-full"
+        <motion.img 
+          src={backgroundImage}
+          alt="خلفية قسم الخدمات"
+          className="absolute w-full h-full object-cover"
           style={{
-            backgroundImage: `linear-gradient(rgba(61, 124, 191, 0.5), rgba(61, 124, 191, 0.7)), url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundAttachment: 'fixed', // ثبات الخلفية أثناء السكرول
-            filter: 'brightness(1) contrast(1.05)',
+            filter: 'brightness(0.7) contrast(1.1)',
             transform: `translateX(${scrollDirection * scrollY * 0.2}px) scale(${1 + scrollY * 0.0002})` // تكبير الصورة مع حركة أفقية تتغير حسب اتجاه التمرير
           }}
+        />
+        
+        {/* طبقة لون فوق الصورة */}
+        <div 
+          className="absolute inset-0 w-full h-full bg-gradient-to-b from-[#3d7cbf]/50 to-[#3d7cbf]/70 z-10"
         />
       </motion.div>
       
