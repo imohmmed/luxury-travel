@@ -534,8 +534,99 @@ const Services: React.FC = () => {
             </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز إجازات السوق الدولية المتحركة في الخلفية */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              {/* رمز سيارة متحركة */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-8 right-8 text-white w-12 h-12"
+                animate={{
+                  x: [0, 60, 0],
+                  rotate: [0, 5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 15,
+                  ease: "linear"
+                }}
+              >
+                <path d="M20 8l-2-4H6L4 8m16 0H4m16 0l1 3h1m-18 0H3m1-3l1 3m0 0l.3.6c.5 1 1.5 1.4 2.5 1.4h9.4c1 0 2-.5 2.5-1.4l.3-.6m0 0h-15"></path>
+                <circle cx="7" cy="14" r="1"></circle>
+                <circle cx="17" cy="14" r="1"></circle>
+              </motion.svg>
+              
+              {/* رمز وثيقة رخصة قيادة */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-6 left-6 text-white w-10 h-10"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  rotate: [0, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 8,
+                  ease: "easeInOut"
+                }}
+              >
+                <rect width="18" height="14" x="3" y="5" rx="2"></rect>
+                <path d="M21 8H3"></path>
+                <path d="M10 12l-1-2h6l-1 2"></path>
+                <path d="M10 12v4h4v-4"></path>
+              </motion.svg>
+              
+              {/* رمز إشارة مرور */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-16 left-12 text-white w-8 h-8"
+                animate={{
+                  y: [0, -10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 6,
+                  ease: "easeInOut"
+                }}
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <circle cx="12" cy="12" r="4"></circle>
+                <path d="M12 2v4"></path>
+                <path d="M12 18v4"></path>
+                <path d="M4.93 4.93l2.83 2.83"></path>
+                <path d="M16.24 16.24l2.83 2.83"></path>
+                <path d="M2 12h4"></path>
+                <path d="M18 12h4"></path>
+                <path d="M4.93 19.07l2.83-2.83"></path>
+                <path d="M16.24 7.76l2.83-2.83"></path>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors relative z-10">
               <span>قسم</span>
               <span className="mr-1">إجازات</span>
               <span className="mr-1">السوق</span>
@@ -557,8 +648,89 @@ const Services: React.FC = () => {
             </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز التأمين الصحي المتحركة في الخلفية */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              {/* رمز القلب/النبض */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-6 right-10 text-white w-12 h-12"
+                animate={{
+                  scale: [1, 1.2, 1],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.5,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 0C1.46 6.7 1.33 10.28 4 13l8 8 8-8c2.67-2.72 2.54-6.3.42-8.42z"></path>
+              </motion.svg>
+              
+              {/* رمز وثيقة تأمين */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-8 left-10 text-white w-10 h-10"
+                animate={{
+                  rotate: [0, 5, 0],
+                  y: [0, -8, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 10,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                <path d="M17 21H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7l5 5v11a2 2 0 0 1-2 2z"></path>
+                <path d="M9 17h6"></path>
+                <path d="M9 13h6"></path>
+              </motion.svg>
+              
+              {/* رمز الإسعاف/الصليب */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-16 left-4 text-white w-8 h-8"
+                animate={{
+                  x: [0, 30, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 8,
+                  ease: "linear"
+                }}
+              >
+                <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+                <path d="M12 8v8"></path>
+                <path d="M8 12h8"></path>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors relative z-10">
               <span>قسم</span>
               <span className="mr-1">التأمين</span>
               <span className="mr-1">الصحي</span>
@@ -579,8 +751,93 @@ const Services: React.FC = () => {
             </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز الاستقبال والتوديع (ترانسفير) المتحركة في الخلفية */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              {/* رمز سيارة فاخرة */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-8 right-8 text-white w-14 h-14"
+                animate={{
+                  x: [0, 80, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 12,
+                  ease: "linear"
+                }}
+              >
+                <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0"></path>
+                <path d="M5 17h-2v-6l2 -5h9l4 5h1a2 2 0 0 1 2 2v4h-2m-4 0h-6"></path>
+                <path d="M15 7l-3 5"></path>
+                <path d="M10 7v5"></path>
+                <path d="M7 7l3 5"></path>
+              </motion.svg>
+              
+              {/* رمز مطار */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-6 left-10 text-white w-12 h-12"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 8,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
+              </motion.svg>
+              
+              {/* رمز متاع */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-20 left-6 text-white w-8 h-8"
+                animate={{
+                  rotate: [0, 10, 0],
+                  x: [0, 20, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 10,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M6 8h12a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-10a2 2 0 0 1 2 -2"></path>
+                <path d="M6 8v-2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v2"></path>
+                <path d="M9 12v4"></path>
+                <path d="M15 12v4"></path>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors relative z-10">
               <div className="inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">الاستقبال</span>
