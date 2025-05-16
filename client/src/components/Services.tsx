@@ -210,9 +210,8 @@ const Services: React.FC = () => {
           }}
         >
           <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
-            {/* رموز الفيز والجوازات المتحركة في الخلفية */}
+            {/* رموز الطائرات المتحركة خلف قسم الفيز */}
             <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
-              {/* رمز الجواز */}
               <motion.svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="24" 
@@ -223,77 +222,21 @@ const Services: React.FC = () => {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="absolute top-6 right-8 text-white w-16 h-16"
+                className="absolute top-4 right-6 text-white w-12 h-12"
                 animate={{
-                  rotate: [0, 8, 0],
-                  scale: [1, 1.1, 1]
+                  x: [0, 70, 0],
+                  y: [0, -30, 0],
+                  rotate: [0, 10, 0]
                 }}
                 transition={{
                   repeat: Infinity,
-                  duration: 10,
-                  ease: "easeInOut"
-                }}
-              >
-                <rect x="2" y="3" width="20" height="18" rx="2"></rect>
-                <path d="M8 10h8"></path>
-                <path d="M8 14h8"></path>
-                <path d="M8 18h8"></path>
-              </motion.svg>
-              
-              {/* رمز ختم تأشيرة */}
-              <motion.svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="absolute bottom-4 right-24 text-white w-12 h-12"
-                animate={{
-                  y: [0, -10, 0],
-                  rotate: [0, 15, 0]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 8,
-                  ease: "easeInOut",
-                  delay: 1
-                }}
-              >
-                <circle cx="12" cy="12" r="10"></circle>
-                <path d="m7 12 3 3 7-7"></path>
-              </motion.svg>
-              
-              {/* رمز طائرة فاخرة */}
-              <motion.svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                stroke="currentColor" 
-                strokeWidth="2" 
-                strokeLinecap="round" 
-                strokeLinejoin="round"
-                className="absolute left-6 top-10 text-white w-14 h-14"
-                animate={{
-                  x: [0, 40, 0],
-                  y: [0, -10, 0],
-                  rotate: [0, -15, 0]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 15,
+                  duration: 20,
                   ease: "linear"
                 }}
               >
-                <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
               </motion.svg>
               
-              {/* رمز بطاقة الهوية أو الفيزا */}
               <motion.svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 width="24" 
@@ -304,22 +247,46 @@ const Services: React.FC = () => {
                 strokeWidth="2" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
-                className="absolute bottom-8 left-10 text-white w-12 h-12"
+                className="absolute top-12 right-20 text-white w-8 h-8"
                 animate={{
-                  scale: [1, 1.05, 1],
+                  x: [0, -60, 0],
+                  y: [0, 20, 0],
                   rotate: [0, -5, 0]
                 }}
                 transition={{
                   repeat: Infinity,
-                  duration: 6,
-                  ease: "easeInOut",
-                  delay: 3
+                  duration: 15,
+                  ease: "linear",
+                  delay: 2
                 }}
               >
-                <rect width="18" height="14" x="3" y="5" rx="2"></rect>
-                <path d="M21 10H3"></path>
-                <path d="M7 15H7.01"></path>
-                <path d="M11 15h2"></path>
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
+              </motion.svg>
+              
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-8 left-8 text-white w-10 h-10"
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, 10, 0],
+                  rotate: [0, 15, 0]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 18,
+                  ease: "linear",
+                  delay: 5
+                }}
+              >
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
               </motion.svg>
             </div>
             
