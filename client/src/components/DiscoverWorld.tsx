@@ -16,7 +16,7 @@ const DiscoverWorld: React.FC = () => {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, -70]); // أسرع للفيديو
   const y2 = useTransform(scrollY, [0, 500], [0, -30]); // أسرع للكرة الأرضية
-  const opacity = useTransform(scrollY, [50, 300], [1, 0.7]); // أسرع للتلاشي
+  const opacityValue = useTransform(scrollY, [50, 300], [1, 0.7]); // أسرع للتلاشي
   
   // تأثير عائم للكرة الأرضية - أسرع
   const floatY = useMotionValue(0);
@@ -56,24 +56,25 @@ const DiscoverWorld: React.FC = () => {
       animate();
     };
     
-    // تحسين مراقبة السكرول للاستجابة الأسرع
+    // تحسين مراقبة السكرول للاستجابة الأسرع والظهور المبكر
     const handleScroll = () => {
       if (!sectionRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
-      const scrollProgress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
       
-      if (scrollProgress > 0.05) { // بداية أبكر (0.05 بدلاً من 0.1)
+      // حساب موقع العنصر نسبة إلى نافذة العرض
+      // سنبدأ التأثير قبل وصول القسم إلى منطقة العرض
+      if (rect.top < viewportHeight + 300) { // ظهور عندما يكون القسم خارج منطقة العرض ب 300 بكسل
         contentControls.start({
           opacity: 1,
           y: 0,
-          transition: { duration: 0.3, ease: "easeOut" } // أسرع (0.3 بدلاً من 0.8)
+          transition: { duration: 0.2, ease: "easeOut" } // أسرع للظهور الفوري
         });
       } else {
         contentControls.start({
           opacity: 0,
-          y: 20, // أقل حركة (20 بدلاً من 30)
-          transition: { duration: 0.2 } // أسرع (0.2 بدلاً من 0.4)
+          y: 10, // مسافة قصيرة جدًا للحركة الأسرع 
+          transition: { duration: 0.1 } // أسرع جدًا
         });
       }
     };
@@ -98,7 +99,7 @@ const DiscoverWorld: React.FC = () => {
   return (
     <motion.section 
       id="discover" 
-      className="py-20 relative overflow-hidden bg-dark min-h-[800px] flex items-center"
+      className="py-10 relative overflow-hidden bg-dark min-h-[700px] flex items-center -mt-10"
       ref={sectionRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
