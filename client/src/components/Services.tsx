@@ -209,8 +209,88 @@ const Services: React.FC = () => {
             // تم إزالة تأثير الحركة العمودية للمحتوى
           }}
         >
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white inline-flex group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز الطائرات المتحركة خلف قسم الفيز */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-4 right-6 text-white w-12 h-12"
+                animate={{
+                  x: [0, 70, 0],
+                  y: [0, -30, 0],
+                  rotate: [0, 10, 0]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 20,
+                  ease: "linear"
+                }}
+              >
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
+              </motion.svg>
+              
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-12 right-20 text-white w-8 h-8"
+                animate={{
+                  x: [0, -60, 0],
+                  y: [0, 20, 0],
+                  rotate: [0, -5, 0]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 15,
+                  ease: "linear",
+                  delay: 2
+                }}
+              >
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
+              </motion.svg>
+              
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-8 left-8 text-white w-10 h-10"
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, 10, 0],
+                  rotate: [0, 15, 0]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 18,
+                  ease: "linear",
+                  delay: 5
+                }}
+              >
+                <path d="M22 16h-20l8-10 2 1 3-4 1.5 2 3.5-2 2 2-6 6 6 3z"></path>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white inline-flex group-hover:text-accent transition-colors relative z-10">
               <span>قسم</span>
               <span className="mr-1">الفيز</span>
             </h3>
@@ -230,8 +310,95 @@ const Services: React.FC = () => {
             </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز الباصات والمكاتب المتحركة خلف قسم الكروبات */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              {/* رمز الباص */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-6 right-12 text-white w-14 h-14"
+                animate={{
+                  x: [0, 80, 0],
+                  y: [0, 5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 25,
+                  ease: "linear"
+                }}
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <path d="M3 8h18" />
+                <path d="M8 3v18" />
+                <path d="M12 3v18" />
+                <path d="M16 3v18" />
+                <path d="M3 12h18" />
+                <path d="M3 16h18" />
+              </motion.svg>
+              
+              {/* رمز مكتب/مبنى */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-10 left-8 text-white w-12 h-12"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  y: [0, -5, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 15,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </motion.svg>
+              
+              {/* رمز شخص/زبون */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-12 left-10 text-white w-8 h-8"
+                animate={{
+                  x: [0, 30, 0],
+                  rotate: [0, 5, 0]
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 10,
+                  ease: "linear",
+                  delay: 3
+                }}
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors relative z-10">
               <div className="inline-flex">
                 <span>قسم</span>
                 <span className="mr-1">الكروبات</span>
@@ -258,8 +425,96 @@ const Services: React.FC = () => {
             </div>
           </motion.div>
           
-          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
-            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors">
+          <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group relative overflow-hidden">
+            {/* رموز التذاكر المتحركة في الخلفية */}
+            <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+              {/* رمز تذكرة طيران */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-6 right-6 text-white w-10 h-10"
+                animate={{
+                  rotate: [0, 10, 0],
+                  scale: [1, 1.1, 1],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 8,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M2 6l5.5 4.5L12 7l4.5 3.5L22 6"></path>
+                <path d="M2 12l5.5 4.5L12 13l4.5 3.5L22 12"></path>
+                <path d="M2 18l5.5 4.5L12 19l4.5 3.5L22 18"></path>
+              </motion.svg>
+              
+              {/* رمز تذكرة */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute bottom-8 left-8 text-white w-12 h-12"
+                animate={{
+                  y: [0, -15, 0],
+                  x: [0, 10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 12,
+                  ease: "easeInOut"
+                }}
+              >
+                <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z" />
+                <path d="M13 4v16" />
+                <path d="M7 8h.01" />
+                <path d="M7 12h.01" />
+                <path d="M7 16h.01" />
+                <path d="M17 8h.01" />
+                <path d="M17 12h.01" />
+                <path d="M17 16h.01" />
+              </motion.svg>
+              
+              {/* رمز طائرة صغيرة */}
+              <motion.svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="absolute top-20 left-4 text-white w-8 h-8"
+                animate={{
+                  x: [0, 50, 0],
+                  y: [0, -20, 0],
+                  rotate: [0, 10, 0],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 15,
+                  ease: "linear"
+                }}
+              >
+                <path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"></path>
+              </motion.svg>
+            </div>
+            
+            <h3 className="text-2xl font-bold mb-2 text-white group-hover:text-accent transition-colors relative z-10">
               <span>قسم</span>
               <span className="mr-1">التذاكر</span>
             </h3>
