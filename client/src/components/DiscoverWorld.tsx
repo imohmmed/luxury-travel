@@ -12,33 +12,33 @@ const DiscoverWorld: React.FC = () => {
   const contentControls = useAnimation();
   const [viewportHeight, setViewportHeight] = useState(0);
   
-  // Parallax effect values
+  // Parallax effect values - أسرع وأكثر تفاعلية
   const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 1000], [0, -100]); // Slower parallax for video
-  const y2 = useTransform(scrollY, [0, 1000], [0, -50]); // Medium parallax for globe
-  const opacity = useTransform(scrollY, [100, 500], [1, 0.7]); // Fade effect on scroll
+  const y1 = useTransform(scrollY, [0, 500], [0, -70]); // أسرع للفيديو
+  const y2 = useTransform(scrollY, [0, 500], [0, -30]); // أسرع للكرة الأرضية
+  const opacity = useTransform(scrollY, [50, 300], [1, 0.7]); // أسرع للتلاشي
   
-  // Globe floating animation
+  // تأثير عائم للكرة الأرضية - أسرع
   const floatY = useMotionValue(0);
   const floatRotate = useMotionValue(0);
   
-  // Scroll-triggered animations for elements
+  // تأثيرات السكرول - استجابة أسرع
   useEffect(() => {
     if (!sectionRef.current) return;
     
-    // Update viewport height for responsive calculations
+    // تحديث ارتفاع المشاهدة
     setViewportHeight(window.innerHeight);
     
     const handleResize = () => {
       setViewportHeight(window.innerHeight);
     };
     
-    // Animation for floating effect on globe
+    // تحريك الكرة بشكل أسرع
     const floatAnimation = () => {
       const floatKeyframes = [
-        { y: -10, rotate: -1 },
+        { y: -7, rotate: -0.8 },
         { y: 0, rotate: 0 },
-        { y: 10, rotate: 1 },
+        { y: 7, rotate: 0.8 },
         { y: 0, rotate: 0 }
       ];
       
@@ -50,44 +50,45 @@ const DiscoverWorld: React.FC = () => {
         floatRotate.set(target.rotate);
         
         currentKeyframe = (currentKeyframe + 1) % floatKeyframes.length;
-        setTimeout(animate, 1500);
+        setTimeout(animate, 800); // أسرع بكثير (800ms بدلاً من 1500ms)
       };
       
       animate();
     };
     
-    // Initialize scroll observation
+    // تحسين مراقبة السكرول للاستجابة الأسرع
     const handleScroll = () => {
       if (!sectionRef.current) return;
       
       const rect = sectionRef.current.getBoundingClientRect();
       const scrollProgress = (viewportHeight - rect.top) / (viewportHeight + rect.height);
       
-      if (scrollProgress > 0.1) {
+      if (scrollProgress > 0.05) { // بداية أبكر (0.05 بدلاً من 0.1)
         contentControls.start({
           opacity: 1,
           y: 0,
-          transition: { duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }
+          transition: { duration: 0.3, ease: "easeOut" } // أسرع (0.3 بدلاً من 0.8)
         });
       } else {
         contentControls.start({
           opacity: 0,
-          y: 30,
-          transition: { duration: 0.4 }
+          y: 20, // أقل حركة (20 بدلاً من 30)
+          transition: { duration: 0.2 } // أسرع (0.2 بدلاً من 0.4)
         });
       }
     };
     
-    // Start floating animation
+    // بدء التحريك
     floatAnimation();
     
-    // Add event listeners
+    // إضافة المراقبة
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
     
-    // Initial check
+    // التحقق المبدئي
     handleScroll();
     
+    // التنظيف
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
@@ -101,7 +102,7 @@ const DiscoverWorld: React.FC = () => {
       ref={sectionRef}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }} // أسرع
     >
       {/* Video Background with Overlay - Parallax Effect */}
       <motion.div 
@@ -121,37 +122,37 @@ const DiscoverWorld: React.FC = () => {
         <motion.div 
           className="absolute inset-0 bg-dark backdrop-blur-sm"
           style={{ 
-            opacity: useTransform(scrollY, [0, 200], [0.8, 0.92]),
-            backdropFilter: useTransform(scrollY, [0, 300], ['blur(2px)', 'blur(5px)'])
+            opacity: useTransform(scrollY, [0, 150], [0.8, 0.92]), // أسرع
+            backdropFilter: useTransform(scrollY, [0, 200], ['blur(2px)', 'blur(5px)']) // أسرع
           }}
         ></motion.div>
       </motion.div>
       
-      {/* Floating Particles with Parallax Effect */}
+      {/* Floating Particles with Parallax Effect - أسرع */}
       <div className="absolute inset-0 z-[1] overflow-hidden pointer-events-none">
-        {Array.from({ length: 20 }).map((_, index) => (
+        {Array.from({ length: 15 }).map((_, index) => ( // تقليل العدد للأداء
           <motion.div
             key={index}
             className="absolute rounded-full bg-white/20"
             initial={{
               top: `${Math.random() * 100}%`,
               left: `${Math.random() * 100}%`,
-              width: `${3 + Math.random() * 10}px`,
-              height: `${3 + Math.random() * 10}px`,
+              width: `${3 + Math.random() * 8}px`,
+              height: `${3 + Math.random() * 8}px`,
               opacity: 0.1 + Math.random() * 0.3
             }}
             animate={{
-              y: [0, -100, -50, -200, 0],
-              x: [0, 50, -30, 20, 0],
-              scale: [1, 1.2, 0.9, 1.1, 1]
+              y: [0, -50, -25, -100, 0], // مسافات أقصر للحركة الأسرع
+              x: [0, 25, -15, 10, 0], // مسافات أقصر للحركة الأسرع
+              scale: [1, 1.1, 0.95, 1.05, 1]
             }}
             transition={{
-              duration: 10 + Math.random() * 20,
+              duration: 5 + Math.random() * 10, // أسرع (5-15 ثانية بدلاً من 10-30)
               repeat: Infinity,
               ease: "linear"
             }}
             style={{
-              y: useTransform(scrollY, [0, 500], [0, -Math.random() * 100])
+              y: useTransform(scrollY, [0, 300], [0, -Math.random() * 50]) // أسرع
             }}
           />
         ))}
@@ -161,31 +162,31 @@ const DiscoverWorld: React.FC = () => {
         <motion.div 
           className="flex flex-col items-center"
           animate={contentControls}
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }} // أقل حركة (20 بدلاً من 30)
         >
-          {/* Text Content with Reveal Effect */}
+          {/* Text Content with Reveal Effect - أسرع */}
           <motion.div 
             className="text-center max-w-3xl mb-12" 
             ref={titleRef}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 15 }} // أقل حركة (15 بدلاً من 30)
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }} // ظهور أسرع (0.1 بدلاً من 0.3)
             transition={{ 
-              duration: 0.8, 
-              ease: [0.165, 0.84, 0.44, 1]
+              duration: 0.4, // أسرع (0.4 بدلاً من 0.8)
+              ease: "easeOut"
             }}
           >
             <h2 className="text-5xl font-bold text-white mb-6 inline-flex justify-center w-full relative">
               <motion.span
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }} // أقل حركة (10 بدلاً من 20)
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.5 }}
+                transition={{ delay: 0, duration: 0.3 }} // أسرع (0.3 بدلاً من 0.5) وبدون تأخير
               >اكتشف</motion.span>
               <motion.span 
                 className="mx-1"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 10 }} // أقل حركة (10 بدلاً من 20)
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.5 }}
+                transition={{ delay: 0.05, duration: 0.3 }} // أسرع (تأخير 0.05 بدلاً من 0.2)
               >العالم</motion.span>
             </h2>
             
@@ -193,7 +194,7 @@ const DiscoverWorld: React.FC = () => {
               className="w-20 h-1 bg-accent mx-auto mb-6"
               initial={{ width: 0 }}
               whileInView={{ width: 80 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.1, duration: 0.3 }} // أسرع (0.3 بدلاً من 0.6 وتأخير أقل)
               viewport={{ once: true }}
             ></motion.div>
             
@@ -201,14 +202,14 @@ const DiscoverWorld: React.FC = () => {
               className="text-2xl text-white leading-relaxed"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.4, duration: 0.7 }}
+              transition={{ delay: 0.15, duration: 0.3 }} // أسرع (0.3 بدلاً من 0.7 وتأخير أقل)
               viewport={{ once: true }}
             >
               استكشف أجمل الوجهات السياحية حول العالم مع باقات سفر مخصصة لتناسب تطلعاتك
             </motion.p>
           </motion.div>
           
-          {/* Globe Animation with Floating Effect */}
+          {/* Globe Animation with Floating Effect - أسرع */}
           <motion.div 
             className="globe-container relative flex items-center justify-center mb-12"
             ref={globeRef}
@@ -217,10 +218,10 @@ const DiscoverWorld: React.FC = () => {
               translateY: floatY,
               rotate: floatRotate
             }}
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 0.95, opacity: 0 }} // تقليل مسافة الظهور (0.95 بدلاً من 0.9)
             whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true, amount: 0.1 }} // ظهور أسرع (0.1 بدلاً من 0.3)
+            transition={{ duration: 0.4, delay: 0.1 }} // أسرع (0.4 بدلاً من 0.8 وتأخير أقل)
           >
             <motion.div 
               className="relative w-[500px] h-[500px]"
@@ -232,7 +233,7 @@ const DiscoverWorld: React.FC = () => {
                 ]
               }}
               transition={{
-                duration: 3,
+                duration: 1.5, // أسرع (1.5 بدلاً من 3)
                 repeat: Infinity,
                 repeatType: "loop",
                 ease: "easeInOut"
@@ -240,24 +241,24 @@ const DiscoverWorld: React.FC = () => {
             >
               <Globe />
               
-              {/* Decorative orbit rings with improved animations */}
+              {/* Decorative orbit rings with improved animations - أسرع */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                 <motion.div 
                   className="w-[105%] h-[105%] border-2 border-white/20 rounded-full absolute"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                  style={{ opacity: useTransform(scrollY, [0, 300], [0.2, 0.1]) }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }} // أسرع (20 بدلاً من 30)
+                  style={{ opacity: useTransform(scrollY, [0, 200], [0.2, 0.1]) }} // أسرع
                 ></motion.div>
                 <motion.div 
                   className="w-[115%] h-[115%] border border-white/10 rounded-full absolute"
                   animate={{ rotate: -360 }}
-                  transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                  style={{ opacity: useTransform(scrollY, [0, 300], [0.1, 0.05]) }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }} // أسرع (30 بدلاً من 50)
+                  style={{ opacity: useTransform(scrollY, [0, 200], [0.1, 0.05]) }} // أسرع
                 ></motion.div>
                 <motion.div 
                   className="w-[125%] h-[125%] border-dashed border border-accent/10 rounded-full absolute"
                   animate={{ rotate: 180 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }} // أسرع (25 بدلاً من 40)
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 0.2 }}
                   viewport={{ once: true }}
@@ -266,14 +267,14 @@ const DiscoverWorld: React.FC = () => {
             </motion.div>
           </motion.div>
           
-          {/* Action Button with Pulse Effect */}
+          {/* Action Button with Pulse Effect - أسرع */}
           <motion.div 
             ref={buttonRef} 
             className="text-center"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }} // أقل حركة (10 بدلاً من 20)
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.5, duration: 0.5 }}
+            transition={{ delay: 0.2, duration: 0.3 }} // أسرع (0.3 بدلاً من 0.5 وتأخير أقل)
           >
             <motion.a 
               href="#discover" 
@@ -289,7 +290,7 @@ const DiscoverWorld: React.FC = () => {
               }}
               transition={{
                 boxShadow: {
-                  duration: 2,
+                  duration: 1, // أسرع (1 بدلاً من 2)
                   repeat: Infinity,
                   repeatType: "loop"
                 }
@@ -300,7 +301,7 @@ const DiscoverWorld: React.FC = () => {
                 <motion.i 
                   className="fas fa-globe-americas mr-2"
                   animate={{ rotate: 360 }}
-                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }} // أسرع (10 بدلاً من 20)
                 ></motion.i>
               </span>
             </motion.a>
