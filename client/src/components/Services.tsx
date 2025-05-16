@@ -117,18 +117,28 @@ const Services: React.FC = () => {
   
   // تأثير Parallax عند التمرير
   const [scrollY, setScrollY] = React.useState(0);
+  const [scrollDirection, setScrollDirection] = React.useState(1); // 1 لليمين، -1 لليسار
+  const [lastScrollY, setLastScrollY] = React.useState(0);
   
   React.useEffect(() => {
     const handleScroll = () => {
+      // تحديد اتجاه التمرير
+      if (window.scrollY > lastScrollY) {
+        setScrollDirection(-1); // للأسفل = حركة لليسار
+      } else {
+        setScrollDirection(1); // للأعلى = حركة لليمين
+      }
+      
+      setLastScrollY(window.scrollY);
       setScrollY(window.scrollY);
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   return (
-    <section id="services" className="py-16 md:py-24 text-secondary relative overflow-hidden" 
+    <section id="services" className="py-16 md:py-24 text-secondary relative overflow-hidden bg-[#3d7cbf]" 
       ref={sectionRef}>
       
       {/* خلفية متحركة مع تأثير Parallax محسّن */}
@@ -144,13 +154,13 @@ const Services: React.FC = () => {
         <div 
           className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
+            backgroundImage: `linear-gradient(rgba(61, 124, 191, 0.5), rgba(61, 124, 191, 0.7)), url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center center',
             backgroundRepeat: 'no-repeat',
             backgroundAttachment: 'fixed', // ثبات الخلفية أثناء السكرول
             filter: 'brightness(1) contrast(1.05)',
-            transform: `translateX(${scrollY * -0.1}px) scale(${1 + scrollY * 0.0002})` // تكبير الصورة مع حركة أفقية إلى اليسار
+            transform: `translateX(${scrollDirection * scrollY * 0.2}px) scale(${1 + scrollY * 0.0002})` // تكبير الصورة مع حركة أفقية تتغير حسب اتجاه التمرير
           }}
         />
       </motion.div>
@@ -162,14 +172,14 @@ const Services: React.FC = () => {
           backgroundSize: '400px',
           backgroundAttachment: 'fixed',
           mixBlendMode: 'overlay',
-          transform: `translateX(${scrollY * 0.05}px)` // حركة خفيفة باتجاه معاكس (لليمين)
+          transform: `translateX(${-scrollDirection * scrollY * 0.1}px)` // حركة خفيفة باتجاه معاكس للطبقة الأولى
         }} 
       />
       
       {/* تم إزالة الطبقة الثالثة للتأثير ثلاثي الأبعاد لتحقيق تناسق أفضل */}
       
       {/* طبقة خلفية لتضاد النص وتعزيز ظهور البطاقات */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 -z-5"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#3d7cbf]/10 to-[#3d7cbf]/30 -z-5"></div>
       
       <div className="container mx-auto px-4">
         <motion.div 
