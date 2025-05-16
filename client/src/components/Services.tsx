@@ -115,12 +115,25 @@ const Services: React.FC = () => {
     }
   };
   
-  // تأثير Parallax عند التمرير
+  // تأثير Parallax عند التمرير مع تعقب الاتجاه
   const [scrollY, setScrollY] = React.useState(0);
+  const [scrollDirection, setScrollDirection] = React.useState('none'); // 'up', 'down', or 'none'
+  const lastScrollY = React.useRef(0);
   
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      const currentScrollY = window.scrollY;
+      
+      // تحديد اتجاه التمرير
+      if (currentScrollY > lastScrollY.current) {
+        setScrollDirection('down');
+      } else if (currentScrollY < lastScrollY.current) {
+        setScrollDirection('up');
+      }
+      
+      // تحديث موضع التمرير وحفظ القيمة السابقة
+      setScrollY(currentScrollY);
+      lastScrollY.current = currentScrollY;
     };
     
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -142,45 +155,62 @@ const Services: React.FC = () => {
         }}
       >
         <div 
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full overflow-hidden"
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundAttachment: 'scroll', // تغيير من fixed لـ scroll للسماح بالحركة
-            filter: 'brightness(0.9) contrast(1.1)',
-            transform: `translateX(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0002})` // إضافة حركة أفقية للخلفية نفسها
+            backgroundSize: 'cover', // لتغطية المساحة كاملة مع الحفاظ على نسبة العرض للارتفاع
+            backgroundPosition: 'center center', // تحديد موضع الصورة في المنتصف
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'scroll',
+            filter: 'brightness(0.95) contrast(1.05)',
+            transform: scrollDirection === 'down'
+              ? `translateX(${-scrollY * 0.2}px)` // تحرك لليسار عند التمرير للأسفل
+              : scrollDirection === 'up'
+                ? `translateX(${scrollY * 0.2}px)` // تحرك لليمين عند التمرير للأعلى
+                : 'translateX(0)' // ثبات في حالة عدم التمرير
           }}
         />
       </motion.div>
       
-      {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس */}
+      {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس للتمرير */}
       <div className="absolute inset-0 opacity-30" 
         style={{
           backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
           backgroundSize: '200px',
           backgroundAttachment: 'scroll',
           mixBlendMode: 'overlay',
-          transform: `translate(${scrollY * 0.6}px, ${scrollY * -0.05}px)` // زيادة قوة الحركة لليمين بشكل كبير
+          transform: scrollDirection === 'down'
+            ? `translate(${scrollY * 0.3}px, ${scrollY * -0.05}px)` // حركة لليمين عند التمرير للأسفل
+            : scrollDirection === 'up'
+              ? `translate(${-scrollY * 0.3}px, ${scrollY * -0.05}px)` // حركة لليسار عند التمرير للأعلى
+              : 'translate(0, 0)'
         }} 
       />
       
-      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - حركة مكثفة للجانب الآخر */}
+      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - حركة معاكسة للطبقة الثانية */}
       <div className="absolute inset-0 opacity-20" 
         style={{
           backgroundImage: "linear-gradient(45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%), linear-gradient(-45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%)",
           backgroundSize: '40px 40px',
-          transform: `translate(${scrollY * -0.3}px, 0)`, // زيادة قوة الحركة لليسار عند السكرول
+          transform: scrollDirection === 'down'
+            ? `translate(${-scrollY * 0.15}px, 0)` // حركة لليسار عند التمرير للأسفل
+            : scrollDirection === 'up'
+              ? `translate(${scrollY * 0.15}px, 0)` // حركة لليمين عند التمرير للأعلى
+              : 'translate(0, 0)',
           zIndex: -8
         }} 
       />
       
-      {/* طبقة إضافية رابعة - حركة سريعة في الاتجاه المعاكس */}
+      {/* طبقة إضافية رابعة - حركة سريعة في اتجاه مختلف */}
       <div className="absolute inset-0 opacity-10" 
         style={{
           backgroundImage: "linear-gradient(0deg, transparent 95%, rgba(255,255,255,0.05) 98%, transparent 100%)",
           backgroundSize: '15px 15px',
-          transform: `translate(${scrollY * 0.8}px, 0)`, // حركة سريعة للغاية في الاتجاه المعاكس
+          transform: scrollDirection === 'down'
+            ? `translate(${scrollY * 0.4}px, 0)` // حركة لليمين بسرعة أكبر عند التمرير للأسفل
+            : scrollDirection === 'up'
+              ? `translate(${-scrollY * 0.4}px, 0)` // حركة لليسار بسرعة أكبر عند التمرير للأعلى
+              : 'translate(0, 0)',
           zIndex: -7
         }} 
       />
