@@ -138,55 +138,45 @@ const Services: React.FC = () => {
         animate={isInView ? "visible" : "hidden"}
         variants={backgroundVariants}
         style={{
-          x: scrollY * -0.5, // زيادة قوة حركة الخلفية إلى اليسار عند السكرول للأسفل
+          x: 0, // إلغاء حركة الكونتينر نفسه
         }}
       >
         <div 
           className="absolute inset-0 w-full h-full"
           style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url(${backgroundImage})`,
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            backgroundAttachment: 'scroll', // تغيير من fixed لـ scroll للسماح بالحركة
-            filter: 'brightness(0.9) contrast(1.1)',
-            transform: `translateX(${scrollY * 0.2}px) scale(${1.1 + scrollY * 0.0002})` // إضافة حركة أفقية للخلفية نفسها
+            backgroundAttachment: 'fixed', // ثبات الخلفية أثناء السكرول
+            filter: 'brightness(1) contrast(1.05)',
+            transform: `translateX(${scrollY * 0.1}px)` // حركة خفيفة جدًا عند السكرول
           }}
         />
       </motion.div>
       
-      {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس */}
-      <div className="absolute inset-0 opacity-30" 
+      {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس بشكل خفيف */}
+      <div className="absolute inset-0 opacity-20" 
         style={{
           backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
-          backgroundSize: '200px',
-          backgroundAttachment: 'scroll',
+          backgroundSize: '400px',
+          backgroundAttachment: 'fixed',
           mixBlendMode: 'overlay',
-          transform: `translate(${scrollY * 0.6}px, ${scrollY * -0.05}px)` // زيادة قوة الحركة لليمين بشكل كبير
+          transform: `translate(${scrollY * -0.05}px, 0)` // حركة خفيفة معاكسة
         }} 
       />
       
-      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - حركة مكثفة للجانب الآخر */}
-      <div className="absolute inset-0 opacity-20" 
+      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - تضيف العمق فقط */}
+      <div className="absolute inset-0 opacity-15" 
         style={{
-          backgroundImage: "linear-gradient(45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%), linear-gradient(-45deg, transparent 90%, rgba(255,255,255,0.15) 95%, transparent 100%)",
+          backgroundImage: "linear-gradient(45deg, transparent 95%, rgba(255,255,255,0.1) 98%, transparent 100%), linear-gradient(-45deg, transparent 95%, rgba(255,255,255,0.1) 98%, transparent 100%)",
           backgroundSize: '40px 40px',
-          transform: `translate(${scrollY * -0.3}px, 0)`, // زيادة قوة الحركة لليسار عند السكرول
+          backgroundAttachment: 'fixed',
           zIndex: -8
         }} 
       />
       
-      {/* طبقة إضافية رابعة - حركة سريعة في الاتجاه المعاكس */}
-      <div className="absolute inset-0 opacity-10" 
-        style={{
-          backgroundImage: "linear-gradient(0deg, transparent 95%, rgba(255,255,255,0.05) 98%, transparent 100%)",
-          backgroundSize: '15px 15px',
-          transform: `translate(${scrollY * 0.8}px, 0)`, // حركة سريعة للغاية في الاتجاه المعاكس
-          zIndex: -7
-        }} 
-      />
-      
-      {/* طبقة خلفية لتضاد النص */}
-      <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-primary/20 -z-5"></div>
+      {/* طبقة خلفية لتضاد النص وتعزيز ظهور البطاقات */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 -z-5"></div>
       
       <div className="container mx-auto px-4">
         <motion.div 
