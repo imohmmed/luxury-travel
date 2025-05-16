@@ -146,34 +146,27 @@ const Services: React.FC = () => {
           style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${backgroundImage})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
             backgroundAttachment: 'fixed', // ثبات الخلفية أثناء السكرول
             filter: 'brightness(1) contrast(1.05)',
-            transform: `translateX(${scrollY * 0.1}px)` // حركة خفيفة جدًا عند السكرول
+            transform: `translateX(${scrollY * -0.1}px) scale(${1 + scrollY * 0.0002})` // تكبير الصورة مع حركة أفقية إلى اليسار
           }}
         />
       </motion.div>
       
       {/* طبقة خلفية إضافية للعمق - تتحرك بالاتجاه المعاكس بشكل خفيف */}
-      <div className="absolute inset-0 opacity-20" 
+      <div className="absolute inset-0 opacity-15" 
         style={{
           backgroundImage: "url('https://assets.website-files.com/5b60dd35a56ec7bab0703d2d/5c80c61c11bce453d640a613_pattern-1.svg')",
           backgroundSize: '400px',
           backgroundAttachment: 'fixed',
           mixBlendMode: 'overlay',
-          transform: `translate(${scrollY * -0.05}px, 0)` // حركة خفيفة معاكسة
+          transform: `translateX(${scrollY * 0.05}px)` // حركة خفيفة باتجاه معاكس (لليمين)
         }} 
       />
       
-      {/* طبقة ثالثة للتأثير ثلاثي الأبعاد - تضيف العمق فقط */}
-      <div className="absolute inset-0 opacity-15" 
-        style={{
-          backgroundImage: "linear-gradient(45deg, transparent 95%, rgba(255,255,255,0.1) 98%, transparent 100%), linear-gradient(-45deg, transparent 95%, rgba(255,255,255,0.1) 98%, transparent 100%)",
-          backgroundSize: '40px 40px',
-          backgroundAttachment: 'fixed',
-          zIndex: -8
-        }} 
-      />
+      {/* تم إزالة الطبقة الثالثة للتأثير ثلاثي الأبعاد لتحقيق تناسق أفضل */}
       
       {/* طبقة خلفية لتضاد النص وتعزيز ظهور البطاقات */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/40 -z-5"></div>
@@ -202,8 +195,8 @@ const Services: React.FC = () => {
           animate={isInView ? "visible" : "hidden"}
           variants={containerVariants}
           style={{
-            willChange: 'transform',
-            transform: `translateY(${scrollY * -0.02}px)` // حركة بسيطة عكس التمرير
+            willChange: 'transform'
+            // تم إزالة تأثير الحركة العمودية للمحتوى
           }}
         >
           <motion.div variants={cardVariants} className="rounded-lg shadow-xl bg-white/10 backdrop-blur-sm p-6 border border-white/10 hover:bg-white/15 transition-all duration-300 group">
